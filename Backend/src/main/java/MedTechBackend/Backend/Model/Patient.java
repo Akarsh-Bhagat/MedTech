@@ -1,4 +1,4 @@
-package Model;
+package MedTechBackend.Backend.Model;
 
 import java.util.Date;
 

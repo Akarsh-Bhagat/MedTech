@@ -1,4 +1,4 @@
-package Model;
+package MedTechBackend.Backend.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -6,21 +6,20 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @Entity
-@Table(name="doctor_table")
+@Table(name="admin_table")
 @Data
-@SequenceGenerator(name="doctor",sequenceName="doctor_gene",initialValue=2000)
-@NoArgsConstructor
-public class Doctor {
+@Builder
+@SequenceGenerator(name="admin",sequenceName="admin_gen",initialValue=1000)
+public class Admin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doctor")
-    @Column(name = "doctor_id")
-    private long doctorId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin")
+    @Column(name = "admin_id")
+    private long adminId;
 
     @Column(name = "first_name")
     @NotEmpty
@@ -34,14 +33,14 @@ public class Doctor {
 
     @Column(name = "email_id", unique = true)
     @NotEmpty
-    @Email(message = "Email is not valid!")
-    public String doctorEmailId;
+    @Email(message = "Email  is not valid!")
+    public String adminEmailId;
 
     @Column(name = "passWord")
     @NotEmpty
     @Size(min = 8, message = "Password length must be 8 and contain uppercase,lowercase,digits")
     @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")
-    public String doctorPassword;
+    public String adminPassword;
 
     @Column(name = "age")
     @NotNull
@@ -62,9 +61,5 @@ public class Doctor {
     @Size(min = 3, message = "address must contain atleast 3 characters")
     public String address;
 
-    @Column(name = "specialization")
-    @NotEmpty
-    @Size(min = 3, message = "specialization should have atleast 3 letters")
-    public String specialization;
 
 }
