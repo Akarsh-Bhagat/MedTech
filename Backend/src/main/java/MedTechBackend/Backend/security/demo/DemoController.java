@@ -1,4 +1,4 @@
-package MedTechBackend.Backend.demo;
+package MedTechBackend.Backend.security.demo;
 
 
 import org.springframework.http.ResponseEntity;

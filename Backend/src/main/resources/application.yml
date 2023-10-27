@@ -1,0 +1,36 @@
+#spring.datasource.driver-class-name=org.postgresql.Driver
+#spring.datasource.url = jdbc:postgresql://localhost:5432/medtech
+#
+#spring.datasource.username = postgres
+#spring.datasource.password = 1343
+#spring.jpa.hibernate.ddl-auto = update
+#spring.jpa.show-sql = true
+##spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.properties.hibernate.format_sql = true
+#spring.datasource.initialize=true
+#spring.main.allow-bean-definition-overriding=true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/medtech
+    username: postgres
+    password: 1343
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+application:
+  security:
+    jwt:
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+
+

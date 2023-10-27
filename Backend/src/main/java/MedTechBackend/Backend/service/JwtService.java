@@ -1,21 +1,29 @@
 package MedTechBackend.Backend.service;
+
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import java.security.Key;
 import java.util.HashMap;
-import org.springframework.security.core.userdetails.User;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
 @Service
 public class JwtService {
+
+    @Value("${application.security.jwt.expiration}")
+    private long jwtExpiration;
+    @Value("${application.security.jwt.refresh-token.expiration}")
+    private long refreshExpiration;
 
     public static final String SECRET ="5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
@@ -36,15 +44,30 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
+        return buildToken(extraClaims, userDetails, jwtExpiration);
+    }
+
+    public String generateRefreshToken(
+            UserDetails userDetails
+    ) {
+        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+    }
+
+    private String buildToken(
+            Map<String, Object> extraClaims,
+            UserDetails userDetails,
+            long expiration
+    ) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 25))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-                .compact(); // generate and return the token
+                .compact();
     }
+
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
@@ -73,28 +96,4 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // SigningKey is used to secretly sign the signature part of the jwt token ( signing algorithm )
-
-
-//
-//    public static final String SECRET ="5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
-//
-//    public String generateToken(String userName){
-//        Map<String,Object> claims=new HashMap<>();
-//        return createToken(claims,userName);
-//    }
-//
-//    private String createToken(Map<String,Object> claims, String userName) {
-//        return Jwts.builder()
-//                .setClaims(claims)
-//                .setSubject(userName)
-//                .setIssuedAt(new Date(System.currentTimeMillis()))
-//                .setExpiration(new Date(System.currentTimeMillis()+1000*60*30))
-//                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
-//    }
-//
-//    private Key getSignKey() {
-//        byte[] keyBytes= Decoders.BASE64.decode(SECRET);
-//        return Keys.hmacShaKeyFor(keyBytes);
-//    }
 }
