@@ -1,8 +1,11 @@
-<form [formGroup]="loginForm">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
   <p-card header="Login" [style]="{ width: '360px' }">
     <div class="field">
       <label for="email">Email</label>
-      <input
+      <input  
+      
+      [(ngModel)]="credentials.email" name="email"
+
         type="text"
         pInputText
         formControlName="email"
@@ -21,6 +24,8 @@
     <div class="field">
       <label for="password">Password</label>
       <input
+      [(ngModel)]="credentials.password" name="password"
+      
         type="password"
         pInputText
         formControlName="password"
@@ -44,3 +49,4 @@
     <div class="mt-2">Not a member? <a routerLink="/signup">Signup</a></div>
   </p-card>
 </form>
+
