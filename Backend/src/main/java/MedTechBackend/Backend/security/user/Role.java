@@ -13,6 +13,7 @@ import static MedTechBackend.Backend.security.user.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {
+
     USER(Collections.emptySet()),
     ADMIN(
             Set.of(
@@ -20,18 +21,18 @@ public enum Role {
                     ADMIN_UPDATE,
                     ADMIN_DELETE,
                     ADMIN_CREATE,
-                    PERSON_UPDATE,
-                    PERSON_READ,
-                    PERSON_DELETE,
-                    PERSON_CREATE
+                    DOCTOR_READ,
+                    DOCTOR_UPDATE,
+                    DOCTOR_DELETE,
+                    DOCTOR_CREATE
             )
     ),
-    PERSON(
+    DOCTOR(
             Set.of(
-                    PERSON_READ,
-                    PERSON_UPDATE,
-                    PERSON_DELETE,
-                    PERSON_CREATE
+                    DOCTOR_READ,
+                    DOCTOR_UPDATE,
+                    DOCTOR_DELETE,
+                    DOCTOR_CREATE
             )
     )
 

@@ -1,4 +1,4 @@
-package MedTechBackend.Backend.Repository;
+package MedTechBackend.Backend.security.user;
 
 import MedTechBackend.Backend.security.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

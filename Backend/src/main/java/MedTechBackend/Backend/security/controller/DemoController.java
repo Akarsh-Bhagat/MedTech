@@ -1,4 +1,4 @@
-package MedTechBackend.Backend.security.demo;
+package MedTechBackend.Backend.security.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
