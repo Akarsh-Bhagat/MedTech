@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,9 @@ export class LoginComponent  implements OnInit{
   }
   constructor(
     private fb: FormBuilder,
-    private loginService:LoginService
+    private loginService:LoginService,
+    private router: Router 
+
   ) { }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
@@ -42,5 +45,7 @@ export class LoginComponent  implements OnInit{
     else{
       console.log("fields empty")
     }
+
+    this.router.navigate(['/home']);
   }
 }

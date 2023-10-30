@@ -1,0 +1,125 @@
+<div class="html">
+    <h4 id="registration">Your Detail</h4>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <!-- Input field for Name -->
+      <div>
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"[(ngModel)]="items.name"
+          placeholder="Your name.."
+          formControlName="name"
+          [ngClass]="{
+            valid: editForm.get('name')?.valid,
+            invalid:
+              editForm.get('name')?.invalid && editForm.get('name')?.touched
+          }"
+        />
+        <div
+          *ngIf="
+            editForm.get('name')?.hasError('required') &&
+            editForm.get('name')?.touched
+          "
+          style="color: red"
+        >
+          Name is required.
+        </div>
+      </div>
+  
+      <!-- Input field for Address -->
+      <div>
+        <label for="address">Address:</label>
+        <input
+          type="text"
+          id="address"
+          [(ngModel)]="items.address"
+          placeholder="Address..."
+          formControlName="address"
+          [ngClass]="{
+            valid: editForm.get('address')?.valid,
+            invalid:
+              editForm.get('address')?.invalid && editForm.get('address')?.touched
+          }"
+        />
+        <div
+          *ngIf="
+            editForm.get('address')?.hasError('required') &&
+            editForm.get('address')?.touched
+          "
+          style="color: red"
+        >
+          Address is required.
+        </div>
+      </div>
+  
+      <!-- Input field for DOB -->
+      <div>
+        <label for="dob">DOB:</label>
+        <input type="date" id="dob" [(ngModel)]="items.dob" placeholder="DOB..." formControlName="dob" />
+      </div>
+  
+      <!-- Input field for Role -->
+      <div>
+        <label for="role">Role:</label>
+        <input
+          type="string"
+          id="role"
+          [(ngModel)]="items.role"
+          placeholder="Your Role.."
+          formControlName="role"
+          [ngClass]="{
+            valid: editForm.get('role')?.valid,
+            invalid:
+              editForm.get('role')?.invalid && editForm.get('role')?.touched
+          }"
+        />
+        <div
+          *ngIf="
+            editForm.get('role')?.hasError('required') &&
+            editForm.get('role')?.touched
+          "
+          style="color: red"
+        >
+          Role is required.
+        </div>
+      </div>
+  
+      <!-- Input field for Gender -->
+      <div class="gender-section">
+        <label>Gender:</label>
+        <div class="gender-option" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              [value]="gender"
+              formControlName="gender"
+              [(ngModel)]="items.gender"
+              [ngClass]="{
+                valid: editForm.get('address')?.valid,
+                invalid:
+                  editForm.get('address')?.invalid &&
+                  editForm.get('address')?.touched
+              }"
+            />
+            {{ gender }}
+          </label>
+        </div>
+        <div
+          *ngIf="
+            editForm.get('gender')?.hasError('required') &&
+            editForm.get('gender')?.touched
+          "
+          style="color: red"
+        >
+          Gender is required.
+        </div>
+      </div>
+  
+      <!-- <button type="submit" id="btn" >Update</button> -->
+      <button type="submit" [disabled]="editForm.invalid" class="btn btn-success">
+        Update
+      </button>
+    </form>
+    <!-- </div> -->
+  </div>
+  

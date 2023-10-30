@@ -1,26 +1,45 @@
-<form [formGroup]="signupForm">
+<form [formGroup]="signupForm" (ngSubmit)="formSubmit()">
+  {{user | json}}
   <p-card header="Signup" [style]="{ width: '360px' }">
     <div class="field">
-      <label for="fullName">FullName</label>
-      <input
+      <label for="firstName">FirstName</label>
+      <input [(ngModel)]="user.firstName"
         type="text"
         pInputText
-        formControlName="fullName"
+        formControlName="firstName"
         class="w-full"
-        name="fullName"
+        name="firstName"
         placeholder="Type your name"
       />
       <small
-        *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)"
+        *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
         class="block p-error"
       >
-        <div *ngIf="fullName.errors?.['required']">Name is required.</div>
-        <div *ngIf="fullName.errors?.['pattern']">Enter a valid Name</div>
+        <div *ngIf="firstName.errors?.['required']">FirstName is required.</div>
+        <div *ngIf="firstName.errors?.['pattern']">Enter a valid LastName</div>
+      </small>
+    </div>
+    <div class="field">
+      <label for="lastName">LastName</label>
+      <input  [(ngModel)]="user.lastName"
+        type="text"
+        pInputText
+        formControlName="lastName"
+        class="w-full"
+        name="lastName"
+        placeholder="Type your name"
+      />
+      <small
+        *ngIf="lastName.invalid && (lastName.dirty ||lastName.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="lastName.errors?.['required']">LastName is required.</div>
+        <div *ngIf="lastName.errors?.['pattern']">Enter a valid LastName</div>
       </small>
     </div>
     <div class="field">
       <label for="email">Email</label>
-      <input
+      <input   [(ngModel)]="user.email"
         type="text"
         pInputText
         formControlName="email"
@@ -38,7 +57,7 @@
     </div>
     <div class="field">
       <label for="password">Password</label>
-      <input
+      <input   [(ngModel)]="user.password"
         type="password"
         pInputText
         formControlName="password"
@@ -55,7 +74,7 @@
     </div>
     <div class="field">
       <label for="confirmPassword">Confirm Password</label>
-      <input
+      <input   [(ngModel)]="user.confirmPassword"
         type="password"
         pInputText
         formControlName="confirmPassword"
@@ -81,7 +100,7 @@
         Password should match
       </small>
     </div>
-    <p-button
+    <p-button type="submit"
       label="Signup"
       styleClass="w-full"
       [disabled]="signupForm.invalid"
@@ -90,3 +109,15 @@
     <div class="mt-2">Already a member? <a routerLink="/login">Login</a></div>
   </p-card>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+

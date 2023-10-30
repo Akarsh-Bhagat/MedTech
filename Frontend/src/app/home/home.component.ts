@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+doctor: any[]=[];
+
+
+
+constructor(){
+  this.doctor = [
+
+      {id:6,name:'Varsha' ,address: 'Lucknow' ,dob:'2004-07-29',gender: 'Female',role:'C'}
+    ];
+}
+
+
 
 }
