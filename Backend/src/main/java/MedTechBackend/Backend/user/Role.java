@@ -1,4 +1,4 @@
-package MedTechBackend.Backend.security.user;
+package MedTechBackend.Backend.user;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,29 +9,28 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static MedTechBackend.Backend.security.user.Permission.*;
-
 @RequiredArgsConstructor
 public enum Role {
+
     USER(Collections.emptySet()),
     ADMIN(
             Set.of(
-                    ADMIN_READ,
-                    ADMIN_UPDATE,
-                    ADMIN_DELETE,
-                    ADMIN_CREATE,
-                    PERSON_UPDATE,
-                    PERSON_READ,
-                    PERSON_DELETE,
-                    PERSON_CREATE
+                    Permission.ADMIN_READ,
+                    Permission.ADMIN_UPDATE,
+                    Permission.ADMIN_DELETE,
+                    Permission.ADMIN_CREATE,
+                    Permission.DOCTOR_READ,
+                    Permission.DOCTOR_UPDATE,
+                    Permission.DOCTOR_DELETE,
+                    Permission.DOCTOR_CREATE
             )
     ),
-    PERSON(
+    DOCTOR(
             Set.of(
-                    PERSON_READ,
-                    PERSON_UPDATE,
-                    PERSON_DELETE,
-                    PERSON_CREATE
+                    Permission.DOCTOR_READ,
+                    Permission.DOCTOR_UPDATE,
+                    Permission.DOCTOR_DELETE,
+                    Permission.DOCTOR_CREATE
             )
     )
 

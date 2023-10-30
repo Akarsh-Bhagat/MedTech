@@ -1,4 +1,4 @@
-package MedTechBackend.Backend.security.user;
+package MedTechBackend.Backend.user;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,7 @@
 package MedTechBackend.Backend.security.token;
 
-import MedTechBackend.Backend.security.user.User;
+
+import MedTechBackend.Backend.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,5 +40,4 @@ public class Token {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User user;
-
 }

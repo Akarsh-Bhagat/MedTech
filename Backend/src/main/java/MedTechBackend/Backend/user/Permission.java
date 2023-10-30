@@ -1,4 +1,4 @@
-package MedTechBackend.Backend.security.user;
+package MedTechBackend.Backend.user;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +10,10 @@ public enum Permission {
     ADMIN_UPDATE("admin:update"),
     ADMIN_CREATE("admin:create"),
     ADMIN_DELETE("admin:delete"),
-    PERSON_READ("management:read"),
-    PERSON_UPDATE("management:update"),
-    PERSON_CREATE("management:create"),
-    PERSON_DELETE("management:delete")
-
-    ;
+    DOCTOR_READ("doctor:read"),
+    DOCTOR_UPDATE("doctor:update"),
+    DOCTOR_CREATE("doctor:create"),
+    DOCTOR_DELETE("doctor:delete");
 
     @Getter
     private final String permission;

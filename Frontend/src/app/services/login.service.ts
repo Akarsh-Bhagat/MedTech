@@ -12,7 +12,9 @@ export class LoginService {
     return this.http.post(`${this.url}/authenticate`, credentials)
   }
     //for login user
-    loginUser(token: string){
+
+    loginUser(token: any){
+
       localStorage.setItem("token", token)
       return true;
     }

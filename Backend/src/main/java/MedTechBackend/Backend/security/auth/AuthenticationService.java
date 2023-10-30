@@ -1,18 +1,19 @@
 package MedTechBackend.Backend.security.auth;
 
+
+//import MedTechBackend.Backend.doctor.Doctor;
 import MedTechBackend.Backend.security.token.Token;
 import MedTechBackend.Backend.security.token.TokenProperties;
 import MedTechBackend.Backend.security.token.TokenRepository;
 import MedTechBackend.Backend.security.token.TokenType;
-import MedTechBackend.Backend.security.user.Role;
-import MedTechBackend.Backend.security.user.User;
-import MedTechBackend.Backend.Repository.UserRepository;
+import MedTechBackend.Backend.user.Role;
+import MedTechBackend.Backend.user.User;
+import MedTechBackend.Backend.user.UserRepository;
 import MedTechBackend.Backend.service.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +25,6 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
@@ -32,19 +32,26 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final TokenProperties tokenProperties;
 
-
-
-
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+                .role(request.getRole())
                 .build();
-        repository.save(user);
         var savedUser = repository.save(user);
+
+//        // Check if the registered role is a doctor
+//        if (request.getRole() == Role.DOCTOR) {
+//            Doctor doctor = new Doctor();
+//            doctor.setUser(savedUser); // Link the doctor to the user
+////            // Set the properties for the doctor
+////            doctor.setSpecialization(request.getSpecialization());
+////            doctor.setExpYears(request.getExpYears());
+//            savedUser.setDoctor(doctor); // Set the doctor to the user
+//        }
+
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
@@ -67,6 +74,8 @@ public class AuthenticationService {
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
@@ -124,9 +133,4 @@ public class AuthenticationService {
             }
         }
     }
-
-
-
-
-
-    }
+}

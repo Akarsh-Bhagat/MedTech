@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
+
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,8 +20,10 @@ export class LoginComponent  implements OnInit{
   }
   constructor(
     private fb: FormBuilder,
+
     private loginService:LoginService,
     private router: Router 
+
 
   ) { }
   ngOnInit(): void {
@@ -46,6 +50,8 @@ export class LoginComponent  implements OnInit{
       console.log("fields empty")
     }
 
+
     this.router.navigate(['/home']);
+
   }
 }
