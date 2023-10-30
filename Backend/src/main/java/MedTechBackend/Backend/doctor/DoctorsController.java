@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-
+@CrossOrigin(origins = "*")
 @RestController
+
 @RequestMapping("/api")
 public class DoctorsController {
 
@@ -21,7 +22,7 @@ public class DoctorsController {
     @PostMapping("/doctors")
     public String createNewDoctor(@RequestBody Doctors doctors) {
         doctorsRepository.save(doctors);
-        return "Doctors created in database";
+        return "Doctor created in database";
     }
 
     @GetMapping("/doctors")
@@ -71,15 +72,5 @@ public class DoctorsController {
         return "Doctors deleted Successfully..";
     }
 
-//    @GetMapping("/employees/empcity")
-//    public ResponseEntity<Employee> getEmployeeByempcity(@RequestParam("emp_city") String emp_city) {
-//        Employee emp = employeeRepository.findByEmpcity(emp_city);
-//        return new ResponseEntity<Employee>(emp, HttpStatus.FOUND);
-//    }
 
-//    @GetMapping("/employee/employeeGreaterThan")
-//    public ResponseEntity<List<Employee>> getEmployeeGreaterThan(@RequestParam("emp_age") int emp_age){
-//        Optional<List<Employee>> empList = employeeRepository.findByEmpageGreaterThan(emp_age);
-//        return new ResponseEntity<List<Employee>>(empList.get(), HttpStatus.FOUND);
-//    }
 }

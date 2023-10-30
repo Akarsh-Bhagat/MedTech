@@ -1,20 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 doctor: any[]=[];
 
 
 
-constructor(){
-  this.doctor = [
+constructor( private userService :UserService){
 
-      {id:6,name:'Varsha' ,address: 'Lucknow' ,dob:'2004-07-29',gender: 'Female',role:'C'}
-    ];
+  
+}
+ngOnInit():void{
+  this.userService.getPosts().subscribe((response)=>{
+    this.doctor=response;
+    console.log(response);
+  })
 }
 
 

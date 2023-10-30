@@ -1,61 +1,28 @@
-
-.container {
-  margin: 20px;
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #282C34, #1C1E25);
+  color: #F5F5F5;
 }
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
+.container-fluid {
+  padding: 20px;
 }
-
-.table th, .table td {
-  border: 1px solid #ccc;=======
+.main-title {
+  text-align: center;
+  color: #61DAFB;
 }
-
-.table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+.btn-add {
+  margin-bottom: 20px;
 }
-
-.table a {
-  text-decoration: none;
-  color: #007bff;
+.table-doctors {
+  background: #F5F5F5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s;
 }
-
-.table a:hover {
-  text-decoration: underline;
+.modal-content {
+  background: #F5F5F5;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s;
 }
-
-.action {
-  vertical-align: middle;
-  margin: 0 4px;
-}
-
-.bn {
-  background-color: #fff; /* Set your desired background color */
-}
-
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* .carousel-caption {
-    color: rgb(255, 255, 255);
-    text-shadow: -1px 1px 0 #000,
-                  1px 1px 0 #000,
-                  1px -1px 0 #000,
-                  -1px -1px 0 #000;
-} */
-
-
-    
-

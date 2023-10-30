@@ -2,47 +2,72 @@
     <h2>User Form</h2>
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <!-- Input field for Name -->
-      <div class="form-group">
-        <label for="firstName">FirstName:</label>
+
+      <!-- <div class="form-group">
+        <label for="id">Id:</label>
         <input
           type="text"
-          id="firstName"
-          formControlName="firstName"
+          id="id"
+          formControlName="id"
           class="form-control"
           [ngClass]="{
-            valid: userForm.get('firstName')?.valid,
+            valid: userForm.get('id')?.valid,
             invalid:
-              userForm.get('firstName')?.invalid && userForm.get('name')?.touched
+              userForm.get('id')?.invalid && userForm.get('id')?.touched
           }"
         />
         <div
           class="warning"
           *ngIf="
-            userForm.get('firstName')?.hasError('required') &&
-            userForm.get('firstName')?.touched
+            userForm.get('id')?.hasError('required') &&
+            userForm.get('id')?.touched
+          "
+        >
+          Id is required.
+        </div>
+      </div> -->
+
+      <div class="form-group">
+        <label for="firstname">FirstName:</label>
+        <input
+          type="text"
+          id="firstname"
+          formControlName="firstname"
+          class="form-control"
+          [ngClass]="{
+            valid: userForm.get('firstname')?.valid,
+            invalid:
+              userForm.get('firstname')?.invalid && userForm.get('firstname')?.touched
+          }"
+        />
+        <div
+          class="warning"
+          *ngIf="
+            userForm.get('firstname')?.hasError('required') &&
+            userForm.get('firstname')?.touched
           "
         >
           firstName is required.
         </div>
       </div>
       <div class="form-group">
-        <label for="name">LastName:</label>
+        <label for="lastname">LastName:</label>
         <input
           type="text"
-          id="lastName"
-          formControlName="lastName"
+          id="lastname"
+          formControlName="lastname"
           class="form-control"
           [ngClass]="{
-            valid: userForm.get('lastName')?.valid,
+            valid: userForm.get('lastname')?.valid,
             invalid:
-              userForm.get('lastName')?.invalid && userForm.get('name')?.touched
+              userForm.get('lastname')?.invalid && userForm.get('lastname')?.touched
           }"
         />
         <div
           class="warning"
           *ngIf="
-            userForm.get('lastName')?.hasError('required') &&
-            userForm.get('lastName')?.touched
+            userForm.get('lastname')?.hasError('required') &&
+            userForm.get('lastname')?.touched
           "
         >
           Name is required.
@@ -132,18 +157,10 @@
       </div>
   
       <!-- Input field for Gender -->
-      <div class="gender-section">
-        <label>Gender:</label>
-        <div class="gender-option" *ngFor="let gender of genders">
-          <label>
-            <input type="radio" [value]="gender" formControlName="gender" />
-            {{ gender }}
-          </label>
-        </div>
-      </div>
+      
       
       <!-- submit button -->
-      <button type="submit"  class="btn btn-success">
+      <button type="submit"  class="btn btn-success" (click)="onSubmit()" routerLink="/home">
         Save
       </button>
     </form>

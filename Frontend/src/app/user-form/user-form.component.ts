@@ -22,17 +22,18 @@ export class UserFormComponent {
     private userService: UserService
   ){
     this.userForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       address: ['', Validators.required],
-      
+      dob: ['', Validators.required],
       email: ['', Validators.required],
-      role: ['', Validators.required],
-      gender: ['', Validators.required]
+      specialisation: ['', Validators.required],
+      
     });
   }
 
   onSubmit(){
+    console.log("inside submit")
     if(this.userForm.valid){
       const userData = this.userForm.value;
       console.log(userData);
