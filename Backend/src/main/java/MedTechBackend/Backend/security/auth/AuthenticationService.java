@@ -1,12 +1,14 @@
 package MedTechBackend.Backend.security.auth;
 
 
+//import MedTechBackend.Backend.doctor.Doctor;
 import MedTechBackend.Backend.security.token.Token;
 import MedTechBackend.Backend.security.token.TokenProperties;
 import MedTechBackend.Backend.security.token.TokenRepository;
 import MedTechBackend.Backend.security.token.TokenType;
-import MedTechBackend.Backend.security.user.User;
-import MedTechBackend.Backend.security.user.UserRepository;
+import MedTechBackend.Backend.user.Role;
+import MedTechBackend.Backend.user.User;
+import MedTechBackend.Backend.user.UserRepository;
 import MedTechBackend.Backend.service.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,10 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -42,6 +41,17 @@ public class AuthenticationService {
                 .role(request.getRole())
                 .build();
         var savedUser = repository.save(user);
+
+//        // Check if the registered role is a doctor
+//        if (request.getRole() == Role.DOCTOR) {
+//            Doctor doctor = new Doctor();
+//            doctor.setUser(savedUser); // Link the doctor to the user
+////            // Set the properties for the doctor
+////            doctor.setSpecialization(request.getSpecialization());
+////            doctor.setExpYears(request.getExpYears());
+//            savedUser.setDoctor(doctor); // Set the doctor to the user
+//        }
+
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);

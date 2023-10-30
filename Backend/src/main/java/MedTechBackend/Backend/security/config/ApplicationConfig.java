@@ -1,7 +1,7 @@
 package MedTechBackend.Backend.security.config;
 
 
-import MedTechBackend.Backend.security.user.UserRepository;
+import MedTechBackend.Backend.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

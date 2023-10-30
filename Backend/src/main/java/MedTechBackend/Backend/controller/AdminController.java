@@ -1,4 +1,4 @@
-package MedTechBackend.Backend.security.controller;
+package MedTechBackend.Backend.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;

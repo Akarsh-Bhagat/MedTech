@@ -1,7 +1,5 @@
-package MedTechBackend.Backend.security.user;
+package MedTechBackend.Backend.user;
 
-import MedTechBackend.Backend.security.user.ChangePasswordRequest;
-import MedTechBackend.Backend.security.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;

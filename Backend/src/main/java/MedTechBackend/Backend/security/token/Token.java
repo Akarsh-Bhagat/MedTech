@@ -1,7 +1,7 @@
 package MedTechBackend.Backend.security.token;
 
 
-import MedTechBackend.Backend.security.user.User;
+import MedTechBackend.Backend.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
