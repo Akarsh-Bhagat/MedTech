@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,12 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
+
 doctor: any[]=[];
 
 
 
-constructor( private userService :UserService){
+constructor(private router: Router, private userService :UserService){
 
   
 }
@@ -22,6 +24,13 @@ ngOnInit():void{
   })
 }
 
-
-
+deleteAndReload(doctorId: number) {
+  this.userService.deleteData({},doctorId).subscribe(
+    () => {
+    },
+    (error) => {
+      window.location.reload();
+    }
+  );
+}
 }

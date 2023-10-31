@@ -1,0 +1,27 @@
+/* Add this to your view.component.css or any global CSS file */
+h3.section-title {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.doctor-details {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.detail-item {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.detail-label {
+    min-width: 130px;
+    font-weight: bold;
+}
+
+.detail-value {
+    margin-left: 10px;
+}

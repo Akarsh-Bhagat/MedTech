@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-
-
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
@@ -12,9 +10,6 @@ import { UserService } from '../services/user.service';
 })
 export class UserFormComponent {
   userForm: FormGroup;
-  genders: string[] = ['Male', 'Female', 'Other'];
-
-
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -28,10 +23,8 @@ export class UserFormComponent {
       dob: ['', Validators.required],
       email: ['', Validators.required],
       specialisation: ['', Validators.required],
-      
     });
   }
-
   onSubmit(){
     console.log("inside submit")
     if(this.userForm.valid){
@@ -40,7 +33,9 @@ export class UserFormComponent {
       // navigating to home page
       this.userService.postData(userData)
         .subscribe(res => {
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/home']);});
         })
     }
   }

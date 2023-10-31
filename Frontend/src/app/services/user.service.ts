@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
+  getUser(doctorId: any) {
+    throw new Error('Method not implemented.');
+  }
   baseUrl:any= "http://localhost:8080/api/v1/auth"
   url:any="http://localhost:8080/api"
 
@@ -20,7 +23,7 @@ export class UserService {
 
   // For view the data 
   getDataById(id: number): Observable<any> {
-    const url = `${this.url}/${id}`;
+    const url = `${this.url}/doctors/${id}`;
     return this.http.get(url);
   }
   // adding the user details in db
@@ -40,9 +43,16 @@ export class UserService {
   // Updating the user details
   updateData(updateData: any,id: number): Observable<any>{
     console.log(updateData);
-    const url = `${this.url}/${id}`;
+    const url = `${this.url}/doctors/${id}`;
     console.log(url);
     
-    return this.http.patch(url, updateData);
+    return this.http.put(url, updateData);
+  }
+
+  //deleting a user
+  deleteData(deleteData: any,id:number): Observable<any>{
+    const url = `${this.url}/doctors/${id}`;
+    console.log(url);
+    return this.http.delete(url, deleteData);
   }
 }

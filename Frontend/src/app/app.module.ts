@@ -22,6 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UserFormComponent } from './user-form/user-form.component';
 import { EditComponent } from './edit/edit.component';
+import { ViewComponent } from './view/view.component';
+import { DeleteComponent } from './delete/delete.component';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { EditComponent } from './edit/edit.component';
     HomeComponent,
     UserFormComponent,
     EditComponent,
+    ViewComponent,
+    DeleteComponent,
     
   ],
   imports: [
