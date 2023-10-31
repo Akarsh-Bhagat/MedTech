@@ -26,7 +26,7 @@ public class DoctorsController {
     }
 
     @GetMapping("/doctors")
-    public ResponseEntity<List<Doctors>> getAllEmployees() {
+    public ResponseEntity<List<Doctors>> getAllDoctors() {
         List<Doctors> docList = new ArrayList<>();
         doctorsRepository.findAll().forEach(docList::add);
         return new ResponseEntity<List<Doctors>>(docList, HttpStatus.OK);
@@ -36,27 +36,27 @@ public class DoctorsController {
     public ResponseEntity<Doctors> getDoctorsById(@PathVariable Integer docid) {
         Optional<Doctors> doc = doctorsRepository.findById(docid);
         if (doc.isPresent()) {
-            return new ResponseEntity<Doctors>(doc.get(), HttpStatus.FOUND);
+            return new ResponseEntity<Doctors>(doc.get(),HttpStatus.OK);
         } else {
             return new ResponseEntity<Doctors>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/doctors/{docid}")
-    public String updateDoctorsById(@PathVariable Integer docid, @RequestBody Doctors doctor) {
+    public ResponseEntity<String> updateDoctorsById(@PathVariable Integer docid, @RequestBody Doctors doctors) {
         Optional<Doctors> doc = doctorsRepository.findById(docid);
         if (doc.isPresent()) {
             Doctors existDoc = doc.get();
-            existDoc.setFirstname(doctor.getFirstname());
-            existDoc.setLastname(doctor.getLastname());
-            existDoc.setEmail(doctor.getEmail());
-            existDoc.setAddress(doctor.getAddress());
-            existDoc.setDob(doctor.getDob());
-            existDoc.setSpecialisation(doctor.getSpecialisation());
+            existDoc.setFirstname(doctors.getFirstname());
+            existDoc.setLastname(doctors.getLastname());
+            existDoc.setEmail(doctors.getEmail());
+            existDoc.setAddress(doctors.getAddress());
+            existDoc.setDob(doctors.getDob());
+            existDoc.setSpecialisation(doctors.getSpecialisation());
             doctorsRepository.save(existDoc);
-            return "Doctors Details against Id " + docid + " updated";
+            return new ResponseEntity<>("Doctors Details against ID " + docid + " updated", HttpStatus.OK);
         } else {
-            return "Doctors Details does not exist for docid " + docid;
+            return new ResponseEntity<>("Doctors Details do not exist for docid " + docid, HttpStatus.NOT_FOUND);
         }
     }
 
