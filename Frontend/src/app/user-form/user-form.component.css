@@ -1,0 +1,19 @@
+.is-valid {
+    border: 1px solid green;
+  }
+  
+  .is-invalid {
+    border: 1px solid red;
+  }
+  .user-details {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .warning {
+    color: #dc3545; /* Red color for warnings */
+    margin-top: 5px;
+  }

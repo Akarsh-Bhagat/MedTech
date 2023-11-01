@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { HttpHeaders } from '@angular/common/http';
@@ -20,12 +20,12 @@ export class EditComponent implements OnInit {
   
     // Initializing  form variable
     this.editForm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      address: ['', Validators.required],
-      dob: ['', Validators.required],
-      email: ['', Validators.required],
-      specialisation: ['', Validators.required],
+      firstname: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      lastname: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      address: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      dob: [Validators.required],
+      email: ['',[Validators.required, Validators.email]],
+      specialisation: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
     });
 
       this.route.params.subscribe(params => {
@@ -44,18 +44,27 @@ export class EditComponent implements OnInit {
       
   }
 
+  getErrorMessage(controlName: string) {
+    const control = this.editForm.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Field is required';
+    } else if (control?.hasError('pattern')) {
+      return 'Invalid input';
+    } else if (control?.hasError('email')) {
+      return 'Invalid email';
+    } else if (control?.hasError('invalidDOB')) {
+      return 'Please provide a valid year after 1900';
+    }
+    return '';
+  }
+
+ 
+
 
   onSubmit(){
     if(this.editForm.valid){
       const userData = this.editForm.value;
       console.log(userData);
-
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          // Add any other necessary headers
-        })
-      };
       
       // navigating to home page
       this.userService.updateData(userData,this.doctor.doctorId)

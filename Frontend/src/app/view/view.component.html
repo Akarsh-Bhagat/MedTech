@@ -1,34 +1,42 @@
-<!-- view.component.html -->
-<div class="container" *ngIf="doctor">
-    <h3 class="section-title">Doctor Details</h3>
-    <div class="doctor-details">
-        <div class="detail-item">
-            <label class="detail-label">ID:</label>
-            <span class="detail-value">{{doctor.doctorId}}</span>
-        </div>
-        <div class="detail-item">
-            <label class="detail-label">First Name:</label>
-            <span class="detail-value">{{doctor.firstname}}</span>
-        </div>
-        <div class="detail-item">
-            <label class="detail-label">Last Name:</label>
-            <span class="detail-value">{{doctor.lastname}}</span>
-        </div>
-        <div class="detail-item">
-            <label class="detail-label">Email:</label>
-            <span class="detail-value">{{doctor.email}}</span>
-        </div>
-        <div class="detail-item">
-            <label class="detail-label">Address:</label>
-            <span class="detail-value">{{doctor.address}}</span>
-        </div>
-        <div class="detail-item">
-            <label class="detail-label">DOB:</label>
-            <span class="detail-value">{{doctor.dob}}</span>
-        </div>
-        <div class="detail-item">
-            <label class="detail-label">Specialization:</label>
-            <span class="detail-value">{{doctor.specialisation}}</span>
+<app-navbar></app-navbar>
+<div class="medbg">
+<div class="container my-4">
+    <h3 class="text-center mb-4">Doctor Details</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="detail-item">
+                        <span class="detail-label">ID:</span>
+                        <span class="detail-value">{{ doctor.doctorId }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">First Name:</span>
+                        <span class="detail-value">{{ doctor.firstname }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Last Name:</span>
+                        <span class="detail-value">{{ doctor.lastname }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email:</span>
+                        <span class="detail-value">{{ doctor.email }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Address:</span>
+                        <span class="detail-value">{{ doctor.address }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">DOB:</span>
+                        <span class="detail-value">{{ doctor.dob }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Specialization:</span>
+                        <span class="detail-value">{{ doctor.specialisation }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>

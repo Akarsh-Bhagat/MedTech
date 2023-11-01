@@ -7,7 +7,12 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+navToElement(arg0: string) {
+throw new Error('Method not implemented.');
+}
   items: MenuItem[] | undefined;
+navbarcolour: any;
+light: any;
 
   ngOnInit() {
     this.items = [
@@ -32,5 +37,12 @@ export class NavbarComponent implements OnInit {
         routerLink: '/contact'
       }
     ];
+  }
+
+  isDropdownVisible = false;
+
+  toggleDropdownPanel(event: Event): void {
+    event.preventDefault();
+    this.isDropdownVisible = !this.isDropdownVisible;
   }
 }

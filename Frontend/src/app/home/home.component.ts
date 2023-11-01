@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { SharingService } from '../services/sharing.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ ngOnInit():void{
   this.userService.getPosts().subscribe((response)=>{
     this.doctor=response;
     console.log(response);
-  })
+  }) 
 }
 
 deleteAndReload(doctorId: number) {
@@ -33,4 +34,5 @@ deleteAndReload(doctorId: number) {
     }
   );
 }
+
 }

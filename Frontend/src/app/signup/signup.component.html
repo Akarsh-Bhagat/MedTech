@@ -1,8 +1,8 @@
+<app-navbar></app-navbar>
 <form [formGroup]="signupForm" (ngSubmit)="formSubmit()">
-  {{user | json}}
   <p-card header="Signup" [style]="{ width: '360px' }">
     <div class="field">
-      <label for="firstName">FirstName</label>
+      <label for="firstName">First Name</label>
       <input [(ngModel)]="user.firstName"
         type="text"
         pInputText
@@ -20,7 +20,7 @@
       </small>
     </div>
     <div class="field">
-      <label for="lastName">LastName</label>
+      <label for="lastName">Last Name</label>
       <input  [(ngModel)]="user.lastName"
         type="text"
         pInputText
