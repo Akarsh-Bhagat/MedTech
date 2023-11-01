@@ -1,12 +1,15 @@
-package MedTechBackend.Backend.doctor;
+package MedTechBackend.Backend.entity;
 
+//import MedTechBackend.Backend.entity.DocExperience;
 import MedTechBackend.Backend.security.token.Token;
 import MedTechBackend.Backend.user.Role;
 import MedTechBackend.Backend.user.User;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.config.annotation.web.oauth2.login.OAuth2LoginSecurityMarker;
 
+import java.security.Provider;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +23,7 @@ public class Doctors {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int doctorId;
 
     @Column(name = "doc_firstname")
@@ -32,7 +35,7 @@ public class Doctors {
     @Column(name = "doc_email")
     private String email;
 
-    @Column(name = "doc_adress")
+    @Column(name = "doc_address")
     private String address;
 
     @Column(name = "doc_dob")
@@ -40,5 +43,14 @@ public class Doctors {
 
     @Column(name = "doc_spec")
     private String specialisation;
+
+//    @OneToMany(mappedBy = "doctors", cascade = CascadeType.ALL)
+//    private List<Service> service;
+
+    @ManyToOne
+    @JoinColumn(name = "experience_id")
+    private DocExperience docExperience;
+
+
 
 }
