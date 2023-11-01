@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/medtech
     username: postgres
-    password: 1343
+    password: 8290
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

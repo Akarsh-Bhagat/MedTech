@@ -20,10 +20,7 @@ public class DocExperience {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="doctor_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Doctors doctors;
-
-
 
 }

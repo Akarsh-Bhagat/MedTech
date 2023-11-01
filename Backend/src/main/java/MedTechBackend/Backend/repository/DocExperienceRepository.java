@@ -1,8 +1,11 @@
 package MedTechBackend.Backend.repository;
 
 import MedTechBackend.Backend.entity.DocExperience;
+import MedTechBackend.Backend.entity.Doctors;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DocExperienceRepository extends JpaRepository<DocExperience,Integer> {
+import java.util.Optional;
 
+public interface DocExperienceRepository extends JpaRepository<DocExperience,Integer> {
+    Optional<DocExperience> findByDoctors(Doctors doctors);
 }

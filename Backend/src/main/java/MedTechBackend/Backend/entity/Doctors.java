@@ -12,7 +12,9 @@ import org.springframework.security.config.annotation.web.oauth2.login.OAuth2Log
 import java.security.Provider;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -47,10 +49,21 @@ public class Doctors {
 //    @OneToMany(mappedBy = "doctors", cascade = CascadeType.ALL)
 //    private List<Service> service;
 
-    @ManyToOne
-    @JoinColumn(name = "experience_id")
-    private DocExperience docExperience;
+    @OneToMany(mappedBy = "doctors", cascade = CascadeType.ALL)
+//    private List<DocExperience> docExperience;
+    private Set<DocExperience> docExperience= new LinkedHashSet<>();
 
-
-
+    @Override
+    public String toString() {
+        return "Doctors{" +
+                "doctorId=" + doctorId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", dob=" + dob +
+                ", specialisation='" + specialisation + '\'' +
+                ", docExperience=" + docExperience +
+                '}';
+    }
 }

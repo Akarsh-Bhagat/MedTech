@@ -1,6 +1,9 @@
 package MedTechBackend.Backend.service;//package MedTechBackend.Backend.doctor;
 
+import MedTechBackend.Backend.dto.DoctorDetails;
+import MedTechBackend.Backend.entity.DocExperience;
 import MedTechBackend.Backend.entity.Doctors;
+import MedTechBackend.Backend.repository.DocExperienceRepository;
 import MedTechBackend.Backend.repository.DoctorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,8 @@ public class DoctorService {
 
     @Autowired
     DoctorsRepository doctorsRepository;
+    @Autowired
+    DocExperienceRepository docExperienceRepository;
 
     public void createDoctor(Doctors doctors) {
         doctorsRepository.save(doctors);
@@ -24,8 +29,23 @@ public class DoctorService {
         return docList;
     }
 
-    public Optional<Doctors> getDoctorById(Integer docid) {
-        return doctorsRepository.findById(docid);
+    public DoctorDetails getDoctorById(Integer docid) {
+        Doctors doctors = doctorsRepository.findById(docid).orElse(null);
+        DocExperience docExperience = docExperienceRepository.findByDoctors(doctors).orElse(null);
+        List<DocExperience> docExperiences = new ArrayList<>();
+        docExperiences.add(docExperience);
+        System.out.println(doctors);
+        System.out.println(docExperience);
+        DoctorDetails doctorDetails = DoctorDetails.builder()
+                .doctorId(doctors.getDoctorId())
+                .firstname(doctors.getFirstname())
+                .lastname(doctors.getLastname())
+                .dob(doctors.getDob())
+                .email(doctors.getEmail())
+                .docExperience(docExperiences)
+                .build();
+
+        return doctorDetails;
     }
 
     public void updateDoctor(Integer docid, Doctors updatedDoctor) {

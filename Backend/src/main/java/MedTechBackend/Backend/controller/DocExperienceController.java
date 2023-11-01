@@ -20,6 +20,7 @@ public class DocExperienceController {
     @PostMapping("/experiences")
     public String createNewDoctorExp(@RequestBody DocExperience docExperience) {
         docExperienceService.createDoctorExp(docExperience);
+        System.out.println(docExperience);
         return "Doctor experience created in the database";
     }
 

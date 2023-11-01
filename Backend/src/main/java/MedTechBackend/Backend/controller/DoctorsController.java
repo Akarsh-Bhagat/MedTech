@@ -1,5 +1,6 @@
 package MedTechBackend.Backend.controller;
 
+        import MedTechBackend.Backend.dto.DoctorDetails;
         import MedTechBackend.Backend.service.DoctorService;
         import MedTechBackend.Backend.entity.Doctors;
         import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,9 @@ public class DoctorsController {
     }
 
     @GetMapping("/doctors/{docid}")
-    public ResponseEntity<Doctors> getDoctorsById(@PathVariable Integer docid) {
-        Optional<Doctors> doc = doctorService.getDoctorById(docid);
-        return doc.map(doctors -> new ResponseEntity<>(doctors, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<DoctorDetails> getDoctorsById(@PathVariable Integer docid) {
+        DoctorDetails doc = doctorService.getDoctorById(docid);
+        return new ResponseEntity<>(doc, HttpStatus.OK);
     }
 
     @PutMapping("/doctors/{docid}")
