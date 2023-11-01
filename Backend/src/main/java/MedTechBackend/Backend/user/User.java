@@ -1,7 +1,6 @@
 package MedTechBackend.Backend.user;
 
 
-import MedTechBackend.Backend.doctor.Doctors;
 import MedTechBackend.Backend.security.token.Token;
 import jakarta.persistence.*;
 
