@@ -1,38 +1,28 @@
 package MedTechBackend.Backend.entity;
 
-//import MedTechBackend.Backend.entity.DocExperience;
-import MedTechBackend.Backend.security.token.Token;
-import MedTechBackend.Backend.user.Role;
-import MedTechBackend.Backend.user.User;
-
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.config.annotation.web.oauth2.login.OAuth2LoginSecurityMarker;
 
-import java.security.Provider;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="doctors")
+@Table(name = "doctors")
 public class Doctors {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int doctorId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(name = "doc_firstname")
-    private String firstname;
+    private String firstName;
 
     @Column(name = "doc_lastname")
-    private String lastname;
+    private String lastName;
 
     @Column(name = "doc_email")
     private String email;
@@ -41,29 +31,26 @@ public class Doctors {
     private String address;
 
     @Column(name = "doc_dob")
-    private LocalDate dob;
+    private LocalDate dateOfBirth;
 
     @Column(name = "doc_spec")
     private String specialisation;
 
-//    @OneToMany(mappedBy = "doctors", cascade = CascadeType.ALL)
-//    private List<Service> service;
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DocExperience> experiences;
 
-    @OneToMany(mappedBy = "doctors", cascade = CascadeType.ALL)
-//    private List<DocExperience> docExperience;
-    private Set<DocExperience> docExperience= new LinkedHashSet<>();
+    // Getters, setters, and additional methods
 
     @Override
     public String toString() {
         return "Doctors{" +
-                "doctorId=" + doctorId +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
-                ", dob=" + dob +
+                ", dateOfBirth=" + dateOfBirth +
                 ", specialisation='" + specialisation + '\'' +
-                ", docExperience=" + docExperience +
                 '}';
     }
 }

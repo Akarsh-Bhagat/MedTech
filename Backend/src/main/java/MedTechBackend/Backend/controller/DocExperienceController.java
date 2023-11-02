@@ -1,52 +1,68 @@
 package MedTechBackend.Backend.controller;
 
-
+import MedTechBackend.Backend.dto.DoctorsDTO;
 import MedTechBackend.Backend.entity.DocExperience;
 import MedTechBackend.Backend.service.DocExperienceService;
+import MedTechBackend.Backend.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/doctors")
+@RequestMapping("/api/doctors/experiences")
 public class DocExperienceController {
-    @Autowired
-    private DocExperienceService docExperienceService;
 
-    @PostMapping("/experiences")
-    public String createNewDoctorExp(@RequestBody DocExperience docExperience) {
-        docExperienceService.createDoctorExp(docExperience);
-        System.out.println(docExperience);
-        return "Doctor experience created in the database";
+    private final DocExperienceService docExperienceService;
+
+    private final DoctorService doctorService;
+
+    public DocExperienceController(DocExperienceService docExperienceService, DoctorService doctorService) {
+        this.docExperienceService = docExperienceService;
+        this.doctorService = doctorService;
     }
 
-    @GetMapping("/experiences")
+//    public DocExperienceController(DocExperienceService docExperienceService, DoctorService doctorService) {
+//        this.docExperienceService = docExperienceService;
+//        this.doctorService = doctorService;
+//    }
+
+    @PostMapping("/{docid}")
+    public ResponseEntity<String> createNewDoctorExp(@PathVariable Integer docid, @RequestBody DocExperience docExperience) {
+        DoctorsDTO doctorDetails = doctorService.getDoctorById(docid);
+        if (doctorDetails != null) {
+            docExperience.setDoctor(doctorDetails.getDoctor());
+            docExperienceService.createDoctorExp(docExperience);
+            return new ResponseEntity<>("Doctor experience created in the database", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Doctor not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping
     public ResponseEntity<List<DocExperience>> getAllDoctorsExp() {
         List<DocExperience> expList = docExperienceService.getAllDoctorsExp();
         return new ResponseEntity<>(expList, HttpStatus.OK);
     }
 
-    @GetMapping("/experiences/{expid}")
+    @GetMapping("/{expid}")
     public ResponseEntity<DocExperience> getDoctorsExpById(@PathVariable Integer expid) {
-        Optional<DocExperience> exp = docExperienceService.getDoctorExpById(expid);
-        return exp.map(docExperience -> new ResponseEntity<>(docExperience, HttpStatus.OK))
+        return docExperienceService.getDoctorExpById(expid)
+                .map(docExperience -> new ResponseEntity<>(docExperience, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/experiences/{expid}")
-    public String deleteDoctorsExpByExpId(@PathVariable Integer expid) {
+    @DeleteMapping("/{expid}")
+    public ResponseEntity<String> deleteDoctorsExpByExpId(@PathVariable Integer expid) {
         docExperienceService.deleteDoctorExpById(expid);
-        return "Doctor experiences deleted successfully";
+        return new ResponseEntity<>("Doctor experiences deleted successfully", HttpStatus.OK);
     }
 
-    @DeleteMapping("/experiences")
-    public String deleteAllDoctorsExp() {
+    @DeleteMapping
+    public ResponseEntity<String> deleteAllDoctorsExp() {
         docExperienceService.deleteAllDoctorsExp();
-        return "All doctors experiences deleted successfully";
+        return new ResponseEntity<>("All doctors experiences deleted successfully", HttpStatus.OK);
     }
-
 }

@@ -1,13 +1,10 @@
 package MedTechBackend.Backend.dto;
 
-import MedTechBackend.Backend.entity.DocExperience;
 import MedTechBackend.Backend.entity.Doctors;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,27 +12,17 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorDetails {
-    private int doctorId;
-
-    private String firstname;
-
-    private String lastname;
-
+public class DoctorsDTO {
+    private Integer id;
+    private String firstName;
+    private String lastName;
     private String email;
-
     private String address;
-
-    private LocalDate dob;
-
+    private LocalDate dateOfBirth;
     private String specialisation;
+    private List<DocExperienceDTO> experiences;
 
-    private List<DocExperience> docExperience;
+    private Doctors doctor;
 
-    private int expId;
-
-    private String description;
-
-    private Doctors doctors;
-
+    // Getters, setters, and additional methods
 }

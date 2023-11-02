@@ -1,6 +1,5 @@
 package MedTechBackend.Backend.service;
 
-
 import MedTechBackend.Backend.entity.DocExperience;
 import MedTechBackend.Backend.repository.DocExperienceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class DocExperienceService {
 
+    private final DocExperienceRepository docExperienceRepository;
+
     @Autowired
-    DocExperienceRepository docExperienceRepository;
+    public DocExperienceService(DocExperienceRepository docExperienceRepository) {
+        this.docExperienceRepository = docExperienceRepository;
+    }
 
     public void createDoctorExp(DocExperience docExperience) {
         docExperienceRepository.save(docExperience);
     }
 
     public List<DocExperience> getAllDoctorsExp() {
-        List<DocExperience> ExpList = new ArrayList<>();
-        docExperienceRepository.findAll().forEach(ExpList::add);
-        return ExpList;
+        return new ArrayList<>(docExperienceRepository.findAll());
     }
 
     public Optional<DocExperience> getDoctorExpById(Integer expid) {

@@ -1,26 +1,22 @@
 package MedTechBackend.Backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="doc_experience")
+@Table(name = "doc_experience")
 public class DocExperience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int expId;
+    private Integer id;
 
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Doctors doctors;
-
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private Doctors doctor;
 }

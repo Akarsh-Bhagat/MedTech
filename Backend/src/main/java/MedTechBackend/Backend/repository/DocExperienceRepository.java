@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface DocExperienceRepository extends JpaRepository<DocExperience,Integer> {
-    Optional<DocExperience> findByDoctors(Doctors doctors);
+    Optional<DocExperience> findByDoctor(Doctors doctors);
 }

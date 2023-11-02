@@ -1,74 +1,75 @@
-package MedTechBackend.Backend.service;//package MedTechBackend.Backend.doctor;
+package MedTechBackend.Backend.service;
 
-import MedTechBackend.Backend.dto.DoctorDetails;
+import MedTechBackend.Backend.dto.DocExperienceDTO;
+import MedTechBackend.Backend.dto.DoctorsDTO;
 import MedTechBackend.Backend.entity.DocExperience;
 import MedTechBackend.Backend.entity.Doctors;
 import MedTechBackend.Backend.repository.DocExperienceRepository;
 import MedTechBackend.Backend.repository.DoctorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
 
     @Autowired
-    DoctorsRepository doctorsRepository;
+    private DoctorsRepository doctorsRepository;
+
     @Autowired
-    DocExperienceRepository docExperienceRepository;
+    private DocExperienceRepository docExperienceRepository;
 
     public void createDoctor(Doctors doctors) {
         doctorsRepository.save(doctors);
     }
 
     public List<Doctors> getAllDoctors() {
-        List<Doctors> docList = new ArrayList<>();
-        doctorsRepository.findAll().forEach(docList::add);
-        return docList;
+        return doctorsRepository.findAll();
     }
 
-    public DoctorDetails getDoctorById(Integer docid) {
-        Doctors doctors = doctorsRepository.findById(docid).orElse(null);
-        DocExperience docExperience = docExperienceRepository.findByDoctors(doctors).orElse(null);
-        List<DocExperience> docExperiences = new ArrayList<>();
-        docExperiences.add(docExperience);
-        System.out.println(doctors);
-        System.out.println(docExperience);
-        DoctorDetails doctorDetails = DoctorDetails.builder()
-                .doctorId(doctors.getDoctorId())
-                .firstname(doctors.getFirstname())
-                .lastname(doctors.getLastname())
-                .dob(doctors.getDob())
-                .email(doctors.getEmail())
-                .docExperience(docExperiences)
-                .build();
+    public DoctorsDTO getDoctorById(Integer docid) {
+        Optional<Doctors> doctorsOptional = doctorsRepository.findById(docid);
+        if (doctorsOptional.isEmpty()) {
+            return null;
+        }
 
-        return doctorDetails;
+        Doctors doctors = doctorsOptional.get();
+        Optional<DocExperience> docExperiences = docExperienceRepository.findByDoctor(doctors);
+        List<DocExperienceDTO> docExperienceDTOs= docExperiences.stream()
+                .map(DocExperienceDTO::new) // Assuming DoctorExperienceDTO has a suitable constructor
+                .collect(Collectors.toList());
+
+        return DoctorsDTO.builder()
+                .id(doctors.getId())
+                .firstName(doctors.getFirstName())
+                .lastName(doctors.getLastName())
+                .dateOfBirth(doctors.getDateOfBirth())
+                .email(doctors.getEmail())
+                .experiences(docExperienceDTOs)
+                .build();
     }
 
     public void updateDoctor(Integer docid, Doctors updatedDoctor) {
-        Optional<Doctors> doc = doctorsRepository.findById(docid);
-        if (doc.isPresent()) {
-            Doctors existingDoctor = doc.get();
-            // Update the existing doctor with the provided information
-            existingDoctor.setFirstname(updatedDoctor.getFirstname());
-            existingDoctor.setLastname(updatedDoctor.getLastname());
+        doctorsRepository.findById(docid).ifPresent(existingDoctor -> {
+            existingDoctor.setFirstName(updatedDoctor.getFirstName());
+            existingDoctor.setLastName(updatedDoctor.getLastName());
             existingDoctor.setEmail(updatedDoctor.getEmail());
             existingDoctor.setAddress(updatedDoctor.getAddress());
-            existingDoctor.setDob(updatedDoctor.getDob());
+            existingDoctor.setDateOfBirth(updatedDoctor.getDateOfBirth());
             existingDoctor.setSpecialisation(updatedDoctor.getSpecialisation());
             doctorsRepository.save(existingDoctor);
-        }
+        });
     }
 
-    public void deleteDoctorById(Integer docid) {
+    public boolean deleteDoctorById(Integer docid) {
         doctorsRepository.deleteById(docid);
+        return false;
     }
 
     public void deleteAllDoctors() {
         doctorsRepository.deleteAll();
     }
 }
-
