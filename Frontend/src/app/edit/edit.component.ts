@@ -20,21 +20,21 @@ export class EditComponent implements OnInit {
   
     // Initializing  form variable
     this.editForm = this.fb.group({
-      firstname: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
-      lastname: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      firstName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      lastName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
       address: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
-      dob: [Validators.required],
+      dateOfBirth: [Validators.required],
       email: ['',[Validators.required, Validators.email]],
       specialisation: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
     });
 
       this.route.params.subscribe(params => {
-        const doctorId = params['id'];
-        this.userService.getDataById(doctorId).subscribe((data: any) => {
+        const id = params['id'];
+        this.userService.getDataById(id).subscribe((data: any) => {
           this.doctor=data;
-          const {firstname, lastname, address, dob, email, specialisation} = data
+          const {firstName, lastName, address, dateOfBirth, email, specialisation} = data
           this.editForm.setValue({
-            firstname, lastname, address, dob, email, specialisation
+            firstName, lastName, address, dateOfBirth, email, specialisation
           })
 
           
@@ -67,7 +67,7 @@ export class EditComponent implements OnInit {
       console.log(userData);
       
       // navigating to home page
-      this.userService.updateData(userData,this.doctor.doctorId)
+      this.userService.updateData(userData,this.doctor.id)
         .subscribe(res => {
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigate(['/home']);});

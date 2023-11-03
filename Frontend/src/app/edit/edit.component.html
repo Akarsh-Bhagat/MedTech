@@ -3,26 +3,26 @@
     <h2>User Form</h2>
     <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="firstname">First Name:</label>
-            <input type="text" id="firstname" formControlName="firstname" class="form-control"
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" formControlName="firstName" class="form-control"
                 [ngClass]="{
-                    'is-valid': editForm.get('firstname')?.valid,
-                    'is-invalid': editForm.get('firstname')?.invalid && editForm.get('firstname')?.touched
+                    'is-valid': editForm.get('firstName')?.valid,
+                    'is-invalid': editForm.get('firstName')?.invalid && editForm.get('firstName')?.touched
                 }" />
-            <div class="warning" *ngIf="editForm.get('firstname')?.hasError('required') && editForm.get('firstname')?.touched">
-              {{ getErrorMessage('firstname') }}
+            <div class="warning" *ngIf="editForm.get('firstName')?.hasError('required') && editForm.get('firstName')?.touched">
+              {{ getErrorMessage('firstName') }}
             </div>
         </div>
 
         <div class="form-group">
-            <label for="lastname">Last Name:</label>
-            <input type="text" id="lastname" formControlName="lastname" class="form-control"
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" formControlName="lastName" class="form-control"
                 [ngClass]="{
-                    'is-valid': editForm.get('lastname')?.valid,
-                    'is-invalid': editForm.get('lastname')?.invalid && editForm.get('lastname')?.touched
+                    'is-valid': editForm.get('lastName')?.valid,
+                    'is-invalid': editForm.get('lastName')?.invalid && editForm.get('lastName')?.touched
                 }" />
-            <div class="warning" *ngIf="editForm.get('lastname')?.hasError('required') && editForm.get('lastname')?.touched">
-              {{ getErrorMessage('lastname') }}
+            <div class="warning" *ngIf="editForm.get('lastName')?.hasError('required') && editForm.get('lastName')?.touched">
+              {{ getErrorMessage('lastName') }}
             </div>
         </div>
 
@@ -51,8 +51,8 @@
         </div>
 
         <div class="form-group">
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" formControlName="dob" class="form-control" />
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dob" formControlName="dateOfBirth" class="form-control" />
         </div>
 
         <div class="form-group">

@@ -25,8 +25,8 @@ ngOnInit():void{
   }) 
 }
 
-deleteAndReload(doctorId: number) {
-  this.userService.deleteData({},doctorId).subscribe(
+deleteAndReload(id: number) {
+  this.userService.deleteData({},id).subscribe(
     () => {
     },
     (error) => {

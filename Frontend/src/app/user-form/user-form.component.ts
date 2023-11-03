@@ -17,17 +17,17 @@ export class UserFormComponent {
     private userService: UserService
   ){
     this.userForm = this.fb.group({
-      firstname: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
-      lastname: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      firstName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      lastName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
       address: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
-      dob: ['',[Validators.required, this.validateDOB]],
+      dateOfBirth: ['',[Validators.required, this.validateDOB]],
       email: ['',[Validators.required, Validators.email]],
       specialisation: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
     });
   }
   validateDOB(control: AbstractControl) {
-    const dob = new Date(control.value);
-    const year = dob.getFullYear();
+    const dateOfBirth = new Date(control.value);
+    const year = dateOfBirth.getFullYear();
     return year > 1900 ? null : { invalidDOB: true };
   }
   getErrorMessage(controlName: string) {

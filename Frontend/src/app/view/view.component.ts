@@ -19,8 +19,8 @@ export class ViewComponent implements OnInit {
   
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const doctorId = params['id'];
-      this.userService.getDataById(doctorId).subscribe((data: any) => {
+      const id = params['id'];
+      this.userService.getDataById(id).subscribe((data: any) => {
         this.doctor=data;
         console.log(data);
       });

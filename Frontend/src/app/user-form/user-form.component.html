@@ -3,36 +3,36 @@
   <h2 class="mb-4">Doctor's Form</h2>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="firstname">First Name:</label>
+      <label for="firstName">First Name:</label>
       <input
         type="text"
-        id="firstname"
-        formControlName="firstname"
+        id="firstName"
+        formControlName="firstName"
         class="form-control"
         [ngClass]="{
-          'is-valid': userForm.get('firstname')?.valid && (userForm.get('firstname')?.dirty || userForm.get('firstname')?.touched),
-          'is-invalid': userForm.get('firstname')?.invalid && (userForm.get('firstname')?.dirty || userForm.get('firstname')?.touched)
+          'is-valid': userForm.get('firstName')?.valid && (userForm.get('firstName')?.dirty || userForm.get('firstName')?.touched),
+          'is-invalid': userForm.get('firstName')?.invalid && (userForm.get('firstName')?.dirty || userForm.get('firstName')?.touched)
         }"
       />
-      <div class="warning" *ngIf="userForm.get('firstname')?.invalid && userForm.get('firstname')?.touched">
-        {{ getErrorMessage('firstname') }}
+      <div class="warning" *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
+        {{ getErrorMessage('firstName') }}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="lastname">Last Name:</label>
+      <label for="lastName">Last Name:</label>
       <input
         type="text"
-        id="lastname"
-        formControlName="lastname"
+        id="lastName"
+        formControlName="lastName"
         class="form-control"
         [ngClass]="{
-          'is-valid': userForm.get('lastname')?.valid && (userForm.get('lastname')?.dirty || userForm.get('lastname')?.touched),
-          'is-invalid': userForm.get('lastname')?.invalid && (userForm.get('lastname')?.dirty || userForm.get('lastname')?.touched)
+          'is-valid': userForm.get('lastName')?.valid && (userForm.get('lastName')?.dirty || userForm.get('lastName')?.touched),
+          'is-invalid': userForm.get('lastName')?.invalid && (userForm.get('lastName')?.dirty || userForm.get('lastName')?.touched)
         }"
       />
-      <div class="warning" *ngIf="userForm.get('lastname')?.invalid && userForm.get('lastname')?.touched">
-        {{ getErrorMessage('lastname') }}
+      <div class="warning" *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+        {{ getErrorMessage('lastName') }}
       </div>
     </div>
 
@@ -71,19 +71,19 @@
     </div>
 
     <div class="form-group">
-      <label for="dob">Date of Birth:</label>
+      <label for="dateOfBirth">Date of Birth:</label>
       <input
         type="date"
-        id="dob"
-        formControlName="dob"
+        id="dateOfBirth"
+        formControlName="dateOfBirth"
         class="form-control"
         [ngClass]="{
-          'is-valid': userForm.get('dob')?.valid && (userForm.get('dob')?.dirty || userForm.get('dob')?.touched),
-          'is-invalid': userForm.get('dob')?.invalid && (userForm.get('dob')?.dirty || userForm.get('dob')?.touched)
+          'is-valid': userForm.get('dateOfBirth')?.valid && (userForm.get('dateOfBirth')?.dirty || userForm.get('dateOfBirth')?.touched),
+          'is-invalid': userForm.get('dateOfBirth')?.invalid && (userForm.get('dateOfBirth')?.dirty || userForm.get('dateOfBirth')?.touched)
         }"
       />
-      <div class="warning" *ngIf="userForm.get('dob')?.invalid && userForm.get('dob')?.touched">
-        {{ getErrorMessage('dob') }}
+      <div class="warning" *ngIf="userForm.get('dateOfBirth')?.invalid && userForm.get('dateOfBirth')?.touched">
+        {{ getErrorMessage('dateOfBirth') }}
       </div>
     </div>
 
