@@ -13,9 +13,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-import static MedTechBackend.Backend.user.Permission.*;
-import static MedTechBackend.Backend.user.Role.ADMIN;
-import static MedTechBackend.Backend.user.Role.DOCTOR;
+import static MedTechBackend.Backend.entity.User.Permission.*;
+import static MedTechBackend.Backend.entity.User.Role.ADMIN;
+import static MedTechBackend.Backend.entity.User.Role.DOCTOR;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;

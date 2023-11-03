@@ -1,6 +1,6 @@
 package MedTechBackend.Backend.security.auth;
 
-import MedTechBackend.Backend.user.Role;
+import MedTechBackend.Backend.entity.User.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

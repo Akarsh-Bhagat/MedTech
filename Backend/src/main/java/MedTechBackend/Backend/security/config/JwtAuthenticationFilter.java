@@ -1,7 +1,7 @@
 package MedTechBackend.Backend.security.config;
 
 import MedTechBackend.Backend.security.token.TokenRepository;
-import MedTechBackend.Backend.service.JwtService;
+import MedTechBackend.Backend.service.Jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

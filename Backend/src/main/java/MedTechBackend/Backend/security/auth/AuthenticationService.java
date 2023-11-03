@@ -6,10 +6,9 @@ import MedTechBackend.Backend.security.token.Token;
 import MedTechBackend.Backend.security.token.TokenProperties;
 import MedTechBackend.Backend.security.token.TokenRepository;
 import MedTechBackend.Backend.security.token.TokenType;
-import MedTechBackend.Backend.user.Role;
-import MedTechBackend.Backend.user.User;
-import MedTechBackend.Backend.user.UserRepository;
-import MedTechBackend.Backend.service.JwtService;
+import MedTechBackend.Backend.entity.User.User;
+import MedTechBackend.Backend.repository.User.UserRepository;
+import MedTechBackend.Backend.service.Jwt.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +41,6 @@ public class AuthenticationService {
                 .build();
         var savedUser = repository.save(user);
 
-//        // Check if the registered role is a doctor
 //        if (request.getRole() == Role.DOCTOR) {
 //            Doctor doctor = new Doctor();
 //            doctor.setUser(savedUser); // Link the doctor to the user
