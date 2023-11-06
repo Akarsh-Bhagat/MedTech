@@ -87,7 +87,7 @@ public class DoctorService {
 
     public boolean deleteDoctorById(Integer docid) {
         doctorsRepository.deleteById(docid);
-        return false;
+        return true;
     }
 
     public void deleteAllDoctors() {
