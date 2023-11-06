@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class ViewComponent implements OnInit {
 
-  doctor: any;
+  doctor: any
 
   constructor( private route: ActivatedRoute,private userService :UserService){
   

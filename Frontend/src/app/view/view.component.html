@@ -1,42 +1,78 @@
 <app-navbar></app-navbar>
-<div class="medbg">
-<div class="container my-4">
-    <h3 class="text-center mb-4">Doctor Details</h3>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
+
+<header class="text-white text-center py-5" style="background-color: #28328c;">
+    <h1 class="display-4">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
+    <p class="lead">{{doctor.specialisation}} | {{doctor.email}}</p>
+</header>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4 shadow">
                 <div class="card-body">
-                    <div class="detail-item">
-                        <span class="detail-label">ID:</span>
-                        <span class="detail-value">{{ doctor.id }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">First Name:</span>
-                        <span class="detail-value">{{ doctor.firstName }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Last Name:</span>
-                        <span class="detail-value">{{ doctor.lastName }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Email:</span>
-                        <span class="detail-value">{{ doctor.email }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Address:</span>
-                        <span class="detail-value">{{ doctor.address }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">DOB:</span>
-                        <span class="detail-value">{{ doctor.dateOfBirth }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Specialisation:</span>
-                        <span class="detail-value">{{ doctor.specialisation }}</span>
-                    </div>
+                    <h3 class="card-title">Services</h3>
+                    <ul class="card-text">
+                        <li *ngFor="let service of doctor?.servicings">{{ service.name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Experiences</h3>
+                    <ul class="card-text">
+                        <li *ngFor="let experience of doctor?.experiences">{{ experience.description }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Memberships</h3>
+                    <ul class="card-text">
+                        <li *ngFor="let membership of doctor?.memberships">{{ membership.history }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Education</h3>
+                    <ul class="card-text">
+                        <li *ngFor="let education of doctor?.education">{{ education.background }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Awards</h3>
+                    <ul class="card-text">
+                        <li *ngFor="let award of doctor?.awards">{{ award.title }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Specializations</h3>
+                    <ul class="card-text">
+                        <li *ngFor="let specialization of doctor?.specializations">{{ specialization.name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

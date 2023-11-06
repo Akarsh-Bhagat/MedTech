@@ -3,6 +3,8 @@
 @import 'primeng/resources/primeng.min.css';
 @import 'primeng/resources/themes/bootstrap4-light-blue/theme.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
 
 html,
 body {
