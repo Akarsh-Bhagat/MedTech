@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Doctor Search</title>
+    <title>Patient Search</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <app-navbar></app-navbar>
     <div class="container">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search Doctors" [(ngModel)]="searchTerm" (input)="filterDoctors()" />
+            <input type="text" class="form-control" placeholder="Search Patients" [(ngModel)]="searchTerm" (input)="filterPatients()" />
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" (click)="filterDoctors()">
+                <button class="btn btn-primary" type="button" (click)="filterPatients()">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#addDoctorModal" routerLink="/form">
-            Add Doctor
+        <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#addPatientModal" routerLink="/patient/form">
+            Add Patient
         </button>
 
         <div class="table-responsive">
@@ -26,32 +26,36 @@
                     <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Gender</th>
                         <th>Email</th>
                         <th>Address</th>
+                        <th>Contact</th>
                         <th>DOB</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let doctor of filteredDoctors">
-                        <td>{{ doctor.firstName }}</td>
-                        <td>{{ doctor.lastName }}</td>
-                        <td>{{ doctor.email }}</td>
-                        <td>{{ doctor.address }}</td>
-                        <td>{{ doctor.dateOfBirth }}</td>
+                    <tr *ngFor="let patient of filteredPatients">
+                        <td>{{ patient.firstName }}</td>
+                        <td>{{ patient.lastName }}</td>
+                        <td>{{ patient.gender}}</td>
+                        <td>{{ patient.email }}</td>
+                        <td>{{ patient.address }}</td>
+                        <td>{{ patient.contact }}</td>
+                        <td>{{ patient.dateOfBirth }}</td>
                         <td>
-                            <a [routerLink]="['/edit', doctor.id]">
+                            <a [routerLink]="['/patient/edit', patient.id]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="action">
                                     <path fill="currentColor" d="M21 12a1 1 0 0 0-1 1v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h6a1 1 0 0 0 0-2H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-6a1 1 0 0 0-1-1Zm-15 .76V17a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .71-.29l6.92-6.93L21.71 8a1 1 0 0 0 0-1.42l-4.24-4.29a1 1 0 0 0-1.42 0l-2.82 2.83l-6.94 6.93a1 1 0 0 0-.29.71Zm10.76-8.35l2.83 2.83l-1.42 1.42l-2.83-2.83ZM8 13.17l5.93-5.93l2.83 2.83L10.83 16H8Z"/>
                                 </svg>
                             </a>
-                            <a [routerLink]="['/view', doctor.id]">
+                            <a [routerLink]="['/patient/view', patient.id]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="action">
                                     <circle cx="16" cy="16" r="4" fill="currentColor"/>
                                     <path fill="currentColor" d="M30.94 15.66A16.69 16.69 0 0 0 16 5A16.69 16.69 0 0 0 1.06 15.66a1 1 0 0 0 0 .68A16.69 16.69 0 0 0 16 27a16.69 16.69 0 0 0 14.94-10.66a1 1 0 0 0 0-.68ZM16 22.5a6.5 6.5 0 1 1 6.5-6.5a6.51 6.51 0 0 1-6.5 6.5Z"/>
                                 </svg>
                             </a>
-                            <a (click)="deleteAndReload(doctor.id)" routerLink="/home">
+                            <a (click)="deleteAndReload(patient.id)" routerLink="/patient">
                                 <svg height="24" width="22" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 496 496" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#CE0909;" d="M496,320.8c0,96.8-78.4,175.2-175.2,175.2H175.2C78.4,496,0,417.6,0,320.8V175.2 C0,78.4,78.4,0,175.2,0h145.6C417.6,0,496,78.4,496,175.2V320.8z"></path> <path style="fill:#B70000;" d="M0,175.2C0,78.4,78.4,0,175.2,0h145.6C417.6,0,496,78.4,496,175.2v145.6 c0,96.8-78.4,175.2-175.2,175.2"></path> <g> <path style="fill:#960000;" d="M320.8,0C417.6,0,496,78.4,496,175.2v145.6c0,96.8-78.4,175.2-175.2,175.2"></path> <path style="fill:#960000;" d="M264.8,262.4l67.2-67.2c4.8-4.8,4.8-12,0-16.8s-12-4.8-16.8,0L248,245.6l-67.2-67.2 c-4.8-4.8-12-4.8-16.8,0s-4.8,12,0,16.8l67.2,67.2L164,329.6c-4.8,4.8-4.8,12,0,16.8c2.4,2.4,5.6,3.2,8,3.2s5.6-0.8,8-3.2 l67.2-67.2l67.2,67.2c2.4,2.4,5.6,3.2,8,3.2s5.6-0.8,8-3.2c4.8-4.8,4.8-12,0-16.8L264.8,262.4z"></path> </g> <path style="fill:#FFFFFF;" d="M264.8,248l67.2-67.2c4.8-4.8,4.8-12,0-16.8s-12-4.8-16.8,0L248,231.2L180.8,164 c-4.8-4.8-12-4.8-16.8,0s-4.8,12,0,16.8l67.2,67.2L164,315.2c-4.8,4.8-4.8,12,0,16.8c2.4,2.4,5.6,3.2,8,3.2s5.6-0.8,8-3.2l67.2-67.2 l67.2,67.2c2.4,2.4,5.6,3.2,8,3.2s5.6-0.8,8-3.2c4.8-4.8,4.8-12,0-16.8L264.8,248z"></path> </g></svg>
                             </a>
                         </td>

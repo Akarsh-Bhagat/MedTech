@@ -24,6 +24,10 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { EditComponent } from './edit/edit.component';
 import { ViewComponent } from './view/view.component';
 import { DeleteComponent } from './delete/delete.component';
+import { PatientHomeComponent } from './patient-home/patient-home.component';
+import { PatientEditComponent } from './patient-edit/patient-edit.component';
+import { PatientFormComponent } from './patient-form/patient-form.component';
+import { PatientViewComponent } from './patient-view/patient-view.component';
 
 
 @NgModule({
@@ -37,6 +41,10 @@ import { DeleteComponent } from './delete/delete.component';
     EditComponent,
     ViewComponent,
     DeleteComponent,
+    PatientHomeComponent,
+    PatientEditComponent,
+    PatientFormComponent,
+    PatientViewComponent,
     
   ],
   imports: [

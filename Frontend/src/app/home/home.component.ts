@@ -25,9 +25,10 @@ export class HomeComponent implements OnInit {
 
   deleteAndReload(id: number) {
     this.userService.deleteData({}, id).subscribe(
-      () => {},
-      (error) => {
+      () => {
         window.location.reload();
+      },
+      (error) => {
       }
     );
   }

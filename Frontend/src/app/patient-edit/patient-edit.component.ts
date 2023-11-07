@@ -3,38 +3,40 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { HttpHeaders } from '@angular/common/http';
+import { PatientService } from '../services/patient.service';
 
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  selector: 'app-patient-edit',
+  templateUrl: './patient-edit.component.html',
+  styleUrls: ['./patient-edit.component.css']
 })
-export class EditComponent implements OnInit {
-  userForm!: FormGroup;
-  doctor: any = []
+export class PatientEditComponent implements OnInit {
+  patientForm!: FormGroup;
+  patient: any = []
 
-  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private router: Router, private patientService: PatientService, private fb: FormBuilder) { }
   
   ngOnInit(): void {
   
     // Initializing  form variable
-    this.userForm = this.fb.group({
+    this.patientForm = this.fb.group({
       firstName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
       lastName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      gender: ['', Validators.required],
       address: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
-      dateOfBirth: [Validators.required],
+      dateOfBirth: [''],
       email: ['',[Validators.required, Validators.email]],
-      specialisation: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      contact:['']
     });
 
       this.route.params.subscribe(params => {
         const id = params['id'];
-        this.userService.getDataById(id).subscribe((data: any) => {
-          this.doctor=data;
-          const {firstName, lastName, address, dateOfBirth, email, specialisation} = data
-          this.userForm.setValue({
-            firstName, lastName, address, dateOfBirth, email, specialisation
+        this.patientService.getDataById(id).subscribe((data: any) => {
+          this.patient=data;
+          const {firstName, lastName, gender, address, dateOfBirth, email, contact} = data
+          this.patientForm.setValue({
+            firstName, lastName, gender, address, dateOfBirth, email, contact
           })
 
           
@@ -45,11 +47,13 @@ export class EditComponent implements OnInit {
   }
 
   getErrorMessage(controlName: string) {
-    const control = this.userForm.get(controlName);
+    const control = this.patientForm.get(controlName);
     if (control?.hasError('required')) {
       return 'Field is required';
     } else if (control?.hasError('pattern')) {
       return 'Invalid input';
+    } else if (control?.hasError('gender')) {
+      return 'Invalid gender';
     } else if (control?.hasError('email')) {
       return 'Invalid email';
     } else if (control?.hasError('invalidDOB')) {
@@ -62,15 +66,15 @@ export class EditComponent implements OnInit {
 
 
   onSubmit(){
-    if(this.userForm.valid){
-      const userData = this.userForm.value;
-      console.log(userData);
+    if(this.patientForm.valid){
+      const patientData = this.patientForm.value;
+      console.log(patientData);
       
       // navigating to home page
-      this.userService.updateData(userData,this.doctor.id)
+      this.patientService.updateData(patientData,this.patient.id)
         .subscribe(res => {
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/home']);});
+            this.router.navigate(['/patient']);});
         })
     }
   }

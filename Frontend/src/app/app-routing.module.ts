@@ -8,6 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { EditComponent } from './edit/edit.component';
 import { ViewComponent } from './view/view.component';
+import { PatientHomeComponent } from './patient-home/patient-home.component';
+import { PatientEditComponent } from './patient-edit/patient-edit.component';
+import { PatientFormComponent } from './patient-form/patient-form.component';
+import { PatientViewComponent } from './patient-view/patient-view.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -32,6 +36,22 @@ const routes: Routes = [
   {
     path: 'view/:id',
     component: ViewComponent
+  },
+  {
+    path: 'patient',
+    component: PatientHomeComponent,
+  },
+  {
+    path: 'patient/form',
+    component:PatientFormComponent
+  },
+  {
+    path: 'patient/view/:id',
+    component: PatientViewComponent
+  },
+  {
+    path: 'patient/edit/:id',
+    component:PatientEditComponent
   },
   {
     path: '', redirectTo: 'home', pathMatch: 'full'

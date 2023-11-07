@@ -1,39 +1,34 @@
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-              <img src="../../assets/images/logo.png" alt="Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Doctors</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Consult</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pharmacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Diagnostics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Health</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="content">
-       
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="../../assets/images/logo.png" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/home' }">
+                <a class="nav-link" [routerLink]="'/home'">Doctors</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/patient' }">
+                <a class="nav-link" [routerLink]="'/patient'">Patients</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/doctorsss' }">
+                <a class="nav-link" [routerLink]="'/doctorsss'">Appointments</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/doctorsss' }">
+                <a class="nav-link" [routerLink]="'/doctorsss'">Services</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/doctorsss' }">
+                <a class="nav-link" [routerLink]="'/doctorsss'">About</a>
+            </li>
+        </ul>
+      </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </nav>
+  <div class="content">
+      <!-- Your content goes here -->
+  </div>
+  
