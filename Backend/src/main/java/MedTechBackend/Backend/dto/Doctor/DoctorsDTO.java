@@ -15,23 +15,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DoctorsDTO {
-    private Integer id;
 
+    private Integer id;
     @NotEmpty(message = "Firstname is required")
     private String firstName;
-
     @NotEmpty(message = "Lastname is required")
     private String lastName;
-
     @NotEmpty(message = "Email is required")
     @Email
     private String email;
-
     @NotEmpty(message = "Address is required")
     private String address;
-
     private LocalDate dateOfBirth;
     private String specialisation;
+
     private List<DocExperience> experiences;
     private List<DocAward> awards;
     private List<DocEducation> education;

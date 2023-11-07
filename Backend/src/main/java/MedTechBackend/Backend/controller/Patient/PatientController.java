@@ -32,6 +32,8 @@ public class PatientController {
         patient.setAddress(patientDTO.getAddress());
         patient.setGender(patientDTO.getGender());
         patient.setMedicalHistory(patientDTO.getMedicalHistory());
+        patient.setClinics(patientDTO.getClinics());
+        patient.setReports(patientDTO.getMedicalReports());
         return patient;
     }
 
@@ -55,26 +57,25 @@ public class PatientController {
 
     @GetMapping()
     public ResponseEntity<List<Patient>> getAllPatients() {
-        List<Patient> docList = patientService.getAllPatient();
-        return new ResponseEntity<>(docList, HttpStatus.OK);
+        List<Patient> patList = patientService.getAllPatient();
+        return new ResponseEntity<>(patList, HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable Integer id) {
-        PatientDTO doc = patientService.getPatientById(id);
-        Patient docEntity=convertDTOToEntity(doc);
-        if (docEntity != null) {
-            return new ResponseEntity<>(docEntity, HttpStatus.OK);
+        PatientDTO pat = patientService.getPatientById(id);
+        Patient patEntity=convertDTOToEntity(pat);
+        if (patEntity != null) {
+            return new ResponseEntity<>(patEntity, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updatePatient(@PathVariable Integer id, @RequestBody PatientDTO patientDTO) {
-        Patient patientEntity = convertDTOToEntity(patientDTO);
-        patientService.updatePatient(id, patientEntity);
+    public ResponseEntity<String> updatePatient(@PathVariable Integer id, @RequestBody Patient patient) {
+        patientService.updatePatient(id, patient);
         return new ResponseEntity<>("Patient details against ID " + id + " updated", HttpStatus.OK);
     }
 

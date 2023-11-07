@@ -1,5 +1,7 @@
 package MedTechBackend.Backend.entity.Patient;
 import MedTechBackend.Backend.entity.Doctor.DocExperience;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,12 +47,12 @@ public class Patient {
     private MedicalHistory medicalHistory;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference(value = "patient-report")
     private List<MedicalReport> reports;
 
-    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private Clinic clinic;
+    private List<Clinic> clinics;
 
 
 //

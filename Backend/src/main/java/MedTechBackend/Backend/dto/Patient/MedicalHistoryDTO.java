@@ -1,6 +1,5 @@
 package MedTechBackend.Backend.dto.Patient;
 
-import MedTechBackend.Backend.dto.Patient.PatientDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

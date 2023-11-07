@@ -18,6 +18,12 @@ public class PatientService {
     @Autowired
     private MedicalHistoryRepository medicalHistoryRepository;
 
+    @Autowired
+    private MedicalReportRepository medicalReportRepository;
+
+    @Autowired
+    private ClinicRepository clinicRepository;
+
 
     public void createPatient(Patient patient) {
         patientRepository.save(patient);
@@ -36,6 +42,8 @@ public class PatientService {
 
         Patient patient = patientOptional.get();
         MedicalHistory medicalHistory=medicalHistoryRepository.findByPatient(patient);
+        List<MedicalReport> medicalReports=medicalReportRepository.findByPatient(patient);
+        List<Clinic> clinics=clinicRepository.findByPatient(patient);
 
         return PatientDTO.builder()
                 .id(patient.getId())
@@ -47,6 +55,8 @@ public class PatientService {
                 .email(patient.getEmail())
                 .gender(patient.getGender())
                 .medicalHistory(patient.getMedicalHistory())
+                .medicalReports(patient.getReports())
+                .clinics(patient.getClinics())
                 .build();
     }
 

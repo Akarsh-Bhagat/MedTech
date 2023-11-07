@@ -1,6 +1,7 @@
 package MedTechBackend.Backend.entity.Patient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,13 +20,13 @@ public class Clinic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "patient_id")
     @JsonBackReference
     private Patient patient;
 
-    @OneToMany(mappedBy = "clinic")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "clinic-report")
     private List<MedicalReport> reports;
 
     private String admissionDate;
