@@ -9,7 +9,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/home' }">
+            <li class="nav-item" [ngClass]="{ 'active': currentRoute == '/home' }">
                 <a class="nav-link" [routerLink]="'/home'">Doctors</a>
             </li>
             <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/patient' }">

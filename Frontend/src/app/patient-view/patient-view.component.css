@@ -1,0 +1,40 @@
+.container{
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+  }
+  .section-heading {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color:  #008080;
+  }
+  .record-details {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  .record-details p {
+    margin: 10px 0;
+  }
+  .record-details strong {
+    color: #28328c;
+  }
+  .clinic-reports ul {
+    list-style: none;
+    padding: 0;
+  }
+  .clinic-reports ul li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+  .clinic-reports ul li:before {
+    content: '\2022';
+    color: #4caf50;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
