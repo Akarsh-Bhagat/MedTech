@@ -1,29 +1,40 @@
-<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
-    <!-- Services -->
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()" class="custom-form">
+  <!-- Services -->
+  <div class="form-group">
     <label for="services">Services:</label>
     <input type="text" id="services" formControlName="services">
-  
-    <!-- Experiences -->
+  </div>
+
+  <!-- Experiences -->
+  <div class="form-group">
     <label for="experiences">Experiences:</label>
     <textarea id="experiences" formControlName="experiences"></textarea>
-  
-    <!-- Awards -->
+  </div>
+
+  <!-- Awards -->
+  <div class="form-group">
     <label for="awards">Awards:</label>
     <input type="text" id="awards" formControlName="awards">
-  
-    <!-- Education -->
+  </div>
+
+  <!-- Education -->
+  <div class="form-group">
     <label for="education">Education:</label>
     <textarea id="education" formControlName="education"></textarea>
-  
-    <!-- Specializations -->
+  </div>
+
+  <!-- Specializations -->
+  <div class="form-group">
     <label for="specializations">Specializations:</label>
     <input type="text" id="specializations" formControlName="specializations">
-  
-    <!-- Memberships -->
+  </div>
+
+  <!-- Memberships -->
+  <div class="form-group">
     <label for="memberships">Memberships:</label>
     <input type="text" id="memberships" formControlName="memberships">
-  
-    <!-- Submit button -->
-    <button type="submit" [disabled]="!doctorForm.valid">Submit</button>
-  </form>
-  
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" [disabled]="!doctorForm.valid">Submit</button>
+</form>
