@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
+// view.component.ts
+
+import { Router } from '@angular/router';
+
+
 
 
 @Component({
@@ -10,9 +15,13 @@ import { UserService } from '../services/user.service';
 })
 export class ViewComponent implements OnInit {
 
+  navigateToEditProfile(): void {
+    this.router.navigate(['/edit-profile']);
+  }
+
   doctor: any
 
-  constructor( private route: ActivatedRoute,private userService :UserService){
+  constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router){
   
     
   }

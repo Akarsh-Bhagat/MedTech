@@ -28,7 +28,10 @@ import { PatientHomeComponent } from './patient-home/patient-home.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
+import { DoctorFormComponent } from './doctor-form/doctor-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { PatientViewComponent } from './patient-view/patient-view.component';
     PatientEditComponent,
     PatientFormComponent,
     PatientViewComponent,
+    DoctorFormComponent,
+    
     
   ],
   imports: [
@@ -61,7 +66,10 @@ import { PatientViewComponent } from './patient-view/patient-view.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDialogModule,
+    RouterModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

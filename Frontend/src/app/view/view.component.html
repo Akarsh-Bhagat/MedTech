@@ -3,6 +3,12 @@
 <header class="text-white text-center py-5" style="background-color: #28328c;">
     <h1 class="display-4">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
     <p class="lead">{{doctor.specialisation}} | {{doctor.email}}</p>
+
+   <!-- view.component.html -->
+
+<button mat-raised-button color="accent" (click)="navigateToEditProfile()">Edit Profile</button>
+
+  
 </header>
 
 <div class="container mt-5">

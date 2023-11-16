@@ -12,6 +12,7 @@ import { PatientHomeComponent } from './patient-home/patient-home.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
+import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -55,7 +56,11 @@ const routes: Routes = [
   },
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
-  }
+  },
+
+ 
+  { path: 'edit-profile', component: DoctorFormComponent },
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

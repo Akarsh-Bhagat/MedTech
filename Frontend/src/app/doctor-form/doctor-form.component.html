@@ -1,0 +1,29 @@
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+    <!-- Services -->
+    <label for="services">Services:</label>
+    <input type="text" id="services" formControlName="services">
+  
+    <!-- Experiences -->
+    <label for="experiences">Experiences:</label>
+    <textarea id="experiences" formControlName="experiences"></textarea>
+  
+    <!-- Awards -->
+    <label for="awards">Awards:</label>
+    <input type="text" id="awards" formControlName="awards">
+  
+    <!-- Education -->
+    <label for="education">Education:</label>
+    <textarea id="education" formControlName="education"></textarea>
+  
+    <!-- Specializations -->
+    <label for="specializations">Specializations:</label>
+    <input type="text" id="specializations" formControlName="specializations">
+  
+    <!-- Memberships -->
+    <label for="memberships">Memberships:</label>
+    <input type="text" id="memberships" formControlName="memberships">
+  
+    <!-- Submit button -->
+    <button type="submit" [disabled]="!doctorForm.valid">Submit</button>
+  </form>
+  

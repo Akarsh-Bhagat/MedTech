@@ -6,4 +6,7 @@ export class Doctor {
         email!: string;
         address!: string;
         specialisation!: string;
+
+
+        
 }
