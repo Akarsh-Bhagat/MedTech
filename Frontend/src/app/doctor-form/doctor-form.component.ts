@@ -1,6 +1,5 @@
-// Import necessary modules from Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-doctor-form',
@@ -8,33 +7,32 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./doctor-form.component.css']
 })
 export class DoctorFormComponent implements OnInit {
-  // Declare a form group to hold the form controls
   doctorForm!: FormGroup;
 
-  // Inject the FormBuilder service to create the form
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    // Initialize the form structure in the ngOnInit lifecycle hook
     this.doctorForm = this.fb.group({
-      services: this.fb.control('', Validators.required),
-      experiences: this.fb.control('', Validators.required),
-      awards: this.fb.control('', Validators.required),
-      education: this.fb.control('', Validators.required),
-      specializations: this.fb.control('', Validators.required),
-      memberships: this.fb.control('', Validators.required),
+      services: this.fb.array([]),
+      experiences: this.fb.array([]),
+      awards: this.fb.array([]),
+      education: this.fb.array([]),
+      specializations: this.fb.array([]),
+      memberships: this.fb.array([])
     });
   }
 
-  // Function to handle form submission
-  onSubmit() {
-    if (this.doctorForm.valid) {
-      // Send the form data to your backend API for storage
-      const formData = this.doctorForm.value;
-      // Call your backend API service here to send the data
-      console.log(formData);
-      // Reset the form after submission
-      this.doctorForm.reset();
-    }
+  getFormArrayControls(formArrayName: string): AbstractControl[] {
+    return (this.doctorForm.get(formArrayName) as FormArray).controls;
+  }
+
+  addInput(formArrayName: string) {
+    const formArray = this.doctorForm.get(formArrayName) as FormArray;
+    formArray.push(this.fb.control(''));
+  }
+
+  removeInput(formArrayName: string, index: number) {
+    const formArray = this.doctorForm.get(formArrayName) as FormArray;
+    formArray.removeAt(index);
   }
 }

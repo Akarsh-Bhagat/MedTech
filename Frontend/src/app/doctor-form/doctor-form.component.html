@@ -1,40 +1,57 @@
-<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()" class="custom-form">
+<form [formGroup]="doctorForm">
+
   <!-- Services -->
-  <div class="form-group">
-    <label for="services">Services:</label>
-    <input type="text" id="services" formControlName="services">
+  <div formArrayName="services">
+    <div *ngFor="let control of getFormArrayControls('services'); let i = index">
+      <input [formControl]="$any (control)" placeholder="Service {{ i + 1 }}" />
+      <button type="button" (click)="removeInput('services', i)">Remove Service</button>
+    </div>
+    <button type="button" (click)="addInput('services')">Add Service</button>
   </div>
 
   <!-- Experiences -->
-  <div class="form-group">
-    <label for="experiences">Experiences:</label>
-    <textarea id="experiences" formControlName="experiences"></textarea>
+  <div formArrayName="experiences">
+    <div *ngFor="let control of getFormArrayControls('experiences'); let i = index">
+      <input [formControl]="$any (control)" placeholder="Experience {{ i + 1 }}" />
+      <button type="button" (click)="removeInput('experiences', i)">Remove Experience</button>
+    </div>
+    <button type="button" (click)="addInput('experiences')">Add Experience</button>
   </div>
 
   <!-- Awards -->
-  <div class="form-group">
-    <label for="awards">Awards:</label>
-    <input type="text" id="awards" formControlName="awards">
+  <div formArrayName="awards">
+    <div *ngFor="let control of getFormArrayControls('awards'); let i = index">
+      <input [formControl]="$any (control)" placeholder="Award {{ i + 1 }}" />
+      <button type="button" (click)="removeInput('awards', i)">Remove Award</button>
+    </div>
+    <button type="button" (click)="addInput('awards')">Add Award</button>
   </div>
 
   <!-- Education -->
-  <div class="form-group">
-    <label for="education">Education:</label>
-    <textarea id="education" formControlName="education"></textarea>
+  <div formArrayName="education">
+    <div *ngFor="let control of getFormArrayControls('education'); let i = index">
+      <input [formControl]="$any (control)" placeholder="Education {{ i + 1 }}" />
+      <button type="button" (click)="removeInput('education', i)">Remove Education</button>
+    </div>
+    <button type="button" (click)="addInput('education')">Add Education</button>
   </div>
 
   <!-- Specializations -->
-  <div class="form-group">
-    <label for="specializations">Specializations:</label>
-    <input type="text" id="specializations" formControlName="specializations">
+  <div formArrayName="specializations">
+    <div *ngFor="let control of getFormArrayControls('specializations'); let i = index">
+      <input [formControl]="$any (control)" placeholder="Specialization {{ i + 1 }}" />
+      <button type="button" (click)="removeInput('specializations', i)">Remove Specialization</button>
+    </div>
+    <button type="button" (click)="addInput('specializations')">Add Specialization</button>
   </div>
 
   <!-- Memberships -->
-  <div class="form-group">
-    <label for="memberships">Memberships:</label>
-    <input type="text" id="memberships" formControlName="memberships">
+  <div formArrayName="memberships">
+    <div *ngFor="let control of getFormArrayControls('memberships'); let i = index">
+      <input [formControl]="$any (control)" placeholder="Membership {{ i + 1 }}" />
+      <button type="button" (click)="removeInput('memberships', i)">Remove Membership</button>
+    </div>
+    <button type="button" (click)="addInput('memberships')">Add Membership</button>
   </div>
 
-  <!-- Submit button -->
-  <button type="submit" [disabled]="!doctorForm.valid">Submit</button>
 </form>
