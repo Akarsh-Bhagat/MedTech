@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Year;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,8 +16,11 @@ public class DocAward{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title",unique = true)
+    @Column(name = "title")
     private String title;
+
+    @Column(name="recYear")
+    private Year recYear;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")

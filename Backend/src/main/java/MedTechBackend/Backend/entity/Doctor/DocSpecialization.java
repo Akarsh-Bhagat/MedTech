@@ -14,7 +14,7 @@ public class DocSpecialization{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "specialization_name",unique = true)
+    @Column(name = "specialization_name")
     private String name;
 
     @ManyToOne

@@ -19,7 +19,7 @@ public class MedicalHistory {
 
     @OneToOne
     @JoinColumn(name = "patient_id")
-    @JsonBackReference
+    @JsonBackReference(value = "patient-medreport")
     private Patient patient;
 
     private List<String> pastConditions;

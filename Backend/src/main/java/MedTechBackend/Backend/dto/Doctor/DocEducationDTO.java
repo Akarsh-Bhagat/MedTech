@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Year;
 import java.util.List;
 
 @Data
@@ -13,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class DocEducationDTO {
     private Integer id;
-    private String background;
+    private String college;
+    private String degree;
+    private Year yop;
     private List<DoctorsDTO> doctors;
 }

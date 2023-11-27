@@ -14,7 +14,7 @@ public class DocServicing{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "service_name",unique = true)
+    @Column(name = "service_name")
     private String name;
 
     @ManyToOne

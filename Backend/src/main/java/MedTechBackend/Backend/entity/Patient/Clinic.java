@@ -22,7 +22,7 @@ public class Clinic {
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    @JsonBackReference
+    @JsonBackReference(value = "patient-clinic")
     private Patient patient;
 
     @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL)

@@ -14,7 +14,7 @@ public class DocMembership{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "history",unique = true)
+    @Column(name = "history")
     private String history;
 
     @ManyToOne

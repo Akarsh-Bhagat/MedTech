@@ -43,7 +43,7 @@ public class Patient {
     private String contact;
 
     @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference(value = "patient-medreport")
     private MedicalHistory medicalHistory;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -51,7 +51,7 @@ public class Patient {
     private List<MedicalReport> reports;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference(value = "patient-clinic")
     private List<Clinic> clinics;
 
 
