@@ -19,6 +19,10 @@ export class ViewComponent implements OnInit {
     this.router.navigate(['/edit-profile']);
   }
 
+  showServices: boolean = false;
+  showExperiences: boolean = false;
+  showAwards: boolean = false;
+  showSpecializations: boolean = false;
   doctor: any={};
 
   constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router){
@@ -35,5 +39,22 @@ export class ViewComponent implements OnInit {
       });
     });
   }
+
+  toggleServicesForm() {
+    this.showServices = !this.showServices;
+  }
+
+  toggleExperiencesForm() {
+    this.showExperiences = !this.showExperiences;
+  }
+
+  toggleAwardsForm() {
+    this.showAwards = !this.showAwards;
+  }
+
+  toggleSpecializationsForm() {
+    this.showAwards = !this.showAwards;
+  }
+
 
 }

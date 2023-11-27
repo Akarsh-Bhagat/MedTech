@@ -6,7 +6,7 @@
 
    <!-- view.component.html -->
 
-<button mat-raised-button color="accent" (click)="navigateToEditProfile()">Edit Profile</button>
+
 
   
 </header>
@@ -17,6 +17,53 @@
             <div class="card mb-4 shadow">
                 <div class="card-body">
                     <h3 class="card-title">Services</h3>
+                    <button
+                    (click)="toggleServicesForm()"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-14 rounded"
+                  >
+                    Add Services
+                    <i class="text-white fa fa-plus"></i>
+                  </button>
+                  <form *ngIf="showServices"
+          
+          class="bg-white rounded-lg p-6"
+        >
+          <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-bold mb-2"
+              >Specialisations</label
+            >
+            <input
+              type="text"
+              id="title"
+              formControlName="title"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="description" class="block text-gray-700 font-bold mb-2"
+              >Servicings</label
+            >
+            <textarea
+              id="description"
+              formControlName="description"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            ></textarea>
+          </div>
+         
+          <div class="flex justify-center">
+            <button
+              type="submit"
+             
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Add to Services
+              <i class="text-2xl text-white fa fa-plus"></i>
+            </button>
+          </div>
+        </form>
+
+
+
                     <ul class="card-text">
                         <li *ngFor="let service of doctor?.servicings">{{ service.name }}</li>
                     </ul>
@@ -28,6 +75,53 @@
             <div class="card mb-4 shadow">
                 <div class="card-body">
                     <h3 class="card-title">Experiences</h3>
+                    <button
+                    (click)="toggleExperiencesForm()"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-14 rounded"
+                  >
+                    Add Experience
+                    <i class="text-white fa fa-plus"></i>
+                  </button>
+                  <form *ngIf="showExperiences"
+          
+          class="bg-white rounded-lg p-6"
+        >
+          <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-bold mb-2"
+              >Specialisations</label
+            >
+            <input
+              type="text"
+              id="title"
+              formControlName="title"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="description" class="block text-gray-700 font-bold mb-2"
+              >Servicings</label
+            >
+            <textarea
+              id="description"
+              formControlName="description"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            ></textarea>
+          </div>
+         
+          <div class="flex justify-center">
+            <button
+              type="submit"
+             
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Add to Experiences
+              <i class="text-2xl text-white fa fa-plus"></i>
+            </button>
+          </div>
+        </form>
+
+
+
                     <ul class="card-text">
                         <li *ngFor="let experience of doctor?.experiences">{{ experience.description }}</li>
                     </ul>
@@ -63,6 +157,50 @@
             <div class="card mb-4 shadow">
                 <div class="card-body">
                     <h3 class="card-title">Awards</h3>
+                    <button
+                    (click)="toggleAwardsForm()"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-14 rounded"
+                  >
+                    Add Services
+                    <i class="text-white fa fa-plus"></i>
+                  </button>
+                  <form *ngIf="showAwards"
+          
+          class="bg-white rounded-lg p-6"
+        >
+          <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-bold mb-2"
+              >Specialisations</label
+            >
+            <input
+              type="text"
+              id="title"
+              formControlName="title"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="description" class="block text-gray-700 font-bold mb-2"
+              >Servicings</label
+            >
+            <textarea
+              id="description"
+              formControlName="description"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            ></textarea>
+          </div>
+         
+          <div class="flex justify-center">
+            <button
+              type="submit"
+             
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Add to Services
+              <i class="text-2xl text-white fa fa-plus"></i>
+            </button>
+          </div>
+        </form>
                     <ul class="card-text">
                         <li *ngFor="let award of doctor?.awards">{{ award.title }}</li>
                     </ul>
@@ -73,7 +211,9 @@
         <div class="col-md-6">
             <div class="card mb-4 shadow">
                 <div class="card-body">
-                    <h3 class="card-title">Specializations</h3>
+                    <h3 class="card-title">Specializations
+                        
+                    </h3>
                     <ul class="card-text">
                         <li *ngFor="let specialization of doctor?.specializations">{{ specialization.name }}</li>
                     </ul>
