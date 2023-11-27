@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, AbstractControl, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CollegeService } from '../services/college.service';
 import { Observable, map, startWith } from 'rxjs';
+import { DegreeService } from '../services/degree.service';
+import { ToastrService, IndividualConfig } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-user-form',
@@ -15,17 +18,21 @@ export class UserFormComponent implements OnInit {
   userForm!: FormGroup;
   currentStep = 1;
   colleges: any[] = [];
+  degrees: any[]= [];
   title: string= "Personal Details";
   steps: number[] = [1, 2, 3, 4, 5];
   filteredColleges: Observable<string[]> | undefined;
   collegeControl = new FormControl();
-
+  formexperience!: FormArray<any>;
+  formawards!: FormArray<any>;
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
     private userService: UserService,
-    private collegeService: CollegeService
+    private collegeService: CollegeService,
+    private degreeService: DegreeService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +46,15 @@ export class UserFormComponent implements OnInit {
       },
       error => {
         console.error('Error fetching colleges', error);
+      }
+    );
+
+    this.degreeService.getDegrees().subscribe(
+      (degrees: any[]) => {
+      this.degrees = degrees;
+    },
+     error => {
+        console.error('Error fetching degrees', error);
       }
     );
   }
@@ -55,24 +71,19 @@ export class UserFormComponent implements OnInit {
       }),
       eduDetails: this.fb.group({
         college: [''],
-        degree: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        yop: ['', [Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
+        degree: ['',[Validators.required]],
+        yop: ['', [Validators.required,Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
       }),
-      expDetails: this.fb.group({
-        hospital: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
-        city: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        startYear: ['', [Validators.required]],
-        endYear: ['', [Validators.required]],
-      }),
-      recDetails: this.fb.group({
-        awards: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        recYear: [''],
-        memberships: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      }),
+      expDetails: this.fb.array([
+        this.GenerateExp()
+      ]),
+      recDetails: this.fb.array([
+        this.generateAward()
+      ]),
       specDetails: this.fb.group({
         specialisation: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
         servicings: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
+        memberships: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
       })
     });
 
@@ -83,6 +94,48 @@ export class UserFormComponent implements OnInit {
     );
   }
 
+  AddExperiences() {
+    this.formexperience = this.userForm.get("expDetails") as FormArray;
+    this.formexperience.push(this.GenerateExp());
+  }
+
+  GenerateExp(){
+   return this.fb.group({
+    hospital: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
+    city: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+    startYear: ['', [Validators.required,Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
+    endYear: ['', [Validators.required,Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
+  })
+  }
+
+  get expDetails() {
+    return this.userForm.get("expDetails") as FormArray;
+  }
+  removeExp(index: any) {
+      this.formexperience = this.userForm.get("expDetails") as FormArray;
+      this.formexperience.removeAt(index);
+  }
+
+  addAward() {
+    this.formawards = this.userForm.get('recDetails') as FormArray;
+    this.formawards.push(this.generateAward());
+  }
+  
+  removeAward(index: any) {
+    this.formawards = this.userForm.get("recDetails") as FormArray;
+    this.formawards.removeAt(index);
+  }
+  get recDetails() {
+    return this.userForm.get("recDetails") as FormArray;
+  }
+  
+  generateAward() {
+    return this.fb.group({
+      title: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      recYear: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
+    });
+  }
 
   validateDOB(control: AbstractControl) {
     const dateOfBirth = new Date(control.value);
@@ -133,24 +186,24 @@ export class UserFormComponent implements OnInit {
       address: formData.personalDetails.address,
       dateOfBirth: formData.personalDetails.dateOfBirth,
       specialisation: formData.personalDetails.specialisation,
-      experiences: [{
-        hospital: formData.expDetails.hospital,
-        city: formData.expDetails.city,
-        description: formData.expDetails.description,
-        startYear: formData.expDetails.startYear,
-        endYear: formData.expDetails.endYear
-      }],
-      awards: [{
-        title: formData.recDetails.awards,
-        recYear: formData.recDetails.recYear
-      }],
+      experiences: formData.expDetails.map((experience: any) => ({
+        hospital: experience.hospital,
+        city: experience.city,
+        description: experience.description,
+        startYear: experience.startYear,
+        endYear: experience.endYear
+      })),
+      awards: formData.recDetails.map((award: any) => ({
+        title: award.title,
+        recYear: award.recYear
+      })),
       education: [{
         college: formData.eduDetails.college,
         degree: formData.eduDetails.degree,
         yop: formData.eduDetails.yop
       }],
       memberships: [{
-        history: formData.recDetails.memberships
+        history: formData.specDetails.memberships
       }],
       servicings: [{
         name: formData.specDetails.servicings
@@ -176,14 +229,11 @@ export class UserFormComponent implements OnInit {
         console.error('Error creating doctor:', error);
 
         if (error.error instanceof ErrorEvent) {
-          // Client-side error (e.g., network issues)
           console.error('Client-side error:', error.error.message);
         } else {
-          // Backend returned an unsuccessful response code
           console.error(`Backend returned code ${error.status}, body was:`, error.error);
         }
 
-        // Handle error as needed
       }
       );
     }
@@ -201,27 +251,44 @@ export class UserFormComponent implements OnInit {
         this.title = "Experience Details";
         break;
       case 4:
-        this.title = "Awards and Memberships";
+        this.title = "Awards";
         break;
       case 5:
-        this.title = "Specializations and Servicings";
+        this.title = "Specializations, Memberships";
         break;
     }
   }
-
-
 
   nextStep() {
     const currentFormGroup = this.getCurrentFormGroup();
    
     if (currentFormGroup?.valid) {
       this.currentStep++;
+      this.toastr.success('Successfully moved to the next step', 'Success', {
+        timeOut: 1000,
+        progressBar: true,
+        closeButton: true,
+        positionClass: 'toast-step-form',  // Set position class here
+      });
       this.updateTitle();
+    } else {
+      this.toastr.error('Form is incomplete or invalid!', 'Error', {
+        timeOut: 1000,
+        progressBar: true,
+        closeButton: true,
+        positionClass: 'toast-step-form',  // Set position class here
+      });
     }
   }
 
   prevStep() {
     this.currentStep--;
+    this.toastr.success('Successfully moved to prev step', 'Success', {
+      timeOut: 1000, 
+      progressBar: true, 
+      closeButton: true, 
+      positionClass: 'toast-step-form',
+    });
     this.updateTitle();
   }
 

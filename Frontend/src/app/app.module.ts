@@ -34,7 +34,7 @@ import { PatientViewComponent } from './patient-view/patient-view.component';
 import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-
+import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -64,6 +64,7 @@ import { RouterModule } from '@angular/router';
     CardModule,
     InputTextModule,
     TypeaheadModule.forRoot(),
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     ButtonModule,
     MenubarModule,
