@@ -5,11 +5,6 @@
   .is-invalid {
     border: 1px solid red;
   }
-  .user-details {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-  }
   .form-group {
     margin-bottom: 20px;
   }
@@ -17,3 +12,72 @@
     color: #dc3545; /* Red color for warnings */
     margin-top: 5px;
   }
+
+  .user-details {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #28328c;
+    border-radius: 1rem;
+  }
+/* 
+.user-details.ng-leave,
+.user-details.ng-enter {
+  opacity: 0;
+} */
+  
+  .step-indicators {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .step-dot {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .step-dot.active {
+    background-color: #007bff;
+  }
+  
+  .form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .custom-input {
+    width: 100%; /* Adjust the width as needed */
+  }
+  
+  /* Adjust the width as needed */
+input.form-control {
+  width: 100%;
+}
+
+/* Set a maximum height for the dropdown and enable vertical scrolling if needed */
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.custom-item {
+  padding: 8px;
+  cursor: pointer;
+  width: 60ch;
+  white-space: pre-line
+}
+
+/* .custom-item:hover {
+  background-color: #108647;
+}   */

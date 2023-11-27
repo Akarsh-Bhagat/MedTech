@@ -20,6 +20,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 import { UserFormComponent } from './user-form/user-form.component';
 import { EditComponent } from './edit/edit.component';
 import { ViewComponent } from './view/view.component';
@@ -29,7 +32,8 @@ import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
 import { DoctorFormComponent } from './doctor-form/doctor-form.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { RouterModule } from '@angular/router';
 
@@ -59,6 +63,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     CardModule,
     InputTextModule,
+    TypeaheadModule.forRoot(),
     ReactiveFormsModule,
     ButtonModule,
     MenubarModule,
@@ -69,7 +74,10 @@ import { RouterModule } from '@angular/router';
     MatDialogModule,
     MatDialogModule,
     RouterModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

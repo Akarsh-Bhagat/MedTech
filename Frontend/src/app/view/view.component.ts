@@ -19,7 +19,7 @@ export class ViewComponent implements OnInit {
     this.router.navigate(['/edit-profile']);
   }
 
-  doctor: any
+  doctor: any={};
 
   constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router){
   

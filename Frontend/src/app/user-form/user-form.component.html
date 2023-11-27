@@ -1,109 +1,329 @@
-<app-navbar></app-navbar>
-<div class="user-details">
-  <h2 class="mb-4">Doctor's Form</h2>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="firstName">First Name:</label>
-      <input
-        type="text"
-        id="firstName"
-        formControlName="firstName"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': userForm.get('firstName')?.valid && (userForm.get('firstName')?.dirty || userForm.get('firstName')?.touched),
-          'is-invalid': userForm.get('firstName')?.invalid && (userForm.get('firstName')?.dirty || userForm.get('firstName')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
-        {{ getErrorMessage('firstName') }}
-      </div>
+<div class="container mt-5">
+  <app-navbar></app-navbar>
+  <div class="user-details">
+    <div class="step-indicators">
+      <span *ngFor="let step of steps" class="step-dot" [class.active]="step === currentStep"></span>
     </div>
+    <h2 class="mb-4 text-center">Step {{currentStep}} - {{title}}</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-      <label for="lastName">Last Name:</label>
-      <input
-        type="text"
-        id="lastName"
-        formControlName="lastName"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': userForm.get('lastName')?.valid && (userForm.get('lastName')?.dirty || userForm.get('lastName')?.touched),
-          'is-invalid': userForm.get('lastName')?.invalid && (userForm.get('lastName')?.dirty || userForm.get('lastName')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
-        {{ getErrorMessage('lastName') }}
+      <div *ngIf="currentStep === 1">
+        <div formGroupName="personalDetails">
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" formControlName="firstName" class="form-control"
+                [ngClass]="{'is-valid': userForm.get('personalDetails.firstName')?.valid && (userForm.get('personalDetails.firstName')?.dirty || userForm.get('personalDetails.firstName')?.touched), 'is-invalid': userForm.get('personalDetails.firstName')?.invalid && (userForm.get('personalDetails.firstName')?.dirty || userForm.get('personalDetails.firstName')?.touched)}" />
+              <div class="warning" *ngIf="userForm.get('personalDetails.firstName')?.invalid && userForm.get('personalDetails.firstName')?.touched">
+                {{ getErrorMessage(userForm.get('personalDetails.firstName')) }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input 
+              type="text" 
+              id="lastName" 
+              formControlName="lastName" 
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('personalDetails.lastName')?.valid && (userForm.get('personalDetails.lastName')?.dirty || userForm.get('personalDetails.lastName')?.touched), 
+                'is-invalid': userForm.get('personalDetails.lastName')?.invalid && (userForm.get('personalDetails.lastName')?.dirty || userForm.get('personalDetails.lastName')?.touched)}" />
+              <div class="warning" *ngIf="userForm.get('personalDetails.lastName')?.invalid && userForm.get('personalDetails.lastName')?.touched">
+                {{ getErrorMessage(userForm.get('personalDetails.lastName')) }}
+              </div>
+            </div>
+    
+
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('personalDetails.email')?.valid && (userForm.get('personalDetails.email')?.dirty || userForm.get('personalDetails.email')?.touched),
+                'is-invalid': userForm.get('personalDetails.email')?.invalid && (userForm.get('personalDetails.email')?.dirty || userForm.get('personalDetails.email')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('personalDetails.email')?.invalid && userForm.get('personalDetails.email')?.touched">
+              {{ getErrorMessage(userForm.get('personalDetails.email')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input
+              type="text"
+              id="address"
+              formControlName="address"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('personalDetails.address')?.valid && (userForm.get('personalDetails.address')?.dirty || userForm.get('personalDetails.address')?.touched),
+                'is-invalid': userForm.get('personalDetails.address')?.invalid && (userForm.get('personalDetails.address')?.dirty || userForm.get('personalDetails.address')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('personalDetails.address')?.invalid && userForm.get('personalDetails.address')?.touched">
+              {{ getErrorMessage(userForm.get('personalDetails.address')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              formControlName="dateOfBirth"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('personalDetails.dateOfBirth')?.valid && (userForm.get('personalDetails.dateOfBirth')?.dirty || userForm.get('personalDetails.dateOfBirth')?.touched),
+                'is-invalid': userForm.get('personalDetails.dateOfBirth')?.invalid && (userForm.get('personalDetails.dateOfBirth')?.dirty || userForm.get('personalDetails.dateOfBirth')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('personalDetails.dateOfBirth')?.invalid && userForm.get('personalDetails.dateOfBirth')?.touched">
+              {{ getErrorMessage(userForm.get('personalDetails.dateOfBirth')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="specialisation">Specialisation:</label>
+            <input
+              type="text"
+              id="specialisation"
+              formControlName="specialisation"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('personalDetails.specialisation')?.valid && (userForm.get('personalDetails.specialisation')?.dirty || userForm.get('personalDetails.specialisation')?.touched),
+                'is-invalid': userForm.get('personalDetails.specialisation')?.invalid && (userForm.get('personalDetails.specialisation')?.dirty || userForm.get('personalDetails.specialisation')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('personalDetails.specialisation')?.invalid && userForm.get('personalDetails.specialisation')?.touched">
+              {{ getErrorMessage(userForm.get('personalDetails.specialisation'))}}
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        formControlName="email"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': userForm.get('email')?.valid && (userForm.get('email')?.dirty || userForm.get('email')?.touched),
-          'is-invalid': userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
-        {{ getErrorMessage('email') }}
+      <div *ngIf="currentStep === 2">
+        <div formGroupName="eduDetails">
+          <div class="form-group">
+            <label for="college">College:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Start typing to select a college"
+              formControlName="college"
+              [typeahead]="colleges"
+              [typeaheadItemTemplate]="customItemTemplate"
+            >
+            <ng-template #customItemTemplate let-model="item" let-index="index">
+              <div class="custom-item">
+                {{ model }}
+              </div>
+            </ng-template>
+          </div>
+          
+          
+          
+
+          <div class="form-group">
+            <label for="degree">Degree:</label>
+            <input
+              type="text"
+              id="degree"
+              formControlName="degree"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('eduDetails.degree')?.valid && (userForm.get('eduDetails.degree')?.dirty || userForm.get('eduDetails.degree')?.touched),
+                'is-invalid': userForm.get('eduDetails.degree')?.invalid && (userForm.get('eduDetails.degree')?.dirty || userForm.get('eduDetails.degree')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('eduDetails.degree')?.invalid && userForm.get('eduDetails.degree')?.touched">
+              {{ getErrorMessage(userForm.get('eduDetails.degree')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="yop">Year of Passing:</label>
+            <input
+              type="text"
+              id="yop"
+              formControlName="yop"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('eduDetails.yop')?.valid && (userForm.get('eduDetails.yop')?.dirty || userForm.get('eduDetails.yop')?.touched),
+                'is-invalid': userForm.get('eduDetails.yop')?.invalid && (userForm.get('eduDetails.yop')?.dirty || userForm.get('eduDetails.yop')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('eduDetails.yop')?.invalid && userForm.get('eduDetails.yop')?.touched">
+              {{ getErrorMessage(userForm.get('eduDetails.yop')) }}
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="nextStep()">Next</button>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="address">Address:</label>
-      <input
-        type="text"
-        id="address"
-        formControlName="address"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': userForm.get('address')?.valid && (userForm.get('address')?.dirty || userForm.get('address')?.touched),
-          'is-invalid': userForm.get('address')?.invalid && (userForm.get('address')?.dirty || userForm.get('address')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched">
-        {{ getErrorMessage('address') }}
+      <div *ngIf="currentStep === 3">
+        <div formGroupName="expDetails">
+          <div class="form-group">
+            <label for="hospital">Hospital:</label>
+            <input
+              type="text"
+              id="hospital"
+              formControlName="hospital"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('expDetails.hospital')?.valid && (userForm.get('expDetails.hospital')?.dirty || userForm.get('expDetails.hospital')?.touched),
+                'is-invalid': userForm.get('expDetails.hospital')?.invalid && (userForm.get('expDetails.hospital')?.dirty || userForm.get('expDetails.hospital')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('expDetails.hospital')?.invalid && userForm.get('expDetails.hospital')?.touched">
+              {{ getErrorMessage(userForm.get('expDetails.hospital')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('expDetails.city')?.valid && (userForm.get('expDetails.city')?.dirty || userForm.get('expDetails.city')?.touched),
+                'is-invalid': userForm.get('expDetails.city')?.invalid && (userForm.get('expDetails.city')?.dirty || userForm.get('expDetails.city')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('expDetails.city')?.invalid && userForm.get('expDetails.city')?.touched">
+              {{ getErrorMessage(userForm.get('expDetails.city')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <input
+              type="text"
+              id="description"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('expDetails.description')?.valid && (userForm.get('expDetails.city')?.dirty || userForm.get('expDetails.city')?.touched),
+                'is-invalid': userForm.get('expDetails.description')?.invalid && (userForm.get('expDetails.city')?.dirty || userForm.get('expDetails.city')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('expDetails.description')?.invalid && userForm.get('expDetails.description')?.touched">
+              {{ getErrorMessage(userForm.get('expDetails.description')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="startYear">Start Year:</label>
+            <input
+              type="text"
+              id="startYear"
+              formControlName="startYear"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('expDetails.startYear')?.valid && (userForm.get('expDetails.startYear')?.dirty || userForm.get('expDetails.startYear')?.touched),
+                'is-invalid': userForm.get('expDetails.startYear')?.invalid && (userForm.get('expDetails.startYear')?.dirty || userForm.get('expDetails.startYear')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('expDetails.startYear')?.invalid && userForm.get('expDetails.startYear')?.touched">
+              {{ getErrorMessage(userForm.get('expDetails.startYear')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="endYear">End Year:</label>
+            <input
+              type="text"
+              id="endYear"
+              formControlName="endYear"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('expDetails.endYear')?.valid && (userForm.get('expDetails.endYear')?.dirty || userForm.get('expDetails.endYear')?.touched),
+                'is-invalid': userForm.get('expDetails.endYear')?.invalid && (userForm.get('expDetails.endYear')?.dirty || userForm.get('expDetails.endYear')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('expDetails.endYear')?.invalid && userForm.get('expDetails.endYear')?.touched">
+              {{ getErrorMessage(userForm.get('expDetails.endYear')) }}
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="nextStep()">Next</button>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="dateOfBirth">Date of Birth:</label>
-      <input
-        type="date"
-        id="dateOfBirth"
-        formControlName="dateOfBirth"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': userForm.get('dateOfBirth')?.valid && (userForm.get('dateOfBirth')?.dirty || userForm.get('dateOfBirth')?.touched),
-          'is-invalid': userForm.get('dateOfBirth')?.invalid && (userForm.get('dateOfBirth')?.dirty || userForm.get('dateOfBirth')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="userForm.get('dateOfBirth')?.invalid && userForm.get('dateOfBirth')?.touched">
-        {{ getErrorMessage('dateOfBirth') }}
+      <div *ngIf="currentStep === 4">
+        <div formGroupName="recDetails">
+          <div class="form-group">
+            <label for="awards">Awards:</label>
+            <input
+              type="text"
+              id="awards"
+              formControlName="awards"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('recDetails.awards')?.valid && (userForm.get('recDetails.awards')?.dirty || userForm.get('recDetails.awards')?.touched),
+                'is-invalid': userForm.get('recDetails.awards')?.invalid && (userForm.get('recDetails.awards')?.dirty || userForm.get('recDetails.awards')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('recDetails.awards')?.invalid && userForm.get('recDetails.awards')?.touched">
+              {{ getErrorMessage(userForm.get('recDetails.awards')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="recYear">Receiving Year:</label>
+            <input
+              type="text"
+              id="recYear"
+              formControlName="recYear"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('recDetails.recYear')?.invalid && (userForm.get('recDetails.recYear')?.dirty || userForm.get('recDetails.recYear')?.touched),
+                'is-invalid': userForm.get('recDetails.recYear')?.invalid && (userForm.get('recDetails.recYear')?.dirty || userForm.get('recDetails.recYear')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('recDetails.recYear')?.invalid && userForm.get('recDetails.recYear')?.touched">
+              {{ getErrorMessage(userForm.get('recDetails.recYear')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="memberships">Memberships:</label>
+            <input
+              type="text"
+              id="memberships"
+              formControlName="memberships"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('recDetails.memberships')?.invalid && (userForm.get('recDetails.memberships')?.dirty || userForm.get('recDetails.memberships')?.touched),
+                'is-invalid': userForm.get('recDetails.memberships')?.invalid && (userForm.get('recDetails.memberships')?.dirty || userForm.get('recDetails.memberships')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('recDetails.memberships')?.invalid && userForm.get('recDetails.memberships')?.touched">
+              {{ getErrorMessage(userForm.get('recDetails.memberships')) }}
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-primary ml-2" (click)="nextStep()">Next</button>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="specialisation">Specialisation:</label>
-      <input
-        type="text"
-        id="specialisation"
-        formControlName="specialisation"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': userForm.get('specialisation')?.valid && (userForm.get('specialisation')?.dirty || userForm.get('specialisation')?.touched),
-          'is-invalid': userForm.get('specialisation')?.invalid && (userForm.get('specialisation')?.dirty || userForm.get('specialisation')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="userForm.get('specialisation')?.invalid && userForm.get('specialisation')?.touched">
-        {{ getErrorMessage('specialisation') }}
+      <div *ngIf="currentStep === 5">
+        <div formGroupName="specDetails">
+          <div class="form-group">
+            <label for="specialisation">Specialisation:</label>
+            <input
+              type="text"
+              id="specialisation"
+              formControlName="specialisation"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('specDetails.specialisation')?.invalid && (userForm.get('specDetails.specialisation')?.dirty || userForm.get('specDetails.specialisation')?.touched),
+                'is-invalid': userForm.get('specDetails.specialisation')?.invalid && (userForm.get('specDetails.specialisation')?.dirty || userForm.get('specDetails.specialisation')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('specDetails.specialisation')?.invalid && userForm.get('specDetails.specialisation')?.touched">
+              {{ getErrorMessage(userForm.get('specDetails.specialisation')) }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="servicings">Servicings:</label>
+            <input
+              type="text"
+              id="servicings"
+              formControlName="servicings"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': userForm.get('specDetails.servicings')?.invalid && (userForm.get('specDetails.servicings')?.dirty || userForm.get('specDetails.servicings')?.touched),
+                'is-invalid': userForm.get('specDetails.servicings')?.invalid && (userForm.get('specDetails.servicings')?.dirty || userForm.get('specDetails.servicings')?.touched)}"/>
+            <div class="warning" *ngIf="userForm.get('specDetails.servicings')?.invalid && userForm.get('specDetails.servicings')?.touched">
+              {{ getErrorMessage(userForm.get('specDetails.servicings')) }}
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="submit" class="btn btn-success ml-2" [disabled]="userForm.invalid">Submit</button>
       </div>
-    </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="userForm.invalid" (click)="onSubmit()" routerLink="/home">Save</button>
-  </form>
+    </form>
+  </div>
 </div>

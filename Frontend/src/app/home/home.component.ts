@@ -26,9 +26,11 @@ export class HomeComponent implements OnInit {
   deleteAndReload(id: number) {
     this.userService.deleteData({}, id).subscribe(
       () => {
+        console.log('Doctor deleted from the database');
         window.location.reload();
       },
       (error) => {
+        console.log('Error while deleting doctor from the database');
       }
     );
   }

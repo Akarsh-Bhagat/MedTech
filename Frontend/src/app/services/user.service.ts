@@ -27,10 +27,10 @@ export class UserService {
     return this.http.get(url);
   }
   // adding the user details in db
-  postData(data: any) {
-    return this.http.post<any>(
+  postData(data: any): Observable<string> {
+    return this.http.post(
       `${this.url}/doctors`,
-      data
+      data,{ responseType: 'text' }
     );
   }
 
@@ -41,18 +41,18 @@ export class UserService {
   }
 
   // Updating the user details
-  updateData(updateData: any,id: number): Observable<any>{
+  updateData(updateData: any,id: number): Observable<string>{
     console.log(updateData);
     const url = `${this.url}/doctors/${id}`;
     console.log(url);
     
-    return this.http.put(url, updateData);
+    return this.http.put(url, updateData, { responseType: 'text' });
   }
 
   //deleting a user
-  deleteData(deleteData: any,id:number): Observable<any>{
+  deleteData(deleteData: any,id:number): Observable<string>{
     const url = `${this.url}/doctors/${id}`;
     console.log(url);
-    return this.http.delete(url, deleteData);
+    return this.http.delete(url, { responseType: 'text' });
   }
 }
