@@ -1,8 +1,17 @@
 <app-navbar></app-navbar>
 
-<header class="text-white text-center py-5" style="background-color: #28328c;">
+<header class="text-white text-center py-5" style="background-color: #28328c; position: relative;">
   <h1 class="display-4">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
   <p class="lead">{{doctor.specialisation}} | {{doctor.email}}</p>
+
+  <!-- Social media icons with spacing -->
+  <div style="position: absolute; top: 10px; right: 10px;">
+      <!-- Replace the following links and icons with the actual social media links and icons you want to use -->
+      <a href="https://facebook.com" target="_blank" class="text-white" style="margin-right: 10px;"><i class="fab fa-facebook-square fa-2x"></i></a>
+      <a href="https://twitter.com" target="_blank" class="text-white" style="margin-right: 10px;"><i class="fab fa-twitter-square fa-2x"></i></a>
+      <a href="https://linkedin.com" target="_blank" class="text-white" style="margin-right: 10px;"><i class="fab fa-linkedin fa-2x"></i></a>
+      <!-- Add more social media icons as needed with appropriate margin-right values -->
+  </div>
 </header>
 
 <div class="container mt-5">
