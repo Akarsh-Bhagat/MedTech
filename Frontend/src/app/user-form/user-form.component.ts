@@ -64,10 +64,10 @@ export class UserFormComponent implements OnInit {
       personalDetails: this.fb.group({
         firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
         lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        address: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
+        address: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
         dateOfBirth: ['', [Validators.required, this.validateDOB]],
         email: ['', [Validators.required, Validators.email]],
-        specialisation: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+        specialisation: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
       }),
       eduDetails: this.fb.group({
         college: [''],
@@ -81,9 +81,9 @@ export class UserFormComponent implements OnInit {
         this.generateAward()
       ]),
       specDetails: this.fb.group({
-        specialisation: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        servicings: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
-        memberships: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
+        specialisation: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+        servicings: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
+        memberships: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
       })
     });
 
@@ -101,11 +101,11 @@ export class UserFormComponent implements OnInit {
 
   GenerateExp(){
    return this.fb.group({
-    hospital: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
-    city: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-    startYear: ['', [Validators.required,Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
-    endYear: ['', [Validators.required,Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
+    hospital: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+    description: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
+    city: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+    startYear: ['', [Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
+    endYear: ['', [Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
   })
   }
 
@@ -132,8 +132,8 @@ export class UserFormComponent implements OnInit {
   
   generateAward() {
     return this.fb.group({
-      title: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      recYear: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
+      title: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      recYear: ['', [Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
     });
   }
 

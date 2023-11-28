@@ -1,224 +1,148 @@
 <app-navbar></app-navbar>
 
 <header class="text-white text-center py-5" style="background-color: #28328c;">
-    <h1 class="display-4">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
-    <p class="lead">{{doctor.specialisation}} | {{doctor.email}}</p>
-
-   <!-- view.component.html -->
-
-
-
-  
+  <h1 class="display-4">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
+  <p class="lead">{{doctor.specialisation}} | {{doctor.email}}</p>
 </header>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card mb-4 shadow">
-                <div class="card-body">
-                    <h3 class="card-title">Services</h3>
-                    <button
-                    (click)="toggleServicesForm()"
-                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-14 rounded"
-                  >
-                    Add Services
-                    <i class="text-white fa fa-plus"></i>
-                  </button>
-                  <form *ngIf="showServices"
-          
-          class="bg-white rounded-lg p-6"
-        >
-          <div class="mb-4">
-            <label for="name" class="block text-gray-700 font-bold mb-2"
-              >Specialisations</label
-            >
-            <input
-              type="text"
-              id="title"
-              formControlName="title"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="description" class="block text-gray-700 font-bold mb-2"
-              >Servicings</label
-            >
-            <textarea
-              id="description"
-              formControlName="description"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            ></textarea>
-          </div>
-         
-          <div class="flex justify-center">
-            <button
-              type="submit"
-             
-              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-            >
-              Add to Services
-              <i class="text-2xl text-white fa fa-plus"></i>
-            </button>
-          </div>
-        </form>
+  <div class="row">
 
-
-
-                    <ul class="card-text">
-                        <li *ngFor="let service of doctor?.servicings">{{ service.name }}</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Education Section -->
+    <div class="col-md-12">
+      <div class="card mb-4 shadow">
+        <div class="card-body">
+          <h2 class="card-title display-5 mb-4">Education</h2>
+          <button
+            (click)="toggleEducationForm()"
+            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+            style="top: 10px; right: 10px;"
+          >
+            <i class="text-white fa fa-edit"></i>
+          </button>
+          <ul class="list-unstyled">
+            <li *ngFor="let education of doctor?.education">
+              <div class="mb-3">
+                <strong class="text-primary">College:</strong> {{ education.college }}<br />
+                <strong class="text-primary">Degree:</strong> {{ education.degree }}<br />
+                <strong class="text-primary">Year of Passing:</strong> {{ education.yop }}
+              </div>
+            </li>
+          </ul>
         </div>
-
-        <div class="col-md-12">
-            <div class="card mb-4 shadow">
-                <div class="card-body">
-                    <h3 class="card-title">Experiences</h3>
-                    <button
-                    (click)="toggleExperiencesForm()"
-                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-14 rounded"
-                  >
-                    Add Experience
-                    <i class="text-white fa fa-plus"></i>
-                  </button>
-                  <form *ngIf="showExperiences"
-          
-          class="bg-white rounded-lg p-6"
-        >
-          <div class="mb-4">
-            <label for="name" class="block text-gray-700 font-bold mb-2"
-              >Specialisations</label
-            >
-            <input
-              type="text"
-              id="title"
-              formControlName="title"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="description" class="block text-gray-700 font-bold mb-2"
-              >Servicings</label
-            >
-            <textarea
-              id="description"
-              formControlName="description"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            ></textarea>
-          </div>
-         
-          <div class="flex justify-center">
-            <button
-              type="submit"
-             
-              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-            >
-              Add to Experiences
-              <i class="text-2xl text-white fa fa-plus"></i>
-            </button>
-          </div>
-        </form>
-
-
-
-                    <ul class="card-text">
-                        <li *ngFor="let experience of doctor?.experiences">{{ experience.description }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-4 shadow">
-                <div class="card-body">
-                    <h3 class="card-title">Memberships</h3>
-                    <ul class="card-text">
-                        <li *ngFor="let membership of doctor?.memberships">{{ membership.history }}</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Experiences Section -->
+    <div class="col-md-12">
+      <div class="card mb-4 shadow">
+        <div class="card-body">
+          <h2 class="card-title display-5 mb-4">Experiences</h2>
+          <button
+            (click)="toggleExperiencesForm()"
+            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+            style="top: 10px; right: 10px;"
+          >
+            <i class="text-white fa fa-edit"></i>
+          </button>
+          <form *ngIf="showExperiences" class="bg-white rounded-lg p-6">
+            <!-- ... Experiences form content ... -->
+          </form>
+          <ul class="list-unstyled">
+            <li *ngFor="let experience of doctor?.experiences" class="mb-3">
+              <div>
+                <strong class="text-primary">Hospital:</strong> {{ experience.hospital }}<br />
+                <strong class="text-primary">City:</strong> {{ experience.city }}<br />
+                <strong class="text-primary">Description:</strong> {{ experience.description }}<br />
+                <strong class="text-primary">Period:</strong> {{ experience.startYear }} - {{ experience.endYear }}
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="col-md-6">
-            <div class="card mb-4 shadow">
-                <div class="card-body">
-                    <h3 class="card-title">Education</h3>
-                    <ul class="card-text">
-                        <li *ngFor="let education of doctor?.education">{{ education.college }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-4 shadow">
-                <div class="card-body">
-                    <h3 class="card-title">Awards</h3>
-                    <button
-                    (click)="toggleAwardsForm()"
-                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-14 rounded"
-                  >
-                    Add Services
-                    <i class="text-white fa fa-plus"></i>
-                  </button>
-                  <form *ngIf="showAwards"
-          
-          class="bg-white rounded-lg p-6"
-        >
-          <div class="mb-4">
-            <label for="name" class="block text-gray-700 font-bold mb-2"
-              >Specialisations</label
-            >
-            <input
-              type="text"
-              id="title"
-              formControlName="title"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="description" class="block text-gray-700 font-bold mb-2"
-              >Servicings</label
-            >
-            <textarea
-              id="description"
-              formControlName="description"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            ></textarea>
-          </div>
-         
-          <div class="flex justify-center">
-            <button
-              type="submit"
-             
-              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-            >
-              Add to Services
-              <i class="text-2xl text-white fa fa-plus"></i>
-            </button>
-          </div>
-        </form>
-                    <ul class="card-text">
-                        <li *ngFor="let award of doctor?.awards">{{ award.title }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-6">
-            <div class="card mb-4 shadow">
-                <div class="card-body">
-                    <h3 class="card-title">Specializations
-                        
-                    </h3>
-                    <ul class="card-text">
-                        <li *ngFor="let specialization of doctor?.specializations">{{ specialization.name }}</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Services Section -->
+    <div class="col-md-12">
+      <div class="card mb-4 shadow">
+        <div class="card-body">
+          <h2 class="card-title display-5 mb-4">Services</h2>
+          <button
+            (click)="toggleServicesForm()"
+            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+            style="top: 10px; right: 10px;"
+          >
+            <i class="text-white fa fa-edit"></i>
+          </button>
+          <form *ngIf="showServices" class="bg-white rounded-lg p-6">
+            <!-- ... Services form content ... -->
+          </form>
+          <ul class="list-unstyled">
+            <li *ngFor="let service of doctor?.servicings" class="mb-3">{{ service.name }}</li>
+          </ul>
         </div>
+      </div>
     </div>
+
+    <!-- Specializations Section -->
+    <div class="col-md-12">
+      <div class="card mb-4 shadow">
+        <div class="card-body">
+          <h2 class="card-title display-5 mb-4">Specializations</h2>
+          <button
+            (click)="toggleSpecializationsForm()"
+            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+            style="top: 10px; right: 10px;"
+          >
+            <i class="text-white fa fa-edit"></i>
+          </button>
+          <ul class="list-unstyled">
+            <li *ngFor="let specialization of doctor?.specializations" class="mb-3">{{ specialization.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memberships Section -->
+    <div class="col-md-6">
+      <div class="card mb-4 shadow">
+        <div class="card-body">
+          <h2 class="card-title display-5 mb-4">Memberships</h2>
+          <button
+            (click)="toggleMembershipsForm()"
+            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+            style="top: 10px; right: 10px;"
+          >
+            <i class="text-white fa fa-edit"></i>
+          </button>
+          <ul class="list-unstyled">
+            <li *ngFor="let membership of doctor?.memberships" class="mb-3">{{ membership.history }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Awards Section -->
+    <div class="col-md-6">
+      <div class="card mb-4 shadow">
+        <div class="card-body">
+          <h2 class="card-title display-5 mb-4">Awards</h2>
+          <button
+            (click)="toggleAwardsForm()"
+            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+            style="top: 10px; right: 10px;"
+          >
+            <i class="text-white fa fa-edit"></i>
+          </button>
+          <form *ngIf="showAwards" class="bg-white rounded-lg p-6">
+            <!-- ... Awards form content ... -->
+          </form>
+          <ul class="list-unstyled">
+            <li *ngFor="let award of doctor?.awards" class="mb-3">{{ award.title }} - {{award.recYear}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>

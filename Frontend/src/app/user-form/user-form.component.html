@@ -10,7 +10,7 @@
       <div *ngIf="currentStep === 1">
         <div formGroupName="personalDetails">
             <div class="form-group">
-              <label for="firstName">First Name:</label>
+              <label for="firstName"><span style="color: red;">* </span>First Name:</label>
               <input type="text" id="firstName" formControlName="firstName" class="form-control"
                 [ngClass]="{'is-valid': userForm.get('personalDetails.firstName')?.valid && (userForm.get('personalDetails.firstName')?.dirty || userForm.get('personalDetails.firstName')?.touched), 'is-invalid': userForm.get('personalDetails.firstName')?.invalid && (userForm.get('personalDetails.firstName')?.dirty || userForm.get('personalDetails.firstName')?.touched)}" />
               <div class="warning" *ngIf="userForm.get('personalDetails.firstName')?.invalid && userForm.get('personalDetails.firstName')?.touched">
@@ -19,7 +19,7 @@
             </div>
 
             <div class="form-group">
-              <label for="lastName">Last Name:</label>
+              <label for="lastName"><span style="color: red;">* </span>Last Name:</label>
               <input 
               type="text" 
               id="lastName" 
@@ -35,7 +35,7 @@
     
 
           <div class="form-group">
-            <label for="email">Email:</label>
+            <label for="email"><span style="color: red;">* </span>Email:</label>
             <input
               type="email"
               id="email"
@@ -65,7 +65,7 @@
           </div>
 
           <div class="form-group">
-            <label for="dateOfBirth">Date of Birth:</label>
+            <label for="dateOfBirth"><span style="color: red;">* </span>Date of Birth:</label>
             <input
               type="date"
               id="dateOfBirth"
@@ -103,7 +103,7 @@
       <div *ngIf="currentStep === 2">
         <div formGroupName="eduDetails">
           <div class="form-group">
-            <label for="college">College:</label>
+            <label for="college"><span style="color: red;">* </span>College:</label>
             <input
               type="text"
               class="form-control"
@@ -120,7 +120,7 @@
           </div>
 
           <div class="form-group">
-            <label for="degree">Degree:</label>
+            <label for="degree"><span style="color: red;">* </span>Degree:</label>
             <input
               type="any"
               class="form-control"
@@ -137,7 +137,7 @@
           </div>
 
           <div class="form-group">
-            <label for="yop">Year of Passing:</label>
+            <label for="yop"><span style="color: red;">* </span>Year of Passing:</label>
             <input
               type="text"
               id="yop"

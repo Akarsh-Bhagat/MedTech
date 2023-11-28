@@ -23,6 +23,8 @@ export class ViewComponent implements OnInit {
   showExperiences: boolean = false;
   showAwards: boolean = false;
   showSpecializations: boolean = false;
+  showMemberships: boolean = false;
+  showEducation: boolean = false;
   doctor: any={};
 
   constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router){
@@ -54,6 +56,14 @@ export class ViewComponent implements OnInit {
 
   toggleSpecializationsForm() {
     this.showAwards = !this.showAwards;
+  }
+
+  toggleMembershipsForm() {
+    this.showMemberships = !this.showMemberships;
+  }
+
+  toggleEducationForm() {
+    this.showEducation = !this.showEducation;
   }
 
 
