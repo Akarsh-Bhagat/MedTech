@@ -1,75 +1,109 @@
 <app-navbar></app-navbar>
 
 <header class="text-white text-center py-5" style="background-color: #28328c; position: relative;">
-  <h1 class="display-4">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
-  <p class="lead">{{doctor.specialisation}} | {{doctor.email}}</p>
-
-  <!-- Social media icons with spacing -->
-  <div style="position: absolute; top: 10px; right: 10px;">
-      <!-- Replace the following links and icons with the actual social media links and icons you want to use -->
-      <a href="https://facebook.com" target="_blank" class="text-white" style="margin-right: 10px;"><i class="fab fa-facebook-square fa-2x"></i></a>
-      <a href="https://twitter.com" target="_blank" class="text-white" style="margin-right: 10px;"><i class="fab fa-twitter-square fa-2x"></i></a>
-      <a href="https://linkedin.com" target="_blank" class="text-white" style="margin-right: 10px;"><i class="fab fa-linkedin fa-2x"></i></a>
-      <!-- Add more social media icons as needed with appropriate margin-right values -->
+  <h1 class="display-4 mb-3">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
+  <p class="lead mb-3">{{doctor.specialisation.toLowerCase()}} | {{ calculateOverallExperience() }} years exp</p>
+  <div style="position: absolute; top: 110px; left: 50%; transform: translateX(-50%);">
+    <a *ngFor="let smedia of doctor?.handles" [href]="smedia?.link" target="_blank" class="text-white" style="margin-right: 10px;">
+      <i [class]="getIconClass(smedia.handle)"></i>
+    </a>
+    <a href="mailto:user@example.com?cc={{doctor.email}}" class="text-white" style="margin-right: 10px;">
+      <i class="fas fa-envelope fa-2x"></i>
+    </a>
   </div>
 </header>
 
+
+
 <div class="container mt-5">
   <div class="row">
+<!-- Education Section -->
+<div class="col-md-12">
+  <div class="card mb-4 shadow">
+    <div class="card-body position-relative"> <!-- Add position-relative class here -->
+      <h2 class="card-title display-5 mb-4">Education</h2>
+      <button
+        (click)="toggleEducationForm()"
+        class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+        style="top: 10px; right: 10px;"
+      >
+        <i class="text-white fa fa-edit"></i>
+      </button>
 
-    <!-- Education Section -->
-    <div class="col-md-12">
-      <div class="card mb-4 shadow">
-        <div class="card-body">
-          <h2 class="card-title display-5 mb-4">Education</h2>
-          <button
-            (click)="toggleEducationForm()"
-            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
-            style="top: 10px; right: 10px;"
-          >
-            <i class="text-white fa fa-edit"></i>
-          </button>
-          <ul class="list-unstyled">
-            <li *ngFor="let education of doctor?.education">
-              <div class="mb-3">
-                <strong class="text-primary">College:</strong> {{ education.college }}<br />
-                <strong class="text-primary">Degree:</strong> {{ education.degree }}<br />
-                <strong class="text-primary">Year of Passing:</strong> {{ education.yop }}
-              </div>
-            </li>
-          </ul>
-        </div>
+      <!-- Sidebar for Education Form -->
+      <div class="sidebar" [ngClass]="{ 'show': showEducation }">
+        <!-- Education Form -->
+        <form *ngIf="showEducation" class="bg-white rounded-lg p-6">
+          <div class="form-group">
+            <label for="college">College:</label>
+            <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+          </div>
+
+          <div class="form-group">
+            <label for="degree">Degree:</label>
+            <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
+          </div>
+
+          <div class="form-group">
+            <label for="yop">Year of Passing:</label>
+            <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="saveEducation()">Save</button>
+        </form>
+      </div>
+
+      <!-- List of Educations -->
+      <ul class="list-unstyled">
+        <li *ngFor="let education of doctor?.education">
+          <div class="mb-3">
+            <strong class="text-primary">College:</strong> {{ education.college }}<br />
+            <strong class="text-primary">Degree:</strong> {{ education.degree }}<br />
+            <strong class="text-primary">Year of Passing:</strong> {{ education.yop }}
+          </div>
+        </li>
+      </ul>
+
+      <!-- Main content -->
+      <div class="main-content" [ngClass]="{ 'show-sidebar': showEducation }" style="padding-top: 40px;"> <!-- Add padding-top -->
+        <!-- Main content here -->
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Experiences Section -->
-    <div class="col-md-12">
-      <div class="card mb-4 shadow">
-        <div class="card-body">
-          <h2 class="card-title display-5 mb-4">Experiences</h2>
-          <button
-            (click)="toggleExperiencesForm()"
-            class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
-            style="top: 10px; right: 10px;"
-          >
-            <i class="text-white fa fa-edit"></i>
-          </button>
-          <form *ngIf="showExperiences" class="bg-white rounded-lg p-6">
-            <!-- ... Experiences form content ... -->
-          </form>
-          <ul class="list-unstyled">
-            <li *ngFor="let experience of doctor?.experiences" class="mb-3">
-              <div>
-                <strong class="text-primary">Hospital:</strong> {{ experience.hospital }}<br />
-                <strong class="text-primary">City:</strong> {{ experience.city }}<br />
-                <strong class="text-primary">Description:</strong> {{ experience.description }}<br />
-                <strong class="text-primary">Period:</strong> {{ experience.startYear }} - {{ experience.endYear }}
-              </div>
-            </li>
-          </ul>
-        </div>
+  <!-- Experiences Section -->
+<div class="col-md-12">
+  <div class="card mb-4 shadow">
+    <div class="card-body">
+      <h2 class="card-title display-5 mb-4">Experiences</h2>
+      <button
+        (click)="toggleExperiencesForm()"
+        class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
+        style="top: 10px; right: 10px;"
+      >
+        <i class="text-white fa fa-edit"></i>
+      </button>
+      <form *ngIf="showExperiences" class="bg-white rounded-lg p-6">
+        <!-- ... Experiences form content ... -->
+      </form>
+      <ul class="list-unstyled">
+        <li *ngFor="let experience of doctor?.experiences" class="mb-3">
+          <div>
+            <strong class="text-primary">Hospital:</strong> {{ experience.hospital }}<br />
+            <strong class="text-primary">City:</strong> {{ experience.city }}<br />
+            <strong class="text-primary">Description:</strong> {{ experience.description }}<br />
+            <strong class="text-primary">Period:</strong> {{ experience.startYear }} - {{ experience.endYear }}
+          </div>
+        </li>
+      </ul>
+      
+      <div class="mt-4">
+        <strong >Overall Experience:</strong> {{ calculateOverallExperience() }} years
       </div>
     </div>
+  </div>
+</div>
 
     <!-- Services Section -->
     <div class="col-md-12">

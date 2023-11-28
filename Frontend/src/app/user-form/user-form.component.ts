@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, AbstractControl, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl, FormGroup, FormControl, FormArray, Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
@@ -25,6 +25,8 @@ export class UserFormComponent implements OnInit {
   collegeControl = new FormControl();
   formexperience!: FormArray<any>;
   formawards!: FormArray<any>;
+  formsmedia!: FormArray<any>;
+
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -68,6 +70,9 @@ export class UserFormComponent implements OnInit {
         dateOfBirth: ['', [Validators.required, this.validateDOB]],
         email: ['', [Validators.required, Validators.email]],
         specialisation: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+        socialMediaList: this.fb.array([
+          this.generateSocialMedia()
+        ]), // Change from FormControl to FormArray
       }),
       eduDetails: this.fb.group({
         college: [''],
@@ -137,6 +142,29 @@ export class UserFormComponent implements OnInit {
     });
   }
 
+  generateSocialMedia() {
+    return this.fb.group({
+      handle: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
+      link: ['', [Validators.pattern('https?://.+')]],
+    })
+  }
+
+  addSocialMedia() {
+    this.formsmedia = this.userForm.get("personalDetails.socialMediaList") as FormArray;
+    this.formsmedia.push(this.generateSocialMedia());
+}
+
+removeSocialMedia(index: number) {
+  this.formsmedia = this.userForm.get("personalDetails.socialMediaList") as FormArray;
+  this.formsmedia.removeAt(index);
+}
+
+get socialMediaList(): FormArray {
+  return this.userForm.get('personalDetails.socialMediaList') as FormArray;
+}
+
+  
+
   validateDOB(control: AbstractControl) {
     const dateOfBirth = new Date(control.value);
     const currentDate = new Date();
@@ -196,6 +224,10 @@ export class UserFormComponent implements OnInit {
       awards: formData.recDetails.map((award: any) => ({
         title: award.title,
         recYear: award.recYear
+      })),
+      handles: formData.personalDetails.socialMediaList.map((smedia: any) => ({
+        handle: smedia.handle,
+        link: smedia.link
       })),
       education: [{
         college: formData.eduDetails.college,
@@ -292,6 +324,15 @@ export class UserFormComponent implements OnInit {
     this.updateTitle();
   }
 
+  getAvailableSocialMediaOptions(index: number): string[] {
+    const selectedHandles = this.userForm.get('personalDetails.socialMediaList')!.value
+      .filter((_: any, i: number) => i !== index) 
+      .map((item: { handle: any; }) => item.handle);
+  
+    const allHandles = ['twitter', 'linkedin', 'facebook'];
+    return allHandles.filter(handle => !selectedHandles.includes(handle));
+  }
+
   getCurrentFormGroup(): FormGroup | null {
     return this.userForm.get(Object.keys(this.userForm.controls)[this.currentStep - 1]) as FormGroup;
   }
@@ -300,4 +341,6 @@ export class UserFormComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.colleges.filter(college => college.toLowerCase().includes(filterValue));
   }
+
+
 }

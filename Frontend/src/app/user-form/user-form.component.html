@@ -79,35 +79,45 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="smedia" class="col-form-label col-sm-2">Social Media:</label>
-        
-            <div class="col-sm-4">
-                <select id="smedia" formControlName="smedia" class="form-control">
-                    <option value="" disabled selected>Select Social Media Platform</option>
-                    <option value="twitter">Twitter</option>
-                    <option value="linkedin">LinkedIn</option>
-                </select>
-            </div>
-        
-            <label for="smediaLink" class="col-form-label col-sm-2"> Link:</label>
-        
-            <div class="col-sm-4">
-                <input
-                    type="text"
-                    id="smediaLink"
-                    formControlName="smediaLink"
-                    class="form-control"
-                    [ngClass]="{
-                        'is-valid': userForm.get('personalDetails.smediaLink')?.valid && (userForm.get('personalDetails.smediaLink')?.dirty || userForm.get('personalDetails.smediaLink')?.touched),
-                        'is-invalid': userForm.get('personalDetails.smediaLink')?.invalid && (userForm.get('personalDetails.smediaLink')?.dirty || userForm.get('personalDetails.smediaLink')?.touched)}"/>
-        
-                <!-- Validation message for the social media link -->
-                <div class="warning" *ngIf="userForm.get('personalDetails.smediaLink')?.invalid && userForm.get('personalDetails.smediaLink')?.touched">
-                    {{ getErrorMessage(userForm.get('personalDetails.smediaLink'))}}
+          <div class="form-group">
+            <label for="socialMediaList">Social Media:</label>
+            <div formArrayName="socialMediaList">
+              <div *ngFor="let socialMedia of userForm.get('personalDetails.socialMediaList')?.value; let i = index">
+                <div [formGroupName]="i" class="col-12">
+                  <div class="row">
+                    <div class="col-4">
+                      <select formControlName="handle" class="form-control">
+                        <option value="" disabled selected>Select social media</option>
+                        <option *ngFor="let option of getAvailableSocialMediaOptions(i)" [value]="option">{{ option }}</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" formControlName="link" placeholder="Your profile link" class="form-control"
+                        [ngClass]="{
+                          'is-valid': userForm.get('personalDetails.socialMediaList.' + i + '.link')?.valid &&
+                            (userForm.get('personalDetails.socialMediaList.' + i + '.link')?.dirty ||
+                              userForm.get('personalDetails.socialMediaList.' + i + '.link')?.touched),
+                          'is-invalid': userForm.get('personalDetails.socialMediaList.' + i + '.link')?.invalid &&
+                            (userForm.get('personalDetails.socialMediaList.' + i + '.link')?.dirty ||
+                              userForm.get('personalDetails.socialMediaList.' + i + '.link')?.touched)
+                        }" />
+
+                      <div class="warning"
+                        *ngIf="userForm.get('personalDetails.socialMediaList.' + i + '.link')?.invalid &&
+                          userForm.get('personalDetails.socialMediaList.' + i + '.link')?.touched">
+                        {{ getErrorMessage(userForm.get('personalDetails.socialMediaList.' + i + '.link')) }}
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <button *ngIf="i > 0" type="button" (click)="removeSocialMedia(i)" class="btn btn-outline-danger btn-sm mr-2 mt-1">-</button>
+                      <button *ngIf="i === userForm.get('personalDetails.socialMediaList')?.value.length - 1 && i<2" type="button" (click)="addSocialMedia()" class="btn btn-outline-primary btn-sm mt-1">+</button>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
+          
         
 
           <div class="form-group">

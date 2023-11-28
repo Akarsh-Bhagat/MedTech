@@ -1,3 +1,38 @@
 .bg{
     padding-top: 20px;
   }
+
+.sidebar {
+  position: fixed;
+  top: 23%;
+  right: -350px;
+  width: 350px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-out;
+  overflow-y: auto;
+}
+
+.sidebar.show {
+  right: 0;
+}
+
+
+.main-content {
+  transition: margin-right 0.3s ease-out;
+}
+
+.main-content.show-sidebar {
+  margin-right: 300px;
+}
+
+.fas:hover{
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
+.fab:hover{
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+
+}
