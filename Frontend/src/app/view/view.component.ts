@@ -103,7 +103,7 @@ export class ViewComponent implements OnInit {
   saveEducation() {
     this.userService.saveEducation(this.newEducation, this.doctor.id)
       .subscribe((response: any) => {
-        // this.doctor.education.push(response);
+       
         window.location.reload();
         this.newEducation = {};
         this.toggleEducationForm();
@@ -113,67 +113,67 @@ export class ViewComponent implements OnInit {
   }
 
   saveExperience() {
-    // Assuming you have a method in the UserService to save experience
+    
     this.userService.saveExperience(this.newExperience, this.doctor.id)
       .subscribe((response: any) => {
-        this.doctor.experiences.push(response); // Assuming the API returns the saved experience
+        window.location.reload();
         this.newExperience = {};
         this.toggleExperiencesForm();
       }, (error: any) => {
         console.error('Error saving experience:', error);
-        // Handle error as needed
+        
       });
   }
 
   saveMembership() {
-    // Assuming you have a method in the UserService to save membership
+    
     this.userService.saveMembership(this.newMembership, this.doctor.id)
       .subscribe((response: any) => {
-        this.doctor.memberships.push(response); // Assuming the API returns the saved membership
+        window.location.reload();
         this.newMembership = {};
         this.toggleMembershipsForm();
       }, (error: any) => {
         console.error('Error saving membership:', error);
-        // Handle error as needed
+        
       });
   }
 
   saveSpecialization() {
-    // Assuming you have a method in the UserService to save specialization
+    
     this.userService.saveSpecialization(this.newSpecialization, this.doctor.id)
       .subscribe((response: any) => {
-        this.doctor.specializations.push(response); // Assuming the API returns the saved specialization
+        window.location.reload();
         this.newSpecialization = {};
         this.toggleSpecializationsForm();
       }, (error: any) => {
         console.error('Error saving specialization:', error);
-        // Handle error as needed
+      
       });
   }
 
   saveAward() {
-    // Assuming you have a method in the UserService to save award
+    
     this.userService.saveAward(this.newAward, this.doctor.id)
       .subscribe((response: any) => {
-        this.doctor.awards.push(response); // Assuming the API returns the saved award
+        window.location.reload();
         this.newAward = {};
         this.toggleAwardsForm();
       }, (error: any) => {
         console.error('Error saving award:', error);
-        // Handle error as needed
+        
       });
   }
 
   saveService() {
-    // Assuming you have a method in the UserService to save service
+    
     this.userService.saveService(this.newService, this.doctor.id)
       .subscribe((response: any) => {
-        this.doctor.servicings.push(response); // Assuming the API returns the saved service
+        window.location.reload(); 
         this.newService = {};
         this.toggleServicesForm();
       }, (error: any) => {
         console.error('Error saving service:', error);
-        // Handle error as needed
+        
       });
   }
 

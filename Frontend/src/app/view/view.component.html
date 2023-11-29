@@ -80,21 +80,32 @@
       <div class="sidebar" [ngClass]="{ 'show': showExperiences }">
         <form *ngIf="showExperiences" class="bg-white rounded-lg p-6">
           <div class="form-group">
-            <label for="college">College:</label>
-            <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+            <label for="hospital">Hospital Name:</label>
+            <input type="text" id="hospital" name="hospital" class="form-control" [(ngModel)]="newExperience.hospital" />
           </div>
 
           <div class="form-group">
-            <label for="degree">Degree:</label>
-            <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
+            <label for="degree">City:</label>
+            <input type="text" id="city" name="city" class="form-control" [(ngModel)]="newExperience.city" />
           </div>
 
           <div class="form-group">
-            <label for="yop">Year of Passing:</label>
-            <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" class="form-control" [(ngModel)]="newExperience.description" />
           </div>
 
-          <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+
+          <div class="form-group">
+            <label for="startYear">StartYear:</label>
+            <input type="text" id="startYear" name="startYear" class="form-control" [(ngModel)]="newExperience.startYear" />
+          </div>
+
+          <div class="form-group">
+            <label for="startYear">EndYear:</label>
+            <input type="text" id="endYear" name="endYear" class="form-control" [(ngModel)]="newExperience.endYear" />
+          </div>
+
+          <button type="button" class="btn btn-primary mt-3" (click)="saveExperience()">Add</button>
         </form>
       </div>
       <ul class="list-unstyled">
@@ -130,21 +141,13 @@
           <div class="sidebar" [ngClass]="{ 'show': showServices }">
             <form *ngIf="showServices" class="bg-white rounded-lg p-6">
               <div class="form-group">
-                <label for="college">College:</label>
-                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newService.college" />
+                <label for="name">Services:</label>
+                <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newService.name" />
               </div>
     
-              <div class="form-group">
-                <label for="degree">Degree:</label>
-                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newService.degree" />
-              </div>
+           
     
-              <div class="form-group">
-                <label for="yop">Year of Passing:</label>
-                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newService.yop" />
-              </div>
-    
-              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+              <button type="button" class="btn btn-primary mt-3" (click)="saveService()">Add</button>
             </form>
           </div>
           <ul class="list-unstyled">
@@ -169,21 +172,13 @@
           <div class="sidebar" [ngClass]="{ 'show': showSpecializations }">
             <form *ngIf="showSpecializations" class="bg-white rounded-lg p-6">
               <div class="form-group">
-                <label for="college">College:</label>
-                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+                <label for="name">Specialization:</label>
+                <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newSpecialization.name" />
               </div>
     
-              <div class="form-group">
-                <label for="degree">Degree:</label>
-                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
-              </div>
+            
     
-              <div class="form-group">
-                <label for="yop">Year of Passing:</label>
-                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
-              </div>
-    
-              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+              <button type="button" class="btn btn-primary mt-3" (click)="saveSpecialization()">Add</button>
             </form>
           </div>
           <ul class="list-unstyled">
@@ -208,21 +203,13 @@
           <div class="sidebar" [ngClass]="{ 'show': showMemberships }">
             <form *ngIf="showMemberships" class="bg-white rounded-lg p-6">
               <div class="form-group">
-                <label for="college">College:</label>
-                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+                <label for="history">Membership:</label>
+                <input type="text" id="history" name="history" class="form-control" [(ngModel)]="newMembership.history" />
               </div>
     
-              <div class="form-group">
-                <label for="degree">Degree:</label>
-                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
-              </div>
+              
     
-              <div class="form-group">
-                <label for="yop">Year of Passing:</label>
-                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
-              </div>
-    
-              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+              <button type="button" class="btn btn-primary mt-3" (click)="saveMembership()">Add</button>
             </form>
           </div>
           <ul class="list-unstyled">
@@ -247,21 +234,18 @@
           <div class="sidebar" [ngClass]="{ 'show': showAwards }">
             <form *ngIf="showAwards" class="bg-white rounded-lg p-6">
               <div class="form-group">
-                <label for="college">College:</label>
-                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+                <label for="title">AwardTitle:</label>
+                <input type="text" id="title" name="title" class="form-control" [(ngModel)]="newAward.title" />
               </div>
+    
+              
     
               <div class="form-group">
-                <label for="degree">Degree:</label>
-                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
+                <label for="recYear"> Recieving Year:</label>
+                <input type="text" id="recYear" name="recYear" class="form-control" [(ngModel)]="newAward.recYear" />
               </div>
     
-              <div class="form-group">
-                <label for="yop">Year of Passing:</label>
-                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
-              </div>
-    
-              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+              <button type="button" class="btn btn-primary mt-3" (click)="saveAward()">Add</button>
             </form>
           </div>
           <ul class="list-unstyled">
