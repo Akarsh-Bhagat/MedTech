@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 // view.component.ts
@@ -14,11 +14,16 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css'],
   animations: [
-    trigger('fadeInOut', [
-      state('void', style({
-        opacity: 0
+    trigger('openClose', [
+      state('open', style({
+        transform: 'translateX(0)',
       })),
-      transition('void <=> *', animate(300)),
+      state('closed', style({
+        transform: 'translateX(100%)',
+      })),
+      transition('open <=> closed', [
+        animate('0.5s ease-in-out')
+      ]),
     ]),
   ],
 })
@@ -35,9 +40,14 @@ export class ViewComponent implements OnInit {
   showMemberships: boolean = false;
   showEducation: boolean = false;
   newEducation: any = {};
+  newExperience: any = {};
+  newService: any = {};
+  newAward: any = {};
+  newMembership: any = {};
+  newSpecialization: any = {};
   doctor: any={};
 
-  constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router){
+  constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router,private elRef: ElementRef){
   
     
   }
@@ -65,7 +75,7 @@ export class ViewComponent implements OnInit {
   }
 
   toggleSpecializationsForm() {
-    this.showAwards = !this.showAwards;
+    this.showSpecializations = !this.showSpecializations;
   }
 
   toggleMembershipsForm() {
@@ -91,8 +101,80 @@ export class ViewComponent implements OnInit {
   }
 
   saveEducation() {
-    this.doctor.education.push(this.newEducation);
-    this.newEducation = {}; 
+    this.userService.saveEducation(this.newEducation, this.doctor.id)
+      .subscribe((response: any) => {
+        // this.doctor.education.push(response);
+        window.location.reload();
+        this.newEducation = {};
+        this.toggleEducationForm();
+      }, (error: any) => {
+        console.error('Error saving education:', error);
+      });
+  }
+
+  saveExperience() {
+    // Assuming you have a method in the UserService to save experience
+    this.userService.saveExperience(this.newExperience, this.doctor.id)
+      .subscribe((response: any) => {
+        this.doctor.experiences.push(response); // Assuming the API returns the saved experience
+        this.newExperience = {};
+        this.toggleExperiencesForm();
+      }, (error: any) => {
+        console.error('Error saving experience:', error);
+        // Handle error as needed
+      });
+  }
+
+  saveMembership() {
+    // Assuming you have a method in the UserService to save membership
+    this.userService.saveMembership(this.newMembership, this.doctor.id)
+      .subscribe((response: any) => {
+        this.doctor.memberships.push(response); // Assuming the API returns the saved membership
+        this.newMembership = {};
+        this.toggleMembershipsForm();
+      }, (error: any) => {
+        console.error('Error saving membership:', error);
+        // Handle error as needed
+      });
+  }
+
+  saveSpecialization() {
+    // Assuming you have a method in the UserService to save specialization
+    this.userService.saveSpecialization(this.newSpecialization, this.doctor.id)
+      .subscribe((response: any) => {
+        this.doctor.specializations.push(response); // Assuming the API returns the saved specialization
+        this.newSpecialization = {};
+        this.toggleSpecializationsForm();
+      }, (error: any) => {
+        console.error('Error saving specialization:', error);
+        // Handle error as needed
+      });
+  }
+
+  saveAward() {
+    // Assuming you have a method in the UserService to save award
+    this.userService.saveAward(this.newAward, this.doctor.id)
+      .subscribe((response: any) => {
+        this.doctor.awards.push(response); // Assuming the API returns the saved award
+        this.newAward = {};
+        this.toggleAwardsForm();
+      }, (error: any) => {
+        console.error('Error saving award:', error);
+        // Handle error as needed
+      });
+  }
+
+  saveService() {
+    // Assuming you have a method in the UserService to save service
+    this.userService.saveService(this.newService, this.doctor.id)
+      .subscribe((response: any) => {
+        this.doctor.servicings.push(response); // Assuming the API returns the saved service
+        this.newService = {};
+        this.toggleServicesForm();
+      }, (error: any) => {
+        console.error('Error saving service:', error);
+        // Handle error as needed
+      });
   }
 
   getIconClass(handle: string): string {
@@ -107,6 +189,7 @@ export class ViewComponent implements OnInit {
         return 'fas fa-question fa-2x'; 
     }
   }
+
 
   
 

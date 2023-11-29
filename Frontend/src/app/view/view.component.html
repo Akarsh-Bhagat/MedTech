@@ -20,7 +20,7 @@
 <!-- Education Section -->
 <div class="col-md-12">
   <div class="card mb-4 shadow">
-    <div class="card-body position-relative"> <!-- Add position-relative class here -->
+    <div class="card-body position-relative"> 
       <h2 class="card-title display-5 mb-4">Education</h2>
       <button
         (click)="toggleEducationForm()"
@@ -30,9 +30,7 @@
         <i class="text-white fa fa-edit"></i>
       </button>
 
-      <!-- Sidebar for Education Form -->
       <div class="sidebar" [ngClass]="{ 'show': showEducation }">
-        <!-- Education Form -->
         <form *ngIf="showEducation" class="bg-white rounded-lg p-6">
           <div class="form-group">
             <label for="college">College:</label>
@@ -49,7 +47,7 @@
             <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
           </div>
 
-          <button type="button" class="btn btn-primary" (click)="saveEducation()">Save</button>
+          <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
         </form>
       </div>
 
@@ -63,11 +61,6 @@
           </div>
         </li>
       </ul>
-
-      <!-- Main content -->
-      <div class="main-content" [ngClass]="{ 'show-sidebar': showEducation }" style="padding-top: 40px;"> <!-- Add padding-top -->
-        <!-- Main content here -->
-      </div>
     </div>
   </div>
 </div>
@@ -84,9 +77,26 @@
       >
         <i class="text-white fa fa-edit"></i>
       </button>
-      <form *ngIf="showExperiences" class="bg-white rounded-lg p-6">
-        <!-- ... Experiences form content ... -->
-      </form>
+      <div class="sidebar" [ngClass]="{ 'show': showExperiences }">
+        <form *ngIf="showExperiences" class="bg-white rounded-lg p-6">
+          <div class="form-group">
+            <label for="college">College:</label>
+            <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+          </div>
+
+          <div class="form-group">
+            <label for="degree">Degree:</label>
+            <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
+          </div>
+
+          <div class="form-group">
+            <label for="yop">Year of Passing:</label>
+            <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
+          </div>
+
+          <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+        </form>
+      </div>
       <ul class="list-unstyled">
         <li *ngFor="let experience of doctor?.experiences" class="mb-3">
           <div>
@@ -117,9 +127,26 @@
           >
             <i class="text-white fa fa-edit"></i>
           </button>
-          <form *ngIf="showServices" class="bg-white rounded-lg p-6">
-            <!-- ... Services form content ... -->
-          </form>
+          <div class="sidebar" [ngClass]="{ 'show': showServices }">
+            <form *ngIf="showServices" class="bg-white rounded-lg p-6">
+              <div class="form-group">
+                <label for="college">College:</label>
+                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newService.college" />
+              </div>
+    
+              <div class="form-group">
+                <label for="degree">Degree:</label>
+                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newService.degree" />
+              </div>
+    
+              <div class="form-group">
+                <label for="yop">Year of Passing:</label>
+                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newService.yop" />
+              </div>
+    
+              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+            </form>
+          </div>
           <ul class="list-unstyled">
             <li *ngFor="let service of doctor?.servicings" class="mb-3">{{ service.name }}</li>
           </ul>
@@ -139,6 +166,26 @@
           >
             <i class="text-white fa fa-edit"></i>
           </button>
+          <div class="sidebar" [ngClass]="{ 'show': showSpecializations }">
+            <form *ngIf="showSpecializations" class="bg-white rounded-lg p-6">
+              <div class="form-group">
+                <label for="college">College:</label>
+                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+              </div>
+    
+              <div class="form-group">
+                <label for="degree">Degree:</label>
+                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
+              </div>
+    
+              <div class="form-group">
+                <label for="yop">Year of Passing:</label>
+                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
+              </div>
+    
+              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+            </form>
+          </div>
           <ul class="list-unstyled">
             <li *ngFor="let specialization of doctor?.specializations" class="mb-3">{{ specialization.name }}</li>
           </ul>
@@ -158,6 +205,26 @@
           >
             <i class="text-white fa fa-edit"></i>
           </button>
+          <div class="sidebar" [ngClass]="{ 'show': showMemberships }">
+            <form *ngIf="showMemberships" class="bg-white rounded-lg p-6">
+              <div class="form-group">
+                <label for="college">College:</label>
+                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+              </div>
+    
+              <div class="form-group">
+                <label for="degree">Degree:</label>
+                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
+              </div>
+    
+              <div class="form-group">
+                <label for="yop">Year of Passing:</label>
+                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
+              </div>
+    
+              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+            </form>
+          </div>
           <ul class="list-unstyled">
             <li *ngFor="let membership of doctor?.memberships" class="mb-3">{{ membership.history }}</li>
           </ul>
@@ -177,9 +244,26 @@
           >
             <i class="text-white fa fa-edit"></i>
           </button>
-          <form *ngIf="showAwards" class="bg-white rounded-lg p-6">
-            <!-- ... Awards form content ... -->
-          </form>
+          <div class="sidebar" [ngClass]="{ 'show': showAwards }">
+            <form *ngIf="showAwards" class="bg-white rounded-lg p-6">
+              <div class="form-group">
+                <label for="college">College:</label>
+                <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
+              </div>
+    
+              <div class="form-group">
+                <label for="degree">Degree:</label>
+                <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
+              </div>
+    
+              <div class="form-group">
+                <label for="yop">Year of Passing:</label>
+                <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
+              </div>
+    
+              <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>
+            </form>
+          </div>
           <ul class="list-unstyled">
             <li *ngFor="let award of doctor?.awards" class="mb-3">{{ award.title }} - {{award.recYear}}</li>
           </ul>
