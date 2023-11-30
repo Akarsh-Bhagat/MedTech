@@ -8,6 +8,7 @@ import { Observable, map, startWith } from 'rxjs';
 import { DegreeService } from '../services/degree.service';
 import { ToastrService, IndividualConfig } from 'ngx-toastr';
 import { CityService } from '../services/city.service';
+import { DocspecService } from '../services/docspec.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class UserFormComponent implements OnInit {
   colleges: any[] = [];
   degrees: any[]= [];
   cities: any[]= [];
+  specializations: any[]=[];
   title: string= "Personal Details";
   steps: number[] = [1, 2, 3, 4, 5];
   filteredColleges: Observable<string[]> | undefined;
@@ -37,6 +39,7 @@ export class UserFormComponent implements OnInit {
     private collegeService: CollegeService,
     private degreeService: DegreeService,
     private cityService: CityService,
+    private docspecService: DocspecService,
     private toastr: ToastrService
   ) {}
 
@@ -67,7 +70,15 @@ export class UserFormComponent implements OnInit {
       this.cities = cities;
     },
      error => {
-        console.error('Error fetching degrees', error);
+        console.error('Error fetching cities', error);
+      }
+    );
+    this.docspecService.getDocspecs().subscribe(
+      (specializations: any[]) => {
+      this.specializations = specializations;
+    },
+     error => {
+        console.error('Error fetching specializations', error);
       }
     );
   }

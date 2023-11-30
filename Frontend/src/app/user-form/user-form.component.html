@@ -118,21 +118,21 @@
             </div>
           </div>
           
-        
-
           <div class="form-group">
-            <label for="specialisation">Specialisation:</label>
+            <label for="docspec">Specialization:</label>
             <input
-              type="text"
-              id="specialisation"
-              formControlName="specialisation"
+              type="any"
               class="form-control"
-              [ngClass]="{
-                'is-valid': userForm.get('personalDetails.specialisation')?.valid && (userForm.get('personalDetails.specialisation')?.dirty || userForm.get('personalDetails.specialisation')?.touched),
-                'is-invalid': userForm.get('personalDetails.specialisation')?.invalid && (userForm.get('personalDetails.specialisation')?.dirty || userForm.get('personalDetails.specialisation')?.touched)}"/>
-            <div class="warning" *ngIf="userForm.get('personalDetails.specialisation')?.invalid && userForm.get('personalDetails.specialisation')?.touched">
-              {{ getErrorMessage(userForm.get('personalDetails.specialisation'))}}
-            </div>
+              placeholder=""
+              formControlName="specialisation"
+              [typeahead]="specializations"
+              [typeaheadItemTemplate]="customItemTemplate"
+            >
+            <ng-template #customItemTemplate let-model="item" let-index="index">
+              <div class="custom-item">
+                {{ model }}
+              </div>
+            </ng-template>
           </div>
 
           <button type="button" class="btn btn-outline-primary" (click)="nextStep()">Next</button>
