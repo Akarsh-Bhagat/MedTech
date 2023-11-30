@@ -36,6 +36,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [

@@ -135,7 +135,7 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary" [disabled]="!userForm.get('personalDetails')?.valid" (click)="nextStep()">Next</button>
+          <button type="button" class="btn btn-outline-primary" (click)="nextStep()">Next</button>
 
 
         </div>
@@ -192,8 +192,8 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
-          <button type="button" class="btn btn-primary ml-2" [disabled]="userForm.get('eduDetails')?.invalid" (click)="nextStep()">Next</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="prevStep()">Previous</button>
+          <button type="button" class="btn btn-outline-primary ml-2" (click)="nextStep()">Next</button>
         </div>
       </div>
       <div *ngIf="currentStep === 3">
@@ -281,8 +281,8 @@
           <button type="button" class="btn btn-success mt-2" (click)="AddExperiences()">Add Another Experience</button>
         </div>
       
-        <button type="button" class="btn btn-secondary mt-2" (click)="prevStep()">Previous</button>
-        <button type="button" class="btn btn-primary ml-2 mt-2" [disabled]="userForm.get('expDetails')?.invalid" (click)="nextStep()">Next</button>
+        <button type="button" class="btn btn-outline-secondary mt-2" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-outline-primary ml-2 mt-2" (click)="nextStep()">Next</button>
       </div>
 
       <div *ngIf="currentStep === 4">
@@ -322,8 +322,8 @@
         </div>
         <button type="button" class="btn btn-success mt-2" (click)="addAward()">Add Another Award</button>
       </div>
-      <button type="button" class="btn btn-secondary mt-2" (click)="prevStep()">Previous</button>
-      <button type="button" class="btn btn-primary ml-2 mt-2" [disabled]="userForm.get('recDetails')?.invalid" (click)="nextStep()">Next</button>
+      <button type="button" class="btn btn-outline-secondary mt-2" (click)="prevStep()">Previous</button>
+      <button type="button" class="btn btn-outline-primary ml-2 mt-2" (click)="nextStep()">Next</button>
     </div>
 
       <div *ngIf="currentStep === 5">
@@ -373,7 +373,7 @@
             </div>
           </div>
 
-        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="prevStep()">Previous</button>
         <button type="submit" class="btn btn-success ml-2" [disabled]="userForm.invalid">Submit</button>
       </div>
       </div>

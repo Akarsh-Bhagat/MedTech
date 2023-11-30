@@ -42,17 +42,17 @@
         <form *ngIf="showEducation" class="bg-white rounded-lg p-6">
           <div class="form-group">
             <label for="college">College:</label>
-            <input type="text" id="college" name="college" class="form-control" formControlName="college" />
+            <input type="text" id="college" name="college" class="form-control" [(ngModel)]="newEducation.college" />
           </div>
 
           <div class="form-group">
             <label for="degree">Degree:</label>
-            <input type="text" id="degree" name="degree" class="form-control" formControlName="degree" />
+            <input type="text" id="degree" name="degree" class="form-control" [(ngModel)]="newEducation.degree" />
           </div>
 
           <div class="form-group">
             <label for="yop">Year of Passing:</label>
-            <input type="text" id="yop" name="yop" class="form-control" formControlName="yop" />
+            <input type="text" id="yop" name="yop" class="form-control" [(ngModel)]="newEducation.yop" />
           </div>
 
           <button type="button" class="btn btn-primary mt-3" (click)="saveEducation()">Add</button>

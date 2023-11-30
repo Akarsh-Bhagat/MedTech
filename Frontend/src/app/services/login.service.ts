@@ -18,7 +18,7 @@ export class LoginService {
       localStorage.setItem("token", token)
       return true;
     }
-  // to check that user is logeed in
+ 
     isLoggedIn(){
      let token= localStorage.getItem("token");
      if(token==undefined || token==='' || token ==null){
@@ -32,7 +32,7 @@ export class LoginService {
    localStorage.removeItem('token');
    return true;
     }
-    // for getting the token
+
     getToken(){
       return localStorage.getItem("token")
     }

@@ -55,7 +55,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     left: 12px;
   }
   .toast-top-right {
-    top: 12px;
+    top: 80px;
     right: 12px;
   }
   .toast-bottom-right {

@@ -311,7 +311,7 @@ get socialMediaList(): FormArray {
         timeOut: 1000,
         progressBar: true,
         closeButton: true,
-        positionClass: 'toast-step-form',  // Set position class here
+        positionClass: 'toast-top-right', 
       });
       this.updateTitle();
     } else {
@@ -319,7 +319,7 @@ get socialMediaList(): FormArray {
         timeOut: 1000,
         progressBar: true,
         closeButton: true,
-        positionClass: 'toast-step-form',  // Set position class here
+        positionClass: 'toast-top-right',  
       });
     }
   }
@@ -330,7 +330,7 @@ get socialMediaList(): FormArray {
       timeOut: 1000, 
       progressBar: true, 
       closeButton: true, 
-      positionClass: 'toast-step-form',
+      positionClass: 'toast-top-right',
     });
     this.updateTitle();
   }
