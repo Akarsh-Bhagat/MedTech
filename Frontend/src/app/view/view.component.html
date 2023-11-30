@@ -259,7 +259,7 @@
             </form>
           </div>
           <ul class="list-unstyled">
-            <li *ngFor="let membership of doctor?.memberships" class="mb-3">{{ membership.history }}</li>
+            <li *ngFor="let membership of doctor?.memberships" class="mb-3">{{ membership.history }} ( {{membership.startYear}} - {{membership.endYear}} )</li>
           </ul>
         </div>
       </div>
