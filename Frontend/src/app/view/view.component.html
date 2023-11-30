@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 
 <header class="text-white text-center py-5" style="background-color: #28328c; position: relative;">
-  <h1 class="display-4 mb-3">Dr. {{doctor.firstName}} {{doctor.lastName}}</h1>
-  <p class="lead mb-3">{{doctor.specialisation.toLowerCase()}} | {{ calculateOverallExperience() }} years exp</p>
+  <h1 class="display-4 mb-3">Dr. {{doctor.firstName}} {{doctor.lastName}} | {{doctor.specialisation}}</h1>
+  <p class="lead mb-3">{{ doctor.email }} </p>
   <div style="position: absolute; top: 110px; left: 50%; transform: translateX(-50%);">
     <a *ngFor="let smedia of doctor?.handles" [href]="smedia?.link" target="_blank" class="text-white" style="margin-right: 10px;">
       <i [class]="getIconClass(smedia.handle)"></i>
@@ -242,6 +242,15 @@
               <div class="form-group">
                 <label for="history">Membership:</label>
                 <input type="text" id="history" name="history" class="form-control" [(ngModel)]="newMembership.history" />
+              </div>
+              <div class="form-group">
+                <label for="startYear">Start Year:</label>
+                <input type="text" id="startYear" name="startYear" class="form-control" [(ngModel)]="newMembership.startYear" />
+              </div>
+
+              <div class="form-group">
+                <label for="endYear">End Year:</label>
+                <input type="text" id="endYear" name="endYear" class="form-control" [(ngModel)]="newMembership.endYear" />
               </div>
     
               
