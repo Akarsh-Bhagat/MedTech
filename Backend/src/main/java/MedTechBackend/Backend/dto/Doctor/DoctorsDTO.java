@@ -35,5 +35,6 @@ public class DoctorsDTO {
     private List<DocMembership> memberships;
     private List<DocServicing> servicings;
     private List<DocSpecialization> specializations;
+    private List<DocHandle> handles;
 
 }

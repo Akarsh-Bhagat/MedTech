@@ -36,6 +36,7 @@ public class DoctorsController {
         doctor.setMemberships(doctorsDTO.getMemberships());
         doctor.setSpecializations(doctorsDTO.getSpecializations());
         doctor.setServicings(doctorsDTO.getServicings());
+        doctor.setHandles(doctorsDTO.getHandles());
         return doctor;
     }
 

@@ -12,10 +12,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocMembershipDTO {
+public class DocHandleDTO {
     private Integer id;
-    private String history;
-    private Year startYear;
-    private Year endYear;
+    private String handle;
+    private String link;
     private List<DoctorsDTO> doctors;
 }

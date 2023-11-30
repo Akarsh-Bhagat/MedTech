@@ -59,6 +59,10 @@ public class Doctors {
     @JsonManagedReference
     private List<DocSpecialization> specializations;
 
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<DocHandle> handles;
+
     @Override
     public String toString() {
         return "Doctors{" +

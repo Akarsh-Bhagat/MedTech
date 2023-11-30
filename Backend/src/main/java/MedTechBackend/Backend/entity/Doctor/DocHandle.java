@@ -10,20 +10,17 @@ import java.time.Year;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "doc_membership")
-public class DocMembership{
+@Table(name = "doc_handles")
+public class DocHandle{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "history")
-    private String history;
+    @Column(name = "handle")
+    private String handle;
 
-    @Column(name="startYear")
-    private Year startYear;
-
-    @Column(name="endYear")
-    private Year endYear;
+    @Column(name="link")
+    private String link;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")

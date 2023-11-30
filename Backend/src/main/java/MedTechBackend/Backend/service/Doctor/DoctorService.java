@@ -33,6 +33,9 @@ public class DoctorService {
     @Autowired
     private DocSpecializationRepository docSpecializationRepository;
 
+    @Autowired
+    private DocHandleRepository docHandleRepository;
+
     public void createDoctor(Doctors doctors) {
         doctorsRepository.save(doctors);
     }
@@ -55,6 +58,7 @@ public class DoctorService {
         List<DocServicing> docServicings = docServicingRepository.findByDoctor(doctor);
         List<DocMembership> docMemberships = docMembershipRepository.findByDoctor(doctor);
         List<DocSpecialization> docSpecializations = docSpecializationRepository.findByDoctor(doctor);
+        List<DocHandle> docHandles= docHandleRepository.findByDoctor(doctor);
 
         return DoctorsDTO.builder()
                 .id(doctor.getId())
@@ -70,6 +74,7 @@ public class DoctorService {
                 .memberships(doctor.getMemberships())
                 .servicings(doctor.getServicings())
                 .specializations(doctor.getSpecializations())
+                .handles(doctor.getHandles())
                 .build();
     }
 
