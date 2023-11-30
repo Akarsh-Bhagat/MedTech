@@ -37,14 +37,16 @@ export class ViewComponent implements OnInit {
   showExperiences: boolean = false;
   showAwards: boolean = false;
   showSpecializations: boolean = false;
-  showMemberships: boolean = false;
   showEducation: boolean = false;
+  showMemberships: boolean = false;
+  showRegistrations: boolean = false;
   newEducation: any = {};
   newExperience: any = {};
   newService: any = {};
   newAward: any = {};
   newMembership: any = {};
   newSpecialization: any = {};
+  newRegistration: any = {};
   doctor: any={};
 
   constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router,private elRef: ElementRef){
@@ -84,6 +86,10 @@ export class ViewComponent implements OnInit {
 
   toggleEducationForm() {
     this.showEducation = !this.showEducation;
+  }
+
+  toggleRegistrationsForm() {
+    this.showRegistrations = !this.showRegistrations;
   }
 
   calculateOverallExperience(): number {
@@ -173,6 +179,19 @@ export class ViewComponent implements OnInit {
         this.toggleServicesForm();
       }, (error: any) => {
         console.error('Error saving service:', error);
+        
+      });
+  }
+
+  saveRegistration() {
+    
+    this.userService.saveRegistration(this.newRegistration, this.doctor.id)
+      .subscribe((response: any) => {
+        window.location.reload();
+        this.newRegistration = {};
+        this.toggleRegistrationsForm();
+      }, (error: any) => {
+        console.error('Error saving registration:', error);
         
       });
   }

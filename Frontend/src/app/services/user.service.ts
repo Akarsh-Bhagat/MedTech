@@ -81,4 +81,9 @@ export class UserService {
     const url = `${this.url}/doctors/servicings/${id}`;
     return this.http.post(url, newService, { responseType: 'text' });
   }
+
+  saveRegistration(newRegistration: any, id: any): Observable<string> {
+    const url = `${this.url}/doctors/registrations/${id}`;
+    return this.http.post(url, newRegistration, { responseType: 'text' });
+  }
 }
