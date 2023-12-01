@@ -19,10 +19,6 @@ export class PatientFormComponent implements OnInit {
   cities: any[]= [];
   title: string= "Personal Details";
   steps: number[] = [1, 2, 3];
-  formallergies!: FormArray<any>;
-  formsurgeries!: FormArray<any>;
-  formpconditions!: FormArray<any>;
-  formmedications!: FormArray<any>;
   formclinic!: FormArray<any>;
 
 
@@ -60,18 +56,10 @@ export class PatientFormComponent implements OnInit {
         contact: [''] 
       }),
       medicalHistory: this.fb.group({
-        pastConditions: this.fb.array([
-          this.generatePastConditions()
-        ]),
-        allergies: this.fb.array([
-          this.generateAllergies()
-        ]),
-        surgeries: this.fb.array([
-          this.generateSurgeries()
-        ]),
-        medications: this.fb.array([
-          this.generateMedications()
-        ]),
+        surgeries: [['']],
+        medications:  [['']],
+        allergies:  [['']],
+        pastConditions: [['']],
         familyHistory: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
         bloodGroup: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
       }),
@@ -92,8 +80,8 @@ export class PatientFormComponent implements OnInit {
     hospital: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
     department: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
     attendingDoctor: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
-    admissionDate: [''],
-    dischargeDate: [''],
+    admissionDate: ['',[Validators.required,this.validateDOB]],
+    dischargeDate: ['',[Validators.required,this.validateDOB]],
     clinicRoom: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
   })
   }
@@ -107,77 +95,77 @@ export class PatientFormComponent implements OnInit {
   }
 
 
-  generateAllergies() {
-    return this.fb.group({
-      allergy: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-    })
-  }
+  // generateAllergies() {
+  //   return this.fb.group({
+  //     allergy: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
+  //   })
+  // }
 
-  addAllergy() {
-    this.formallergies = this.patientForm.get('medicalHistory.allergies') as FormArray;
-    this.formallergies.push(this.generateAllergies());
-  }
+  // addAllergy() {
+  //   this.formallergies = this.patientForm.get('medicalHistory.allergies') as FormArray;
+  //   this.formallergies.push(this.generateAllergies());
+  // }
 
-  removeAllergy(index: number) {
-  this.formallergies = this.patientForm.get('medicalHistory.allergies') as FormArray;
-  this.formallergies.removeAt(index);}
+  // removeAllergy(index: number) {
+  // this.formallergies = this.patientForm.get('medicalHistory.allergies') as FormArray;
+  // this.formallergies.removeAt(index);}
 
-  get allergies(): FormArray {
-  return this.patientForm.get('medicalHistory.allergies') as FormArray;}
+  // get allergies(): FormArray {
+  // return this.patientForm.get('medicalHistory.allergies') as FormArray;}
 
-  generateSurgeries() {
-    return this.fb.group({
-      surgery: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-    })
-  }
+  // generateSurgeries() {
+  //   return this.fb.group({
+  //     surgery: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
+  //   })
+  // }
 
-  addSurgery() {
-    this.formsurgeries = this.patientForm.get('medicalHistory.surgeries') as FormArray;
-    this.formsurgeries.push(this.generateSurgeries());
-  }
+  // addSurgery() {
+  //   this.formsurgeries = this.patientForm.get('medicalHistory.surgeries') as FormArray;
+  //   this.formsurgeries.push(this.generateSurgeries());
+  // }
 
-  removeSurgery(index: number) {
-  this.formsurgeries = this.patientForm.get('medicalHistory.surgeries') as FormArray;
-  this.formsurgeries.removeAt(index);}
+  // removeSurgery(index: number) {
+  // this.formsurgeries = this.patientForm.get('medicalHistory.surgeries') as FormArray;
+  // this.formsurgeries.removeAt(index);}
 
-  get surgeries(): FormArray {
-  return this.patientForm.get('medicalHistory.surgeries') as FormArray;}
+  // get surgeries(): FormArray {
+  // return this.patientForm.get('medicalHistory.surgeries') as FormArray;}
 
-  generatePastConditions() {
-    return this.fb.group({
-      pastCondition: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-    })
-  }
+  // generatePastConditions() {
+  //   return this.fb.group({
+  //     pastCondition: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
+  //   })
+  // }
 
-  addPastCondition() {
-    this.formpconditions = this.patientForm.get('medicalHistory.pastConditions') as FormArray;
-    this.formpconditions.push(this.generatePastConditions());
-  }
+  // addPastCondition() {
+  //   this.formpconditions = this.patientForm.get('medicalHistory.pastConditions') as FormArray;
+  //   this.formpconditions.push(this.generatePastConditions());
+  // }
 
-  removePastCondition(index: number) {
-  this.formpconditions = this.patientForm.get('medicalHistory.pastConditions') as FormArray;
-  this.formpconditions.removeAt(index);}
+  // removePastCondition(index: number) {
+  // this.formpconditions = this.patientForm.get('medicalHistory.pastConditions') as FormArray;
+  // this.formpconditions.removeAt(index);}
 
-  get pastConditions(): FormArray {
-  return this.patientForm.get('medicalHistory.pastConditions') as FormArray;}
+  // get pastConditions(): FormArray {
+  // return this.patientForm.get('medicalHistory.pastConditions') as FormArray;}
 
-  generateMedications() {
-    return this.fb.group({
-      medication: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-    })
-  }
+  // generateMedications() {
+  //   return this.fb.group({
+  //     medication: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
+  //   })
+  // }
 
-  addMedication() {
-    this.formsurgeries = this.patientForm.get('medicalHistory.medications') as FormArray;
-    this.formsurgeries.push(this.generateMedications());
-  }
+  // addMedication() {
+  //   this.formsurgeries = this.patientForm.get('medicalHistory.medications') as FormArray;
+  //   this.formsurgeries.push(this.generateMedications());
+  // }
 
-  removeMedication(index: number) {
-  this.formsurgeries = this.patientForm.get('medicalHistory.medications') as FormArray;
-  this.formsurgeries.removeAt(index);}
+  // removeMedication(index: number) {
+  // this.formsurgeries = this.patientForm.get('medicalHistory.medications') as FormArray;
+  // this.formsurgeries.removeAt(index);}
 
-  get medications(): FormArray {
-  return this.patientForm.get('medicalHistory.medications') as FormArray;}
+  // get medications(): FormArray {
+  // return this.patientForm.get('medicalHistory.medications') as FormArray;}
 
 
   validateDOB(control: AbstractControl) {
@@ -203,7 +191,7 @@ export class PatientFormComponent implements OnInit {
       return 'Invalid email';
     } 
     else if (control?.hasError('futureDate') ) {
-      return 'Please provide a valid date of birth!';
+      return 'Please provide a valid date!';
     }
     else if (control?.hasError('tooOld') ) {
       return 'Seems like older than expected!';
@@ -219,14 +207,15 @@ export class PatientFormComponent implements OnInit {
       email: formData.personalDetails.email,
       address: formData.personalDetails.address,
       dateOfBirth: formData.personalDetails.dateOfBirth,
-      medicalHistory: [{
-        pastConditions: formData.medicalHistory.pastConditions,
-        allergies: formData.medicalHistory.allergies,
-        surgeries: formData.medicalHistory.surgeries,
-        medications: formData.medicalHistory.medications,
+      contact: formData.personalDetails.contact,
+      medicalHistory: {
+        pastConditions: [formData.medicalHistory.pastConditions],
+        allergies: [formData.medicalHistory.allergies],
+        surgeries: [formData.medicalHistory.surgeries],
+        medications: [formData.medicalHistory.medications],
         familyHistory: formData.medicalHistory.familyHistory,
         bloodGroup: formData.medicalHistory.bloodGroup
-      }],
+      },
       clinics: formData.clinicDetails.map((clinic: any) => ({
         admissionDate: clinic.admissionDate,
         dischargeDate: clinic.dischargeDate,
@@ -278,7 +267,7 @@ export class PatientFormComponent implements OnInit {
   nextStep() {
     const currentFormGroup = this.getCurrentFormGroup();
    
-    if (currentFormGroup?.valid) {
+    if (currentFormGroup?.valid || currentFormGroup?.invalid ) {
       this.currentStep++;
       this.toastr.success('Successfully moved to the next step', 'Success', {
         timeOut: 1000,
