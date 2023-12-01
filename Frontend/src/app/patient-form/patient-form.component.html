@@ -1,126 +1,321 @@
 <app-navbar></app-navbar>
-<div class="user-details">
-  <h2 class="mb-4">Patient's Form</h2>
-  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="firstName">First Name:</label>
-      <input
-        type="text"
-        id="firstName"
-        formControlName="firstName"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': patientForm.get('firstName')?.valid && (patientForm.get('firstName')?.dirty || patientForm.get('firstName')?.touched),
-          'is-invalid': patientForm.get('firstName')?.invalid && (patientForm.get('firstName')?.dirty || patientForm.get('firstName')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="patientForm.get('firstName')?.invalid && patientForm.get('firstName')?.touched">
-        {{ getErrorMessage('firstName') }}
-      </div>
+<div class="container mt-5">
+  <div class="patient-details">
+    <div class="step-indicators">
+      <span *ngFor="let step of steps" class="step-dot" [class.active]="step === currentStep"></span>
     </div>
+    <h2 class="mb-4 text-center">Step {{currentStep}} - {{title}}</h2>
+    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-      <label for="lastName">Last Name:</label>
-      <input
-        type="text"
-        id="lastName"
-        formControlName="lastName"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': patientForm.get('lastName')?.valid && (patientForm.get('lastName')?.dirty || patientForm.get('lastName')?.touched),
-          'is-invalid': patientForm.get('lastName')?.invalid && (patientForm.get('lastName')?.dirty || patientForm.get('lastName')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="patientForm.get('lastName')?.invalid && patientForm.get('lastName')?.touched">
-        {{ getErrorMessage('lastName') }}
+
+<div *ngIf="currentStep === 1">
+  <div formGroupName="personalDetails">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('firstName')?.valid && (patientForm.get('firstName')?.dirty || patientForm.get('firstName')?.touched),
+            'is-invalid': patientForm.get('firstName')?.invalid && (patientForm.get('firstName')?.dirty || patientForm.get('firstName')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('firstName')?.invalid && patientForm.get('firstName')?.touched">
+          {{ getErrorMessage('firstName') }}
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="gender">Gender:</label>
-      <input
-        type="text"
-        id="gender"
-        formControlName="gender"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': patientForm.get('gender')?.valid && (patientForm.get('gender')?.dirty || patientForm.get('gender')?.touched),
-          'is-invalid': patientForm.get('gender')?.invalid && (patientForm.get('gender')?.dirty || patientForm.get('gender')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched">
-        {{ getErrorMessage('gender') }}
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          formControlName="lastName"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('lastName')?.valid && (patientForm.get('lastName')?.dirty || patientForm.get('lastName')?.touched),
+            'is-invalid': patientForm.get('lastName')?.invalid && (patientForm.get('lastName')?.dirty || patientForm.get('lastName')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('lastName')?.invalid && patientForm.get('lastName')?.touched">
+          {{ getErrorMessage('lastName') }}
+        </div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        formControlName="email"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': patientForm.get('email')?.valid && (patientForm.get('email')?.dirty || patientForm.get('email')?.touched),
-          'is-invalid': patientForm.get('email')?.invalid && (patientForm.get('email')?.dirty || patientForm.get('email')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="patientForm.get('email')?.invalid && patientForm.get('email')?.touched">
-        {{ getErrorMessage('email') }}
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <input
+          type="text"
+          id="gender"
+          formControlName="gender"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('gender')?.valid && (patientForm.get('gender')?.dirty || patientForm.get('gender')?.touched),
+            'is-invalid': patientForm.get('gender')?.invalid && (patientForm.get('gender')?.dirty || patientForm.get('gender')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched">
+          {{ getErrorMessage('gender') }}
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="address">Address:</label>
-      <input
-        type="text"
-        id="address"
-        formControlName="address"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': patientForm.get('address')?.valid && (patientForm.get('address')?.dirty || patientForm.get('address')?.touched),
-          'is-invalid': patientForm.get('address')?.invalid && (patientForm.get('address')?.dirty || patientForm.get('address')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="patientForm.get('address')?.invalid && patientForm.get('address')?.touched">
-        {{ getErrorMessage('address') }}
+      <div class="form-group">
+        <label for="contact">Contact:</label>
+        <input
+          type="text"
+          id="contact"
+          formControlName="contact"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('contact')?.valid && (patientForm.get('contact')?.dirty || patientForm.get('contact')?.touched),
+            'is-invalid': patientForm.get('contact')?.invalid && (patientForm.get('contact')?.dirty || patientForm.get('contact')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('contact')?.invalid && patientForm.get('contact')?.touched">
+          {{ getErrorMessage('contact') }}
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="dateOfBirth">Date of Birth:</label>
-      <input
-        type="date"
-        id="dateOfBirth"
-        formControlName="dateOfBirth"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': patientForm.get('dateOfBirth')?.valid && (patientForm.get('dateOfBirth')?.dirty || patientForm.get('dateOfBirth')?.touched),
-          'is-invalid': patientForm.get('dateOfBirth')?.invalid && (patientForm.get('dateOfBirth')?.dirty || patientForm.get('dateOfBirth')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="patientForm.get('dateOfBirth')?.invalid && patientForm.get('dateOfBirth')?.touched">
-        {{ getErrorMessage('dateOfBirth') }}
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('email')?.valid && (patientForm.get('email')?.dirty || patientForm.get('email')?.touched),
+            'is-invalid': patientForm.get('email')?.invalid && (patientForm.get('email')?.dirty || patientForm.get('email')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('email')?.invalid && patientForm.get('email')?.touched">
+          {{ getErrorMessage('email') }}
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="specialisation">Contact:</label>
-      <input
-        type="text"
-        id="contact"
-        formControlName="contact"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': patientForm.get('contact')?.valid && (patientForm.get('contact')?.dirty || patientForm.get('contact')?.touched),
-          'is-invalid': patientForm.get('contact')?.invalid && (patientForm.get('contact')?.dirty || patientForm.get('contact')?.touched)
-        }"
-      />
-      <div class="warning" *ngIf="patientForm.get('contact')?.invalid && patientForm.get('contact')?.touched">
-        {{ getErrorMessage('contact') }}
+      <div class="form-group">
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input
+          type="date"
+          id="dateOfBirth"
+          formControlName="dateOfBirth"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('dateOfBirth')?.valid && (patientForm.get('dateOfBirth')?.dirty || patientForm.get('dateOfBirth')?.touched),
+            'is-invalid': patientForm.get('dateOfBirth')?.invalid && (patientForm.get('dateOfBirth')?.dirty || patientForm.get('dateOfBirth')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('dateOfBirth')?.invalid && patientForm.get('dateOfBirth')?.touched">
+          {{ getErrorMessage('dateOfBirth') }}
+        </div>
       </div>
-    </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="patientForm.invalid" (click)="onSubmit()" routerLink="/patient">Save</button>
-  </form>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input
+          type="text"
+          id="address"
+          formControlName="address"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('address')?.valid && (patientForm.get('address')?.dirty || patientForm.get('address')?.touched),
+            'is-invalid': patientForm.get('address')?.invalid && (patientForm.get('address')?.dirty || patientForm.get('address')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('address')?.invalid && patientForm.get('address')?.touched">
+          {{ getErrorMessage('address') }}
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-outline-primary" (click)="nextStep()">Next</button>
+
+  </div>
 </div>
+
+
+<div *ngIf="currentStep === 2">
+  <div formGroupName="medicalHistory">
+      <div class="form-group">
+        <label for="bloodGroup">Blood Group:</label>
+        <input
+          type="text"
+          id="bloodGroup"
+          formControlName="bloodGroup"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('bloodGroup')?.valid && (patientForm.get('bloodGroup')?.dirty || patientForm.get('bloodGroup')?.touched),
+            'is-invalid': patientForm.get('bloodGroup')?.invalid && (patientForm.get('bloodGroup')?.dirty || patientForm.get('bloodGroup')?.touched)
+          }"
+        />
+        <div class="warning" *ngIf="patientForm.get('bloodGroup')?.invalid && patientForm.get('bloodGroup')?.touched">
+          {{ getErrorMessage('bloodGroup') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="familyHistory">Family History:</label>
+        <textarea
+          id="familyHistory"
+          formControlName="familyHistory"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': patientForm.get('familyHistory')?.valid && (patientForm.get('familyHistory')?.dirty || patientForm.get('familyHistory')?.touched),
+            'is-invalid': patientForm.get('familyHistory')?.invalid && (patientForm.get('familyHistory')?.dirty || patientForm.get('familyHistory')?.touched)
+          }"
+        ></textarea>
+        <div class="warning" *ngIf="patientForm.get('familyHistory')?.invalid && patientForm.get('familyHistory')?.touched">
+          {{ getErrorMessage('familyHistory') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="medications">Medications:</label>
+        <div formArrayName="medications">
+          <div *ngFor="let medication of patientForm.get('medicalHistory.medications')?.value; let i = index">
+            <div [formGroupName]="i" class="col-12">
+              <div class="row">
+
+                <div class="col-4">
+                  <input type="text" formControlName="medication" placeholder="" class="form-control"
+                    [ngClass]="{
+                      'is-valid': patientForm.get('medicalHistory.medications.' + i + 'medication')?.valid &&
+                        (patientForm.get('medicalHistory.medications.' + i + 'medication')?.dirty ||
+                          patientForm.get('medicalHistory.medications.' + i + 'medication')?.touched),
+                      'is-invalid': patientForm.get('medicalHistory.medications.' + i + 'medication')?.invalid &&
+                        (patientForm.get('medicalHistory.medications.' + i + 'medication')?.dirty ||
+                          patientForm.get('medicalHistory.medications.' + i + 'medication')?.touched)
+                    }" />
+      
+                  <div class="warning"
+                    *ngIf="patientForm.get('medicalHistory.medications.' + i + 'medication')?.invalid &&
+                      patientForm.get('medicalHistory.medications.' + i + 'medication')?.touched">
+                    {{ getErrorMessage(patientForm.get('medicalHistory.medications.' + i + 'medication')) }}
+                  </div>
+                </div>
+                <div class="col-2">
+                  <button *ngIf="i > 0" type="button" (click)="removeMedication(i)" class="btn btn-outline-danger btn-sm mr-2 mt-1">-</button>
+                  <button *ngIf="i === patientForm.get('medicalHistory.medications')?.value.length - 1 && i<2" type="button" (click)="addMedication()" class="btn btn-outline-primary btn-sm mt-1">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="allergies">Allergies:</label>
+        <div formArrayName="allergies">
+          <div *ngFor="let allergy of patientForm.get('medicalHistory.allergies')?.value; let i = index">
+            <div [formGroupName]="i" class="col-12">
+              <div class="row">
+
+                <div class="col-4">
+                  <input type="text" formControlName="allergy" placeholder="" class="form-control"
+                    [ngClass]="{
+                      'is-valid': patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.valid &&
+                        (patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.dirty ||
+                          patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.touched),
+                      'is-invalid': patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.invalid &&
+                        (patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.dirty ||
+                          patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.touched)
+                    }" />
+      
+                  <div class="warning"
+                    *ngIf="patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.invalid &&
+                      patientForm.get('medicalHistory.allergies.' + i + 'allergy')?.touched">
+                    {{ getErrorMessage(patientForm.get('medicalHistory.allergies.' + i + 'allergy')) }}
+                  </div>
+                </div>
+                <div class="col-2">
+                  <button *ngIf="i > 0" type="button" (click)="removeAllergy(i)" class="btn btn-outline-danger btn-sm mr-2 mt-1">-</button>
+                  <button *ngIf="i === patientForm.get('medicalHistory.allergies')?.value.length - 1 && i<2" type="button" (click)="addAllergy()" class="btn btn-outline-primary btn-sm mt-1">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="surgeries">Surgeries:</label>
+        <div formArrayName="surgeries">
+          <div *ngFor="let surgery of patientForm.get('medicalHistory.surgeries')?.value; let i = index">
+            <div [formGroupName]="i" class="col-12">
+              <div class="row">
+
+                <div class="col-4">
+                  <input type="text" formControlName="surgery" placeholder="" class="form-control"
+                    [ngClass]="{
+                      'is-valid': patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.valid &&
+                        (patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.dirty ||
+                          patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.touched),
+                      'is-invalid': patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.invalid &&
+                        (patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.dirty ||
+                          patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.touched)
+                    }" />
+      
+                  <div class="warning"
+                    *ngIf="patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.invalid &&
+                      patientForm.get('medicalHistory.surgeries.' + i + 'surgery')?.touched">
+                    {{ getErrorMessage(patientForm.get('medicalHistory.surgeries.' + i + 'surgery')) }}
+                  </div>
+                </div>
+                <div class="col-2">
+                  <button *ngIf="i > 0" type="button" (click)="removeSurgery(i)" class="btn btn-outline-danger btn-sm mr-2 mt-1">-</button>
+                  <button *ngIf="i === patientForm.get('medicalHistory.surgeries')?.value.length - 1 && i<2" type="button" (click)="addSurgery()" class="btn btn-outline-primary btn-sm mt-1">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="pastConditions">Past Conditions:</label>
+        <div formArrayName="pastConditions">
+          <div *ngFor="let pastCondition of patientForm.get('medicalHistory.pastConditions')?.value; let i = index">
+            <div [formGroupName]="i" class="col-12">
+              <div class="row">
+
+                <div class="col-4">
+                  <input type="text" formControlName="pastCondition" placeholder="" class="form-control"
+                    [ngClass]="{
+                      'is-valid': patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.valid &&
+                        (patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.dirty ||
+                          patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.touched),
+                      'is-invalid': patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.invalid &&
+                        (patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.dirty ||
+                          patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.touched)
+                    }" />
+      
+                  <div class="warning"
+                    *ngIf="patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.invalid &&
+                      patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')?.touched">
+                    {{ getErrorMessage(patientForm.get('medicalHistory.pastConditions.' + i + 'pastCondition')) }}
+                  </div>
+                </div>
+                <div class="col-2">
+                  <button *ngIf="i > 0" type="button" (click)="removePastCondition(i)" class="btn btn-outline-danger btn-sm mr-2 mt-1">-</button>
+                  <button *ngIf="i === patientForm.get('medicalHistory.pastConditions')?.value.length - 1 && i<2" type="button" (click)="addPastCondition()" class="btn btn-outline-primary btn-sm mt-1">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-outline-secondary mt-2" (click)="prevStep()">Previous</button>
+      <button type="button" class="btn btn-outline-primary ml-2 mt-2" (click)="nextStep()">Next</button>
+  </div>
+</div>
+
+
+
+      <button type="submit" class="btn btn-success" [disabled]="patientForm.invalid">Save</button>
+    </form>
+  </div>
+</div>
+
+
+
