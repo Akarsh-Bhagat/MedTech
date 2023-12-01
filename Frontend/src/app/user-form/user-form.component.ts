@@ -6,7 +6,7 @@ import { UserService } from '../services/user.service';
 import { CollegeService } from '../services/college.service';
 import { Observable, map, startWith } from 'rxjs';
 import { DegreeService } from '../services/degree.service';
-import { ToastrService, IndividualConfig } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { CityService } from '../services/city.service';
 import { DocspecService } from '../services/docspec.service';
 
@@ -45,9 +45,6 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    // this.collegeService.getColleges().subscribe(data => {
-    //   this.colleges = data;
-    // });
     this.collegeService.getColleges().subscribe(
       (colleges: any[]) => {
         this.colleges = colleges.map(college => college.college); // Assuming "college" is the key in your JSON
