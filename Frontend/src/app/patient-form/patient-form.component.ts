@@ -18,7 +18,7 @@ export class PatientFormComponent implements OnInit {
   currentStep = 1;
   cities: any[]= [];
   title: string= "Personal Details";
-  steps: number[] = [1, 2, 3, 4];
+  steps: number[] = [1, 2, 3];
   formallergies!: FormArray<any>;
   formsurgeries!: FormArray<any>;
   formpconditions!: FormArray<any>;
@@ -133,7 +133,7 @@ export class PatientFormComponent implements OnInit {
 
   addSurgery() {
     this.formsurgeries = this.patientForm.get('medicalHistory.surgeries') as FormArray;
-    this.formsurgeries.push(this.generateAllergies());
+    this.formsurgeries.push(this.generateSurgeries());
   }
 
   removeSurgery(index: number) {

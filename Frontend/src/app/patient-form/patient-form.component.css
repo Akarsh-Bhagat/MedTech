@@ -1,19 +1,73 @@
 .is-valid {
-    border: 1px solid green;
-  }
-  
-  .is-invalid {
-    border: 1px solid red;
-  }
-  .patient-details {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  .form-group {
-    margin-bottom: 20px;
-  }
-  .warning {
-    color: #dc3545; /* Red color for warnings */
-    margin-top: 5px;
-  }
+  border: 1px solid green;
+}
+
+.is-invalid {
+  border: 1px solid red;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.warning {
+  color: #dc3545; 
+  margin-top: 5px;
+}
+
+.patient-details {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid #008080;
+  border-radius: 1rem;
+}
+
+.step-indicators {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.step-dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.step-dot.active {
+  background-color: #007bff;
+}
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.custom-input {
+  width: 100%; 
+}
+
+
+input.form-control {
+width: 100%;
+}
+
+.dropdown-menu {
+max-height: 200px;
+overflow-y: auto;
+}
+
+.custom-item {
+padding: 8px;
+cursor: pointer;
+width: 60ch;
+white-space: pre-line
+}
