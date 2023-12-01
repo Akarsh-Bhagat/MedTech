@@ -36,7 +36,7 @@ export class PatientFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+    
     this.initializeForm();
     this.cityService.getCities().subscribe(
       (cities: any[]) => {
@@ -312,5 +312,4 @@ export class PatientFormComponent implements OnInit {
   getCurrentFormGroup(): FormGroup | null {
     return this.patientForm.get(Object.keys(this.patientForm.controls)[this.currentStep - 1]) as FormGroup;
   }
-
 }

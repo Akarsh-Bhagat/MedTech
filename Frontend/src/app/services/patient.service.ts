@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PatientService {
 
+
   url: any = "http://localhost:8080/api";
 
   constructor(private http: HttpClient) { }
@@ -44,6 +45,11 @@ export class PatientService {
     const url = `${this.url}/patient/${id}`;
     console.log(url);
     return this.http.delete(url, { responseType: 'text' });
+  }
+
+  saveClinic(newClinic: any, id: any): Observable<string> {
+    const url = `${this.url}/patient/clinic/${id}`;
+    return this.http.post(url, newClinic, { responseType: 'text' });
   }
 
 }
