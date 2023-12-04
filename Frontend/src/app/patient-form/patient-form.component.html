@@ -51,11 +51,18 @@
           id="gender"
           formControlName="gender"
           class="form-control"
+          [typeahead]="genders"
+          [typeaheadItemTemplate]="customItemTemplate"
           [ngClass]="{
             'is-valid': patientForm.get('personalDetails.gender')?.valid && (patientForm.get('personalDetails.gender')?.dirty || patientForm.get('personalDetails.gender')?.touched),
             'is-invalid': patientForm.get('personalDetails.gender')?.invalid && (patientForm.get('personalDetails.gender')?.dirty || patientForm.get('personalDetails.gender')?.touched)
           }"
         />
+        <ng-template #customItemTemplate let-model="item" let-index="index">
+          <div class="custom-item">
+            {{ model }}
+          </div>
+        </ng-template>
         <div class="warning" *ngIf="patientForm.get('personalDetails.gender')?.invalid && patientForm.get('personalDetails.gender')?.touched">
           {{ getErrorMessage(patientForm.get('personalDetails.gender')) }}
         </div>
@@ -144,13 +151,20 @@
           id="bloodGroup"
           formControlName="bloodGroup"
           class="form-control"
+          [typeahead]="bloodGroups"
+          [typeaheadItemTemplate]="customItemTemplate"
           [ngClass]="{
             'is-valid': patientForm.get('medicalHistory.bloodGroup')?.valid && (patientForm.get('medicalHistory.bloodGroup')?.dirty || patientForm.get('medicalHistory.bloodGroup')?.touched),
             'is-invalid': patientForm.get('medicalHistory.bloodGroup')?.invalid && (patientForm.get('medicalHistory.bloodGroup')?.dirty || patientForm.get('medicalHistory.bloodGroup')?.touched)
           }"
         />
+        <ng-template #customItemTemplate let-model="item" let-index="index">
+          <div class="custom-item">
+            {{ model }}
+          </div>
+        </ng-template>
         <div class="warning" *ngIf="patientForm.get('medicalHistory.bloodGroup')?.invalid && patientForm.get('medicalHistory.bloodGroup')?.touched">
-          {{ getErrorMessage('bloodGroup') }}
+          {{ getErrorMessage(patientForm.get('medicalHistory.bloodGroup')) }}
         </div>
       </div>
 
@@ -173,20 +187,22 @@
 
       <div class="form-group">
         <label for="allergies">Allergies:</label>
-        <input
-          type="text"
-          id="allergies"
-          formControlName="allergies"
-          class="form-control"
-          [ngClass]="{
-            'is-valid': patientForm.get('medicalHistory.allergies')?.valid && (patientForm.get('medicalHistory.allergies')?.dirty || patientForm.get('medicalHistory.allergies')?.touched),
-            'is-invalid': patientForm.get('medicalHistory.allergies')?.invalid && (patientForm.get('medicalHistory.allergies')?.dirty || patientForm.get('medicalHistory.allergies')?.touched)
-          }"
-        />
-        <div class="warning" *ngIf="patientForm.get('medicalHistory.allergies')?.invalid && patientForm.get('medicalHistory.allergies')?.touched">
-          {{ getErrorMessage(patientForm.get('medicalHistory.allergies')) }}
-        </div>
+        <mat-chip-list formControlName="medicalHistory.allergies">
+          <mat-chip *ngFor="let allergy of patientForm.get('medicalHistory.allergies')!.value" [removable]="true"
+                    (removed)="remove(allergy)">
+            {{ allergy }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+        <input placeholder="Add Allergy" [formControl]="allergyCtrl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="add($event)">
+          <mat-option *ngFor="let option of filteredAllergies | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
       </div>
+      
+      
 
       <div class="form-group">
         <label for="pastConditions">Past Conditions:</label>
@@ -271,11 +287,18 @@
           id="department"
           formControlName="department"
           class="form-control"
+          [typeahead]="departments"
+          [typeaheadItemTemplate]="customItemTemplate"
           [ngClass]="{
             'is-valid': clinic.get('department')?.valid && (clinic.get('department')?.dirty || clinic.get('department')?.touched),
             'is-invalid': clinic.get('department')?.invalid && (clinic.get('department')?.dirty || clinic.get('department')?.touched)
           }"
         />
+        <ng-template #customItemTemplate let-model="item" let-index="index">
+          <div class="custom-item">
+            {{ model }}
+          </div>
+        </ng-template>
         <div class="warning" *ngIf="clinic.get('department')?.invalid && clinic.get('department')?.touched">
           {{ getErrorMessage(clinic.get('department')) }}
         </div>
@@ -353,13 +376,9 @@
     </div>
     <button type="button" class="btn btn-outline-secondary mt-2" (click)="AddClinic()">Add Another Clinic </button>
   </div>
-<<<<<<< HEAD
-  <button type="button" class="btn btn-outline-secondary" (click)="prevStep()">Previous</button>
-  <button type="submit" class="btn btn-success"  [disabled]="patientForm.invalid">Save</button>
-=======
   <button type="button" class="btn btn-outline-secondary mt-2" (click)="prevStep()">Previous</button>
-  <button type="submit" class="btn btn-success ml-2 mt-2" [disabled]="patientForm.invalid">Save</button>
->>>>>>> 93012a3395379d910fc72696a47ce9dd66ee0034
+  <button type="submit" class="btn btn-success ml-2 mt-2"  [disabled]="patientForm.invalid">Save</button>
+
 </div>
 
     </form>

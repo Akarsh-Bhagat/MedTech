@@ -19,6 +19,12 @@ export class PatientFormComponent implements OnInit {
   cities: any[]= [];
   title: string= "Personal Details";
   steps: number[] = [1, 2, 3];
+  bloodGroups: string[] = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  genders: string[] = ['Male','Female','Other','Prefer not to say'];
+  departments: string[] = ['Cardiology','Dermatology','Gastroenterology','Hematology','Nephrology','Neurology','Obstetrics and Gynecology',  'Oncology','Ophthalmology','Pediatrics','Radiology'];
+  allergies: string[] = ['Peanuts', 'Shellfish', 'Lactose', 'Gluten']; 
+  filteredAllergies!: Observable<string[]>;
+  allergyCtrl = this.fb.control('');
   formclinic!: FormArray<any>;
 
 
@@ -34,6 +40,11 @@ export class PatientFormComponent implements OnInit {
   ngOnInit(): void {
     
     this.initializeForm();
+
+    this.filteredAllergies = this.allergyCtrl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filterAllergies(value!))
+    );
     this.cityService.getCities().subscribe(
       (cities: any[]) => {
       this.cities = cities;
@@ -61,13 +72,18 @@ export class PatientFormComponent implements OnInit {
         allergies:  [['']],
         pastConditions: [['']],
         familyHistory: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
-        bloodGroup: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
+        bloodGroup: ['', [Validators.required, Validators.pattern('^[A-Za-z+-]+$')]]
       }),
       clinicDetails: this.fb.array([
         this.generateClinic()
       ])
     });
 
+  }
+
+  filterAllergies(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.allergies.filter(allergy => allergy.toLowerCase().includes(filterValue));
   }
 
   AddClinic() {
@@ -93,79 +109,6 @@ export class PatientFormComponent implements OnInit {
       this.formclinic = this.patientForm.get("clinicDetails") as FormArray;
       this.formclinic.removeAt(index);
   }
-
-
-  // generateAllergies() {
-  //   return this.fb.group({
-  //     allergy: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-  //   })
-  // }
-
-  // addAllergy() {
-  //   this.formallergies = this.patientForm.get('medicalHistory.allergies') as FormArray;
-  //   this.formallergies.push(this.generateAllergies());
-  // }
-
-  // removeAllergy(index: number) {
-  // this.formallergies = this.patientForm.get('medicalHistory.allergies') as FormArray;
-  // this.formallergies.removeAt(index);}
-
-  // get allergies(): FormArray {
-  // return this.patientForm.get('medicalHistory.allergies') as FormArray;}
-
-  // generateSurgeries() {
-  //   return this.fb.group({
-  //     surgery: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-  //   })
-  // }
-
-  // addSurgery() {
-  //   this.formsurgeries = this.patientForm.get('medicalHistory.surgeries') as FormArray;
-  //   this.formsurgeries.push(this.generateSurgeries());
-  // }
-
-  // removeSurgery(index: number) {
-  // this.formsurgeries = this.patientForm.get('medicalHistory.surgeries') as FormArray;
-  // this.formsurgeries.removeAt(index);}
-
-  // get surgeries(): FormArray {
-  // return this.patientForm.get('medicalHistory.surgeries') as FormArray;}
-
-  // generatePastConditions() {
-  //   return this.fb.group({
-  //     pastCondition: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-  //   })
-  // }
-
-  // addPastCondition() {
-  //   this.formpconditions = this.patientForm.get('medicalHistory.pastConditions') as FormArray;
-  //   this.formpconditions.push(this.generatePastConditions());
-  // }
-
-  // removePastCondition(index: number) {
-  // this.formpconditions = this.patientForm.get('medicalHistory.pastConditions') as FormArray;
-  // this.formpconditions.removeAt(index);}
-
-  // get pastConditions(): FormArray {
-  // return this.patientForm.get('medicalHistory.pastConditions') as FormArray;}
-
-  // generateMedications() {
-  //   return this.fb.group({
-  //     medication: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]]
-  //   })
-  // }
-
-  // addMedication() {
-  //   this.formsurgeries = this.patientForm.get('medicalHistory.medications') as FormArray;
-  //   this.formsurgeries.push(this.generateMedications());
-  // }
-
-  // removeMedication(index: number) {
-  // this.formsurgeries = this.patientForm.get('medicalHistory.medications') as FormArray;
-  // this.formsurgeries.removeAt(index);}
-
-  // get medications(): FormArray {
-  // return this.patientForm.get('medicalHistory.medications') as FormArray;}
 
 
   validateDOB(control: AbstractControl) {
@@ -300,5 +243,34 @@ export class PatientFormComponent implements OnInit {
 
   getCurrentFormGroup(): FormGroup | null {
     return this.patientForm.get(Object.keys(this.patientForm.controls)[this.currentStep - 1]) as FormGroup;
+  }
+
+  add(event: any): void {
+    const value = event.option.viewValue;
+    if (!this.patientForm.value.medicalHistory.allergies.includes(value)) {
+      this.patientForm.value.medicalHistory.allergies.push(value);
+      this.patientForm.patchValue({
+        medicalHistory: {
+          allergies: [...this.patientForm.value.medicalHistory.allergies],
+          // ... other medicalHistory fields
+        },
+        // ... other form fields
+      });
+    }
+    this.allergyCtrl.setValue('');
+  }
+
+  remove(allergy: string): void {
+    const index = this.patientForm.value.medicalHistory.allergies.indexOf(allergy);
+    if (index >= 0) {
+      this.patientForm.value.medicalHistory.allergies.splice(index, 1);
+      this.patientForm.patchValue({
+        medicalHistory: {
+          allergies: [...this.patientForm.value.medicalHistory.allergies],
+          // ... other medicalHistory fields
+        },
+        // ... other form fields
+      });
+    }
   }
 }

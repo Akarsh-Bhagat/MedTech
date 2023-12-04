@@ -30,12 +30,25 @@ public class MedicalReport {
     @JsonBackReference(value = "patient-report")
     private Patient patient;
 
+    @Column(name = "dateOfVisit")
     private LocalDate dateOfVisit;
+
+    @Column(name = "reportDate")
     private LocalDate reportDate;
+
+    @Column(name = "diagnosis")
     private String diagnosis;
+
+    @Column(name = "symptoms")
     private String symptoms;
+
+    @Column(name = "treatment")
     private String treatment;
+
+    @Column(name = "prescription")
     private String prescription;
+
+    @Column(name = "hospital")
     private String hospital;
 
 }

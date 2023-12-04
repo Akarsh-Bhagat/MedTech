@@ -37,6 +37,7 @@ public class DoctorsController {
         doctor.setSpecializations(doctorsDTO.getSpecializations());
         doctor.setServicings(doctorsDTO.getServicings());
         doctor.setHandles(doctorsDTO.getHandles());
+        doctor.setRegistrations(doctorsDTO.getRegistrations());
         return doctor;
     }
 
@@ -51,7 +52,7 @@ public class DoctorsController {
         return doctorsDTO;
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<String> createNewDoctor(@RequestBody Doctors doctor) {
         doctorService.createDoctor(doctor);
         return new ResponseEntity<>("Doctor created in the database", HttpStatus.CREATED);

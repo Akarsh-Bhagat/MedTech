@@ -21,10 +21,10 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "firstname",nullable = false)
+    @Column(name = "firstName",nullable = false)
     private String firstName;
 
-    @Column(name = "lastname",nullable = false)
+    @Column(name = "lastName",nullable = false)
     private String lastName;
 
     @Column(name = "gender",nullable = false)

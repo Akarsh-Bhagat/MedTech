@@ -22,16 +22,22 @@ public class MedicalHistory {
     @JsonBackReference(value = "patient-medreport")
     private Patient patient;
 
+    @Column(name = "pastConditions")
     private List<String> pastConditions;
 
+    @Column(name = "allergies")
     private List<String> allergies;
 
+    @Column(name = "surgeries")
     private List<String> surgeries;
 
+    @Column(name = "medications")
     private List<String> medications;
 
+    @Column(name = "familyHistory")
     private String familyHistory;
 
+    @Column(name = "bloodGroup")
     private String bloodGroup;
 
 }

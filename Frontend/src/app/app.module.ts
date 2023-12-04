@@ -37,6 +37,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { AuthGuard } from './auth.guard';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
+    MatChipsModule,
     MatButtonModule,
     MatDialogModule,
     MatDialogModule,

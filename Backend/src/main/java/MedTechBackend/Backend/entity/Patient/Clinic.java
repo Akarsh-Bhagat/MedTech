@@ -29,16 +29,22 @@ public class Clinic {
     @JsonManagedReference(value = "clinic-report")
     private List<MedicalReport> reports;
 
+    @Column(name = "admissionDate")
     private String admissionDate;
 
+    @Column(name = "dischargeDate")
     private String dischargeDate;
 
+    @Column(name = "attendingDoctor")
     private String attendingDoctor;
 
+    @Column(name = "clinicRoom")
     private String clinicRoom;
 
+    @Column(name = "hospital")
     private String hospital;
 
+    @Column(name = "department")
     private String department;
 
 }
