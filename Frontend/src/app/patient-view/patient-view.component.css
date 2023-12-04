@@ -21,22 +21,32 @@
   .record-details strong {
     color: #28328c;
   }
-  .clinic-reports ul {
-    list-style: none;
-    padding: 0;
-  }
-  .clinic-reports ul li {
-    padding-left: 20px;
-    position: relative;
-    margin-bottom: 5px;
-  }
-  .clinic-reports ul li:before {
-    content: '\2022';
-    color: #4caf50;
+
+  .edit-button {
+    position: absolute;
+    top: 0px; 
+    right: 10px;
+    background-color: #4caf50;
+    color: white;
     font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
+    padding: 4px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-button:hover {
+    background-color: #45a049;
+  }
+  
+ 
+  .close-btn {
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 
   .sidebar {
@@ -49,10 +59,59 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease-out;
     overflow-y: auto;
-    z-index: 1000; /* Add a z-index value */
+    z-index: 1000; 
   }
   
   .sidebar.show {
     right: 0;
   }
+  
+.clinic-form {
+  padding: 20px;
+}
+
+.clinic-container {
+  background-color: #ecf0f1;
+  padding: 15px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.clinic-details p {
+  margin: 5px 0;
+}
+
+.clinic-details strong {
+  color: #28328c;
+}
+
+.toggle-reports {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reports-list {
+  list-style: none;
+  padding: 0;
+}
+
+.reports-list li {
+  background-color: #fff;
+  padding: 15px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.reports-list li p {
+  margin: 5px 0;
+}
+
+
   

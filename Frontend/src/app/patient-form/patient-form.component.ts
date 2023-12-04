@@ -61,7 +61,7 @@ export class PatientFormComponent implements OnInit {
         firstName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
         lastName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
         gender: ['', Validators.required],
-        address: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+        address: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
         dateOfBirth: ['',[Validators.required, this.validateDOB]],
         email: ['',[Validators.required, Validators.email]],
         contact: [''] 
@@ -210,7 +210,7 @@ export class PatientFormComponent implements OnInit {
   nextStep() {
     const currentFormGroup = this.getCurrentFormGroup();
    
-    if (currentFormGroup?.valid || currentFormGroup?.invalid ) {
+    if (currentFormGroup?.valid) {
       this.currentStep++;
       this.toastr.success('Successfully moved to the next step', 'Success', {
         timeOut: 1000,
@@ -252,9 +252,8 @@ export class PatientFormComponent implements OnInit {
       this.patientForm.patchValue({
         medicalHistory: {
           allergies: [...this.patientForm.value.medicalHistory.allergies],
-          // ... other medicalHistory fields
+
         },
-        // ... other form fields
       });
     }
     this.allergyCtrl.setValue('');
@@ -267,9 +266,7 @@ export class PatientFormComponent implements OnInit {
       this.patientForm.patchValue({
         medicalHistory: {
           allergies: [...this.patientForm.value.medicalHistory.allergies],
-          // ... other medicalHistory fields
         },
-        // ... other form fields
       });
     }
   }

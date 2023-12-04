@@ -25,7 +25,6 @@ export class PatientViewComponent {
 
   patient: any
   showReports: boolean = false;
-  showHideText: string = "Show Reports";
   showClinics: boolean = false;
   newClinic:any={};
 
@@ -52,7 +51,6 @@ export class PatientViewComponent {
     const clinic = this.patient.clinics.find((c: any) => c.id === clinicId);
     if (clinic) {
       clinic.showReports = !clinic.showReports;
-      this.showHideText = clinic.showReports ? "Hide Reports" : "Show Reports";
     }
   }
 

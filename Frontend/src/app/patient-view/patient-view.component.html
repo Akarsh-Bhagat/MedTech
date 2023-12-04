@@ -33,76 +33,78 @@
       </div>
     </div>
   </div>
-
+  
   <div class="row">
-    <div class="col-md-12">
-      <h2 class="section-heading text-center position-relative">Clinic & Medical Reports</h2>
-     
+  <div class="col-md-12">
+    <h2 class="section-heading text-center">Clinic & Medical Reports</h2>
 
+    <button
+      (click)="toggleClinicsForm()"
+      class="edit-button"
+    >
+      <i class="fa fa-edit"></i>
+    </button>
+
+    <div class="sidebar" [ngClass]="{ 'show': showClinics }">
       <button
-        (click)="toggleClinicsForm()"
-        class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
-        style="top: 2px; left: 46rem;"
-      >
-        <i class="text-white fa fa-edit"></i>
-      </button>
-      <div class="sidebar" [ngClass]="{ 'show': showClinics }">
-        <button
         class="close-btn"
         (click)="toggleClinicsForm()"
-        style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 30px; cursor: pointer;"
       >
         &times;
       </button>
-        <form *ngIf="showClinics" class="bg-white rounded-lg p-6">
-          <div class="form-group">
-            <label for="hospital">Hospital:</label>
-            <input type="text" id="hospital" name="hospital" class="form-control" [(ngModel)]="newClinic.hospital" />
-          </div>
-          <div class="form-group">
-            <label for="department">Department:</label>
-            <input type="text" id="department" name="department" class="form-control" [(ngModel)]="newClinic.department" />
-          </div>
-          <div class="form-group">
-            <label for="admissionDate">Admission Date:</label>
-            <input type="text" id="admissionDate" name="admissionDate" class="form-control" [(ngModel)]="newClinic.admissionDate" />
-          </div>
-          <div class="form-group">
-            <label for="dischargeDate">Discharge Date:</label>
-            <input type="text" id="dischargeDate" name="dischargeDate" class="form-control" [(ngModel)]="newClinic.dischargeDate" />
-          </div>
-          <div class="form-group">
-            <label for="attendingDoctor">Attending Doctor :</label>
-            <input type="text" id="attendingDoctor" name="attendingDoctor" class="form-control" [(ngModel)]="newClinic.attendingDoctor" />
-          </div>
-          <button type="button" class="btn btn-primary mt-3" (click)="saveClinic()">Add</button>
-        </form>
-      </div>
+      <form *ngIf="showClinics" class="clinic-form">
+        <div class="form-group">
+          <label for="hospital">Hospital:</label>
+          <input type="text" id="hospital" name="hospital" class="form-control" [(ngModel)]="newClinic.hospital" />
+        </div>
+        <div class="form-group">
+          <label for="department">Department:</label>
+          <input type="text" id="department" name="department" class="form-control" [(ngModel)]="newClinic.department" />
+        </div>
+        <div class="form-group">
+          <label for="admissionDate">Admission Date:</label>
+          <input type="text" id="admissionDate" name="admissionDate" class="form-control" [(ngModel)]="newClinic.admissionDate" />
+        </div>
+        <div class="form-group">
+          <label for="dischargeDate">Discharge Date:</label>
+          <input type="text" id="dischargeDate" name="dischargeDate" class="form-control" [(ngModel)]="newClinic.dischargeDate" />
+        </div>
+        <div class="form-group">
+          <label for="attendingDoctor">Attending Doctor :</label>
+          <input type="text" id="attendingDoctor" name="attendingDoctor" class="form-control" [(ngModel)]="newClinic.attendingDoctor" />
+        </div>
+        <button type="button" class="btn btn-primary" (click)="saveClinic()">Add</button>
+      </form>
+    </div>
 
-
-      <ng-container *ngFor="let clinic of patient.clinics">
-        <div class="record-details">
+    <ng-container *ngFor="let clinic of patient.clinics">
+      <div class="clinic-container">
+        <div class="clinic-details">
           <p><strong>Hospital:</strong> {{ clinic.hospital }}</p>
           <p><strong>Department:</strong> {{ clinic.department }}</p>
           <p><strong>Admission Date:</strong> {{ clinic.admissionDate }}</p>
           <p><strong>Discharge Date:</strong> {{ clinic.dischargeDate }}</p>
           <p><strong>Attending Doctor:</strong> {{ clinic.attendingDoctor }}</p>
-          <button (click)="toggleReports(clinic.id)">{{ showHideText }}</button>
-          <ul *ngIf="clinic.showReports">
-            <li *ngFor="let report of clinic.reports">
-              <p><strong>Date of Visit:</strong> {{ report.dateOfVisit }}</p>
-              <p><strong>Report Date:</strong> {{ report.reportDate }}</p>
-              <p><strong>Diagnosis:</strong> {{ report.diagnosis }}</p>
-              <p><strong>Symptoms:</strong> {{ report.symptoms }}</p>
-              <p><strong>Treatment:</strong> {{ report.treatment }}</p>
-              <p><strong>Prescription:</strong> {{ report.prescription }}</p>
-              <p><strong>Hospital:</strong> {{ report.hospital }}</p>
-            </li>
-          </ul>
+          <button (click)="toggleReports(clinic.id)" class="toggle-reports">
+            {{ clinic.showReports ? 'Hide Reports' : 'Show Reports' }}
+          </button>
         </div>
-      </ng-container>
-    </div>
+
+        <ul *ngIf="clinic.showReports" class="reports-list">
+          <li *ngFor="let report of clinic.reports">
+            <p><strong>Date of Visit:</strong> {{ report.dateOfVisit }}</p>
+            <p><strong>Report Date:</strong> {{ report.reportDate }}</p>
+            <p><strong>Diagnosis:</strong> {{ report.diagnosis }}</p>
+            <p><strong>Symptoms:</strong> {{ report.symptoms }}</p>
+            <p><strong>Treatment:</strong> {{ report.treatment }}</p>
+            <p><strong>Prescription:</strong> {{ report.prescription }}</p>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
   </div>
+</div>
+
   
   
 </div>

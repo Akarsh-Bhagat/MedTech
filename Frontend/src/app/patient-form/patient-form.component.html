@@ -11,7 +11,7 @@
 <div *ngIf="currentStep === 1">
   <div formGroupName="personalDetails">
       <div class="form-group">
-        <label for="firstName">First Name:</label>
+        <label for="firstName"><span style="color: red;">* </span>First Name:</label>
         <input
           type="text"
           id="firstName"
@@ -28,7 +28,7 @@
       </div>
 
       <div class="form-group">
-        <label for="lastName">Last Name:</label>
+        <label for="lastName"><span style="color: red;">* </span>Last Name:</label>
         <input
           type="text"
           id="lastName"
@@ -45,7 +45,7 @@
       </div>
 
       <div class="form-group">
-        <label for="gender">Gender:</label>
+        <label for="gender"><span style="color: red;">* </span>Gender:</label>
         <input
           type="text"
           id="gender"
@@ -86,7 +86,7 @@
       </div>
 
       <div class="form-group">
-        <label for="email">Email:</label>
+        <label for="email"><span style="color: red;">* </span>Email:</label>
         <input
           type="text"
           id="email"
@@ -103,7 +103,7 @@
       </div>
 
       <div class="form-group">
-        <label for="dateOfBirth">Date of Birth:</label>
+        <label for="dateOfBirth"><span style="color: red;">* </span>Date of Birth:</label>
         <input
           type="date"
           id="dateOfBirth"

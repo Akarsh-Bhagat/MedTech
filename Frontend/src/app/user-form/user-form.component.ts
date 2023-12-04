@@ -99,7 +99,7 @@ export class UserFormComponent implements OnInit {
         yop: ['', [Validators.required,Validators.pattern('^[1-9][0-9]{3}$'), Validators.min(1950), Validators.max(2023)]],
       }),
       expDetails: this.fb.array([
-        this.GenerateExp()
+        this.generateExp()
       ]),
       recDetails: this.fb.array([
         this.generateAward()
@@ -120,10 +120,10 @@ export class UserFormComponent implements OnInit {
 
   AddExperiences() {
     this.formexperience = this.userForm.get("expDetails") as FormArray;
-    this.formexperience.push(this.GenerateExp());
+    this.formexperience.push(this.generateExp());
   }
 
-  GenerateExp(){
+  generateExp(){
    return this.fb.group({
     hospital: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
     description: ['', [Validators.pattern('^[a-zA-Z0-9 ,.-]*$')]],
