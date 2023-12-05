@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctors/awards")
+@RequestMapping("/api/v1/doctors/awards")
 public class DocAwardController {
 
     private final DocAwardService docAwardService;

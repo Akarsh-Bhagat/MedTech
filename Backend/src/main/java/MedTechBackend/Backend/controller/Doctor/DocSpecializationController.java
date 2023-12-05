@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctors/specializations")
+@RequestMapping("/api/v1/doctors/specializations")
 public class DocSpecializationController {
 
     private final DocSpecializationService docSpecializationService;

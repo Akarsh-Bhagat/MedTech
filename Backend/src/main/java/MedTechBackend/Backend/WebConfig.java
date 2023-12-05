@@ -1,36 +1,25 @@
-import org.springframework.stereotype.Component;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+package MedTechBackend.Backend;
 
-@Component
-@WebFilter("/*")
-public class CorsFilter implements Filter {
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:4200"); // Update with your Angular app's URL
-        httpResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
-        httpResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-        chain.doFilter(request, response);
-    }
+@Configuration
+public class WebConfig {
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        // Initialization code if needed
-    }
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOriginPattern("*");
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+        config.setAllowCredentials(true);
 
-    @Override
-    public void destroy() {
-        // Cleanup code if needed
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter((CorsConfigurationSource) source);
     }
 }

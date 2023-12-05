@@ -3,15 +3,16 @@ package MedTechBackend.Backend.controller.Doctor;
 import MedTechBackend.Backend.dto.Doctor.DoctorsDTO;
 import MedTechBackend.Backend.entity.Doctor.Doctors;
 import MedTechBackend.Backend.service.Doctor.DoctorService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+
 @RestController
-@RequestMapping("/api/doctors")
+@RequestMapping("/api/v1/doctors")
 public class DoctorsController {
 
     private final DoctorService doctorService;
@@ -51,6 +52,7 @@ public class DoctorsController {
         doctorsDTO.setSpecialisation(doctors.getSpecialisation());
         return doctorsDTO;
     }
+
 
     @PostMapping()
     public ResponseEntity<String> createNewDoctor(@RequestBody Doctors doctor) {

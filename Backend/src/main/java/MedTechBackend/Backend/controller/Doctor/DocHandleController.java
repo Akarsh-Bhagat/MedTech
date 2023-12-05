@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctors/handles")
+@RequestMapping("/api/v1/doctors/handles")
 public class DocHandleController {
 
     private final DocHandleService docHandleService;

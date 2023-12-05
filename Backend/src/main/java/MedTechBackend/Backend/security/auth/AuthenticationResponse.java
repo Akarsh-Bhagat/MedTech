@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
 
-    @JsonProperty("access_token")
+    @JsonProperty("accessToken")
     private String accessToken;
-    @JsonProperty("access_token_expiration")
-    private long jwtExpiration;
-    @JsonProperty("refresh_token")
+    @JsonProperty("accessExp")
+    private long accessExp;
+    @JsonProperty("refreshToken")
     private String refreshToken;
-    @JsonProperty("refresh_token_expiration")
-    private long refreshExpiration;
+    @JsonProperty("refreshExp")
+    private long refreshExp;
 
 }

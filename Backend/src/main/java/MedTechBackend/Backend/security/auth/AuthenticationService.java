@@ -33,8 +33,8 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
+                .firstname(request.getFirstName())
+                .lastname(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
@@ -56,8 +56,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
-                .jwtExpiration(tokenProperties.getAccessExpiration())
-                .refreshExpiration(tokenProperties.getRefreshExpiration())
+                .accessExp(tokenProperties.getAccessExpiration())
+                .refreshExp(tokenProperties.getRefreshExpiration())
                 .build();
     }
 
@@ -77,8 +77,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
-                .jwtExpiration(tokenProperties.getAccessExpiration())
-                .refreshExpiration(tokenProperties.getRefreshExpiration())
+                .accessExp(tokenProperties.getAccessExpiration())
+                .refreshExp(tokenProperties.getRefreshExpiration())
                 .build();
     }
 

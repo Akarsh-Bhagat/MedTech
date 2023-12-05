@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctors/experiences")
+@RequestMapping("/api/v1/doctors/experiences")
 public class DocExperienceController {
 
     private final DocExperienceService docExperienceService;

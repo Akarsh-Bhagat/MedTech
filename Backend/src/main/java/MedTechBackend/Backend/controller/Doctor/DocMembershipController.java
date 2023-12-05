@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctors/memberships")
+@RequestMapping("/api/v1/doctors/memberships")
 public class DocMembershipController {
 
     private final DocMembershipService docMembershipService;
