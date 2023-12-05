@@ -23,8 +23,8 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 
@@ -45,12 +45,12 @@ public class User implements UserDetails {
 
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
     }
 
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastName = lastname;
     }
 
     @Override

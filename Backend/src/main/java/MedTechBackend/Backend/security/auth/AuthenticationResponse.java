@@ -1,5 +1,6 @@
 package MedTechBackend.Backend.security.auth;
 
+import MedTechBackend.Backend.entity.User.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +21,7 @@ public class AuthenticationResponse {
     private String refreshToken;
     @JsonProperty("refreshExp")
     private long refreshExp;
+    @JsonProperty("userRole")
+    private Role userRole;
 
 }

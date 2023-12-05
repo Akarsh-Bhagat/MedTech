@@ -12,7 +12,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public enum Role {
 
-    PATIENT(Collections.emptySet()),
+    PATIENT( Set.of(
+            Permission. PATIENT_READ,
+            Permission.PATIENT_UPDATE,
+            Permission.PATIENT_DELETE,
+            Permission.PATIENT_CREATE
+    )),
     ADMIN(
             Set.of(
                     Permission.ADMIN_READ,

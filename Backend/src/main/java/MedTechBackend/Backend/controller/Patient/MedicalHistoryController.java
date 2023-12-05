@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/patient/medhistory")
+@RequestMapping("/api/v1/patient/medhistory")
 public class MedicalHistoryController {
 
     private final MedicalHistoryService medicalHistoryService;

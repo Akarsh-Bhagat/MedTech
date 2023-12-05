@@ -15,8 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import static MedTechBackend.Backend.entity.User.Permission.*;
-import static MedTechBackend.Backend.entity.User.Role.ADMIN;
-import static MedTechBackend.Backend.entity.User.Role.DOCTOR;
+import static MedTechBackend.Backend.entity.User.Role.*;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -60,6 +59,11 @@ public class SecurityConfiguration {
                                 .requestMatchers(POST, "/api/v1/admin/**").hasAuthority(ADMIN_CREATE.name())
                                 .requestMatchers(PUT, "/api/v1/admin/**").hasAuthority(ADMIN_UPDATE.name())
                                 .requestMatchers(DELETE, "/api/v1/admin/**").hasAuthority(ADMIN_DELETE.name())
+                                .requestMatchers("/api/v1/patient/**").hasAnyRole(ADMIN.name(), PATIENT.name())
+                                .requestMatchers(GET, "/api/v1/patient/**").hasAnyAuthority(ADMIN_READ.name(), PATIENT_READ.name())
+                                .requestMatchers(POST, "/api/v1/patient/**").hasAnyAuthority(ADMIN_CREATE.name(), PATIENT_CREATE.name())
+                                .requestMatchers(PUT, "/api/v1/patient/**").hasAnyAuthority(ADMIN_UPDATE.name(), PATIENT_UPDATE.name())
+                                .requestMatchers(DELETE, "/api/v1/patient/**").hasAnyAuthority(ADMIN_DELETE.name(), PATIENT_DELETE.name())
                                 .anyRequest()
                                 .authenticated()
                 )
