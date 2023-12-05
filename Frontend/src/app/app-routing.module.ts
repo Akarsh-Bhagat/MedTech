@@ -12,6 +12,7 @@ import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
 import { DoctorFormComponent } from './doctor-form/doctor-form.component';
+import { AuthGuard } from './shared/auth.guard';
 const routes: Routes = [
   {
     path: 'login',
@@ -24,41 +25,49 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'form',
-    component:UserFormComponent
+    component:UserFormComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'edit/:id',
-    component:EditComponent
+    component:EditComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'view/:id',
-    component: ViewComponent
+    component: ViewComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'patient',
     component: PatientHomeComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'patient/form',
-    component:PatientFormComponent
+    component:PatientFormComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'patient/view/:id',
-    component: PatientViewComponent
+    component: PatientViewComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'patient/edit/:id',
-    component:PatientEditComponent
+    component:PatientEditComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
 
  
-  { path: 'edit-profile', component: DoctorFormComponent },
+  { path: 'edit-profile', component: DoctorFormComponent,canActivate:[AuthGuard] },
   
 ];
 @NgModule({

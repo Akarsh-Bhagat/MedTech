@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -36,8 +36,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from './auth.guard';
 import { MatChipsModule } from '@angular/material/chips';
+import { FooterComponent } from './footer/footer.component';
+import { CustomInterceptor } from './services/custom.interceptor';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { MatChipsModule } from '@angular/material/chips';
     PatientFormComponent,
     PatientViewComponent,
     DoctorFormComponent,
+    FooterComponent,
     
     
   ],
@@ -84,7 +86,13 @@ import { MatChipsModule } from '@angular/material/chips';
     MatOptionModule,
     MatAutocompleteModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:CustomInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

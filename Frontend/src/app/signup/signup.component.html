@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<body>
 <form [formGroup]="signupForm" (ngSubmit)="formSubmit()">
   <p-card header="Signup" [style]="{ width: '360px' }">
     <div class="field">
@@ -109,7 +110,7 @@
     <div class="mt-2">Already a member? <a routerLink="/login">Login</a></div>
   </p-card>
 </form>
-
+</body>
 
 
 

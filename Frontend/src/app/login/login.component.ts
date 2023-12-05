@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 
 import { Router } from '@angular/router';
+import { CustomInterceptor } from '../services/custom.interceptor';
 
 @Component({
   selector: 'app-login',
@@ -35,23 +36,20 @@ export class LoginComponent  implements OnInit{
   get password() { return this.loginForm.controls['password']; }
   onSubmit(){
     if((this.credentials.email!='' && this.credentials.password!='' ) &&(this.credentials.email!=null && this.credentials.password!=null )){
-      console.log("Submit the form")
-      // token generte
-      this.loginService.generateToken(this.credentials).subscribe(
-        response=>{
-          console.log(response)
+      this.loginService.authenticate(this.credentials).subscribe(
+        (response:any)=>{
+          alert('Login successful'),
+          this.router.navigate(['/']);
         },
         error=>{
          console.log(error);
+         alert('Bad credentials')
         }
       )
     }
     else{
       console.log("fields empty")
     }
-
-
-    this.router.navigate(['/home']);
 
   }
 }

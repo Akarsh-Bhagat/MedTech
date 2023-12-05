@@ -5,8 +5,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: url('https://media.istockphoto.com/id/1428114896/photo/empty-corridor-in-modern-hospital-with-waiting-area-and-hospital-bed-in-rooms-3d-rendering.jpg?s=612x612&w=0&k=20&c=tqhBTji0gY6XbD4yfW0Ab1Vc6NJe2cQYdqQqs9J2zhM=') center center fixed;
+  height: 92.5vh;
+  background: url('https://img.freepik.com/premium-photo/blurred-interior-hospital-clinical-with-people-abstract-medical-background_1484-1309.jpg') center center fixed;
   background-size: cover;
 }
 

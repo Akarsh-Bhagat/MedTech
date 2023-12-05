@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from './helper';
 import { Observable } from 'rxjs';
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   baseUrl: any = "http://localhost:8080/api/v1/auth";
-  url: any = "http://localhost:8080/api";
+  url: any = "http://localhost:8080/api/v1";
 
   constructor(private http: HttpClient) { }
 

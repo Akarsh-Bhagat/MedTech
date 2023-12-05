@@ -13,13 +13,13 @@ export class HomeComponent implements OnInit {
   filteredDoctors: any[] = [];
   searchTerm: string = '';
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService) {
+  }
 
   ngOnInit(): void {
-    this.userService.getPosts().subscribe((response) => {
+    this.userService.getPosts().subscribe((response: any) => {
       this.doctor = response;
       this.filteredDoctors = response;
-      console.log(response);
     });
   }
 
