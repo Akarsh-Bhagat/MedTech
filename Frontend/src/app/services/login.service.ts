@@ -15,13 +15,13 @@ export class LoginService {
     return this.http.post(`${this.url}/authenticate`, credentials).pipe(
       tap((response: any) => {
         if (response && response.accessToken && response.refreshToken &&
-            response.accessExp && response.refreshExp) {
+            response.accessExp && response.refreshExp && response.userRole) {
           const now = Date.now();
 
           const accessTokenExpiration = now + response.accessExp;
           const refreshTokenExpiration = now + response.refreshExp;
 
-          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration);
+          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole);
           console.log('Tokens stored successfully.');
         }
       }),
@@ -32,7 +32,29 @@ export class LoginService {
     );
   }
 
-  private storeTokens(accessToken: string, refreshToken: string, accessTokenExpiration: number, refreshTokenExpiration: number) {
+  register(credentials: any) {
+    return this.http.post(`${this.url}/register`, credentials).pipe(
+      tap((response: any) => {
+        if (response && response.accessToken && response.refreshToken &&
+            response.accessExp && response.refreshExp && response.userRole) {
+          const now = Date.now();
+
+          const accessTokenExpiration = now + response.accessExp;
+          const refreshTokenExpiration = now + response.refreshExp;
+
+          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole);
+          console.log('Tokens stored successfully.');
+        }
+      }),
+      catchError(error => {
+        console.error('Error during authentication:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  private storeTokens(accessToken: string, refreshToken: string, accessTokenExpiration: number, refreshTokenExpiration: number, userRole: string) {
+    localStorage.setItem("userRole", userRole);
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("accessTokenExpiration", accessTokenExpiration.toString());
@@ -71,7 +93,7 @@ export class LoginService {
           const accessTokenExpiration = now + response.accessExp;
           const refreshTokenExpiration = now + response.refreshExp;
 
-          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration);
+          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole);
 
           return of(response.accessToken);
         } else {

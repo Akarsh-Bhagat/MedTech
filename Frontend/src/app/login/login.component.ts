@@ -39,7 +39,7 @@ export class LoginComponent  implements OnInit{
       this.loginService.authenticate(this.credentials).subscribe(
         (response:any)=>{
           alert('Login successful'),
-          this.router.navigate(['/']);
+          this.router.navigate(['/homepage']);
         },
         error=>{
          console.log(error);

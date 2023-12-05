@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { passwordMatchValidator } from '../shared/password-match.directive';
 import { UserService } from '../services/user.service';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,15 +18,16 @@ export class SignupComponent implements OnInit {
     lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    confirmPassword: ['', Validators.required]
+    confirmPassword: ['', Validators.required],
+    role: ['',Validators.required]
   }, {
     validators:  passwordMatchValidator
   })
 
   constructor(
     private fb: FormBuilder,
-    private userService:UserService
-
+    private service:LoginService,
+    private router: Router
   ) { }
   ngOnInit(): void {
    
@@ -51,31 +54,35 @@ export class SignupComponent implements OnInit {
     return this.signupForm.controls['confirmPassword'];
   }
 
+  get role() {
+    return this.signupForm.controls['role'];
+  }
+
   public  user={
     firstName:'',
     lastName:'',
     email:'',
     password: '',
-    confirmPassword:''
+    confirmPassword:'',
+    role:''
   }
 
   formSubmit(){
-    console.log(this.user);
     if(this.user.firstName == '' || this.user.firstName==null ){
       alert( 'UserName is required');
       return
     }
-     
-    //add User.
-    this.userService.addUser(this.signupForm.value).subscribe(
+
+    this.service.register(this.signupForm.value).subscribe(
       (data)=>{
         console.log(data);
-        alert('successfully registered');
-
+        alert('Successfully registered');
+        this.router.navigate(['/homepage']);
       },
       (error)=>{
         console.log(error);
-        alert('something went wrong')
+        console.log(this.signupForm.value)
+        alert('Something went wrong')
       }
     )
   }

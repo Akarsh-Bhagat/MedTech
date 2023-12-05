@@ -101,6 +101,26 @@
         Password should match
       </small>
     </div>
+    <div class="field">
+      <label for="role">Doctor or Patient?</label>
+      <input  [(ngModel)]="user.role"
+        type="text"
+        pInputText
+        formControlName="role"
+        class="w-full"
+        name="role"
+        placeholder=""
+      />
+      <small
+        *ngIf="role.invalid && (role.dirty ||role.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="role.errors?.['required']">User role is required.</div>
+        <div *ngIf="role.errors?.['pattern']">Enter a valid user role</div>
+      </small>
+    </div>
+    
+    
     <p-button type="submit"
       label="Signup"
       styleClass="w-full"

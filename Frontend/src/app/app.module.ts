@@ -39,6 +39,9 @@ import { RouterModule } from '@angular/router';
 import { MatChipsModule } from '@angular/material/chips';
 import { FooterComponent } from './footer/footer.component';
 import { CustomInterceptor } from './services/custom.interceptor';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { DeniedComponent } from './denied/denied.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 @NgModule({
@@ -58,8 +61,9 @@ import { CustomInterceptor } from './services/custom.interceptor';
     PatientViewComponent,
     DoctorFormComponent,
     FooterComponent,
-    
-    
+    NotFoundComponent,
+    DeniedComponent,
+    HomepageComponent,  
   ],
   imports: [
     BrowserModule,

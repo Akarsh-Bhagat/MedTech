@@ -13,6 +13,10 @@ import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
 import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 import { AuthGuard } from './shared/auth.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { DeniedComponent } from './denied/denied.component';
+import { RoleGuard } from './shared/role.guard';
+import { HomepageComponent } from './homepage/homepage.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -25,7 +29,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate:[AuthGuard]
+    canActivate:[RoleGuard]
   },
   {
     path: 'form',
@@ -45,7 +49,7 @@ const routes: Routes = [
   {
     path: 'patient',
     component: PatientHomeComponent,
-    canActivate:[AuthGuard]
+    canActivate:[RoleGuard]
   },
   {
     path: 'patient/form',
@@ -68,6 +72,9 @@ const routes: Routes = [
 
  
   { path: 'edit-profile', component: DoctorFormComponent,canActivate:[AuthGuard] },
+  { path: 'homepage', component: HomepageComponent,canActivate:[AuthGuard] },
+  { path: 'denied', component: DeniedComponent },
+  { path: '**', component: NotFoundComponent }
   
 ];
 @NgModule({

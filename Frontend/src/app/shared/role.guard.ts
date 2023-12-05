@@ -5,16 +5,16 @@ import { LoginService } from '../services/login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.loginService.isLoggedIn()) {
+    let Role= localStorage.getItem("userRole");
+    if(Role == "ADMIN"){
       return true;
-    } else {
-      this.router.navigate(['/denied']);
-      return false;
     }
+    alert("You dont't have admin rights")
+    return false;
   }
 }
