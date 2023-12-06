@@ -2,6 +2,7 @@ package MedTechBackend.Backend.security.auth;
 
 
 //import MedTechBackend.Backend.doctor.Doctor;
+import MedTechBackend.Backend.entity.User.Role;
 import MedTechBackend.Backend.security.token.Token;
 import MedTechBackend.Backend.security.token.TokenProperties;
 import MedTechBackend.Backend.security.token.TokenRepository;
@@ -132,5 +133,27 @@ public class AuthenticationService {
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }
         }
+    }
+
+    public void createSuperAdmin() {
+        if (repository.countAdmins() < 1) {
+            User adminUser = new User();
+            adminUser.setFirstname("Akarsh");
+            adminUser.setLastname("Bhagat");
+            adminUser.setEmail("admin@medtech.com");
+            adminUser.setPassword(passwordEncoder.encode("admin11@"));
+            adminUser.setRole(Role.ADMIN);
+
+            repository.save(adminUser);
+        }
+    }
+
+    public boolean deleteUserById(Integer id) {
+        repository.deleteById(id);
+        return true;
+    }
+
+    public void deleteAllUsers() {
+        repository.deleteAll();
     }
 }
