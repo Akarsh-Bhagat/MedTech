@@ -118,6 +118,7 @@ export class LoginService {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessTokenExpiration');
     localStorage.removeItem('refreshTokenExpiration');
+    localStorage.removeItem('userRole');
     return true;
   }
 }

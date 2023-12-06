@@ -17,7 +17,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { DeniedComponent } from './denied/denied.component';
 import { RoleGuard } from './shared/role.guard';
 import { HomepageComponent } from './homepage/homepage.component';
+import { SuperloginComponent } from './superlogin/superlogin.component';
 const routes: Routes = [
+  {
+    path: 'admin/login',
+    component: SuperloginComponent
+  },
   {
     path: 'login',
     component: LoginComponent

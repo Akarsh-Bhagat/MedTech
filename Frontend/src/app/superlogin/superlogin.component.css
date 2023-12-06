@@ -1,0 +1,66 @@
+body {
+    background: url('https://i.redd.it/2hq0tps0u1l51.png');
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .login-container {
+    background: #353535;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 60px;
+    border-radius: 10px;
+  }
+  
+  .login-form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .login-title {
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4d4d4d;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .login-button {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: #27ae60;
+  }
+  

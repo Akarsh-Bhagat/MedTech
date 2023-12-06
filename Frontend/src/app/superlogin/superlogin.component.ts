@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 
-import { Router } from '@angular/router';
-import { CustomInterceptor } from '../services/custom.interceptor';
-
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-superlogin',
+  templateUrl: './superlogin.component.html',
+  styleUrls: ['./superlogin.component.css']
 })
-export class LoginComponent  implements OnInit{
+export class SuperloginComponent {
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
@@ -39,7 +37,7 @@ export class LoginComponent  implements OnInit{
       this.loginService.authenticate(this.credentials).subscribe(
         (response:any)=>{
           alert('Login successful');
-          this.router.navigate(['/homepage']);
+          this.router.navigate(['/home']);
         },
         error=>{
          console.log(error);

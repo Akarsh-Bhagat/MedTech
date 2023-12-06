@@ -42,6 +42,7 @@ import { CustomInterceptor } from './services/custom.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DeniedComponent } from './denied/denied.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { SuperloginComponent } from './superlogin/superlogin.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     FooterComponent,
     NotFoundComponent,
     DeniedComponent,
-    HomepageComponent,  
+    HomepageComponent,
+    SuperloginComponent,  
   ],
   imports: [
     BrowserModule,

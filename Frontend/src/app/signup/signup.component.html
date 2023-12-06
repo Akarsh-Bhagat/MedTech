@@ -16,7 +16,7 @@
         *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
         class="block p-error"
       >
-        <div *ngIf="firstName.errors?.['required']">FirstName is required.</div>
+        <div *ngIf="firstName.errors?.['required']">First Name is required.</div>
         <div *ngIf="firstName.errors?.['pattern']">Enter a valid LastName</div>
       </small>
     </div>
@@ -34,7 +34,7 @@
         *ngIf="lastName.invalid && (lastName.dirty ||lastName.touched)"
         class="block p-error"
       >
-        <div *ngIf="lastName.errors?.['required']">LastName is required.</div>
+        <div *ngIf="lastName.errors?.['required']">Last Name is required.</div>
         <div *ngIf="lastName.errors?.['pattern']">Enter a valid LastName</div>
       </small>
     </div>
