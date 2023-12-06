@@ -66,3 +66,18 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  margin-right: 15px; 
+}
+
+.radio-option input {
+  margin-right: 5px; 
+}
