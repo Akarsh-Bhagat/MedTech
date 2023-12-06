@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-superlogin',
@@ -21,7 +22,8 @@ export class SuperloginComponent {
     private fb: FormBuilder,
 
     private loginService:LoginService,
-    private router: Router 
+    private router: Router,
+    private toastr: ToastrService
 
 
   ) { }
@@ -36,11 +38,12 @@ export class SuperloginComponent {
     if((this.credentials.email!='' && this.credentials.password!='' ) &&(this.credentials.email!=null && this.credentials.password!=null )){
       this.loginService.authenticate(this.credentials).subscribe(
         (response:any)=>{
-          alert('Login successful');
+          this.toastr.success('Login Successful', 'Success', { timeOut: 1500 });
           this.router.navigate(['/home']);
         },
         error=>{
          console.log(error);
+         this.toastr.error('Something went wrong', 'Error', { timeOut: 1500 });
          alert('Bad credentials')
         }
       )

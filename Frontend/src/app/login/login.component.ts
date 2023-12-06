@@ -4,6 +4,7 @@ import { LoginService } from '../services/login.service';
 
 import { Router } from '@angular/router';
 import { CustomInterceptor } from '../services/custom.interceptor';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent  implements OnInit{
     private fb: FormBuilder,
 
     private loginService:LoginService,
-    private router: Router 
+    private router: Router,
+    private toastr: ToastrService
 
 
   ) { }
@@ -38,12 +40,12 @@ export class LoginComponent  implements OnInit{
     if((this.credentials.email!='' && this.credentials.password!='' ) &&(this.credentials.email!=null && this.credentials.password!=null )){
       this.loginService.authenticate(this.credentials).subscribe(
         (response:any)=>{
-          alert('Login successful');
+          this.toastr.success('Login Successful', 'Success', { timeOut: 1500 });
           this.router.navigate(['/homepage']);
         },
         error=>{
          console.log(error);
-         alert('Bad credentials')
+         this.toastr.error('Something went wrong', 'Error', { timeOut: 1500 });
         }
       )
     }

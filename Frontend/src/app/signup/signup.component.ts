@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { passwordMatchValidator } from '../shared/password-match.directive';
-import { UserService } from '../services/user.service';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -27,7 +27,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service:LoginService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
   ngOnInit(): void {
    
@@ -76,13 +77,12 @@ export class SignupComponent implements OnInit {
     this.service.register(this.signupForm.value).subscribe(
       (data)=>{
         console.log(data);
-        alert('Successfully registered');
+        this.toastr.success('Successfully registered', 'Success',{ timeOut: 1500 });
         this.router.navigate(['/homepage']);
       },
       (error)=>{
         console.log(error);
-        console.log(this.signupForm.value)
-        alert('Something went wrong')
+        this.toastr.error('Something went wrong', 'Error',{ timeOut: 1500 });
       }
     )
   }
