@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from './helper';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,12 @@ export class UserService {
 
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/doctors`);
+  }
+
+  getDoctorsCount(): Observable<number> {
+    return this.http.get<any[]>(`${this.url}/doctors`).pipe(
+      map(doctors => doctors.length)
+    );
   }
 
   getDataById(id: number): Observable<any> {

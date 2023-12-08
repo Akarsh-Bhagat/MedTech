@@ -13,7 +13,6 @@ export class SharingService {
 
   getData() {
     return this.light;
-    //return "dark";
   }
 
   constructor() { }

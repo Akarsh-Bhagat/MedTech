@@ -178,16 +178,18 @@ export class PatientFormComponent implements OnInit {
         (response) => {
         console.log('Patient added successfully:', response);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/patient']);
+          this.router.navigate(['/home']);
         });
       },
       (error) => {
-        console.error('Error adding patient:', error);
+        console.error('Error creating patient:', error);
+
         if (error.error instanceof ErrorEvent) {
           console.error('Client-side error:', error.error.message);
         } else {
           console.error(`Backend returned code ${error.status}, body was:`, error.error);
         }
+
       }
       );
     }

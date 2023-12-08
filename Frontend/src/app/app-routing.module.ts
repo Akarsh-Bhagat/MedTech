@@ -11,13 +11,13 @@ import { PatientHomeComponent } from './patient-home/patient-home.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
-import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 import { AuthGuard } from './shared/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DeniedComponent } from './denied/denied.component';
 import { RoleGuard } from './shared/role.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SuperloginComponent } from './superlogin/superlogin.component';
+import { AdminhomeComponent } from './adminhome/adminhome.component';
 const routes: Routes = [
   {
     path: 'admin/login',
@@ -33,13 +33,12 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent,
+    component: AdminhomeComponent,
     canActivate:[RoleGuard]
   },
   {
     path: 'form',
-    component:UserFormComponent,
-    canActivate:[AuthGuard]
+    component:UserFormComponent
   },
   {
     path: 'edit/:id',
@@ -58,8 +57,7 @@ const routes: Routes = [
   },
   {
     path: 'patient/form',
-    component:PatientFormComponent,
-    canActivate:[AuthGuard]
+    component:PatientFormComponent
   },
   {
     path: 'patient/view/:id',
@@ -75,8 +73,6 @@ const routes: Routes = [
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
 
- 
-  { path: 'edit-profile', component: DoctorFormComponent,canActivate:[AuthGuard] },
   { path: 'homepage', component: HomepageComponent,canActivate:[AuthGuard] },
   { path: 'denied', component: DeniedComponent },
   { path: '**', component: NotFoundComponent }

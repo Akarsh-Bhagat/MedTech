@@ -1,20 +1,29 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from './helper';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
-
-
-  url: any = "http://localhost:8080/api";
+  baseUrl: any = "http://localhost:8080/api/v1/auth";
+  url: any = "http://localhost:8080/api/v1";
 
   constructor(private http: HttpClient) { }
 
+  public addUser(user: any) {
+    return this.http.post(`${baseUrl}/register`, user);
+  }
+
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/patient`);
+  }
+
+  getPatientsCount(): Observable<number> {
+    return this.http.get<any[]>(`${this.url}/patient`).pipe(
+      map(patients => patients.length)
+    );
   }
 
   getDataById(id: number): Observable<any> {
@@ -46,6 +55,7 @@ export class PatientService {
     console.log(url);
     return this.http.delete(url, { responseType: 'text' });
   }
+
 
   saveClinic(newClinic: any, id: any): Observable<string> {
     const url = `${this.url}/patient/clinic/${id}`;

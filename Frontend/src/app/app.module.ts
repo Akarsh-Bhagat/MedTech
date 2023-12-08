@@ -31,7 +31,6 @@ import { PatientHomeComponent } from './patient-home/patient-home.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
-import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastrModule } from 'ngx-toastr';
@@ -43,6 +42,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { DeniedComponent } from './denied/denied.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SuperloginComponent } from './superlogin/superlogin.component';
+import { AdminhomeComponent } from './adminhome/adminhome.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
@@ -60,12 +61,13 @@ import { SuperloginComponent } from './superlogin/superlogin.component';
     PatientEditComponent,
     PatientFormComponent,
     PatientViewComponent,
-    DoctorFormComponent,
     FooterComponent,
     NotFoundComponent,
     DeniedComponent,
     HomepageComponent,
-    SuperloginComponent,  
+    SuperloginComponent,
+    AdminhomeComponent,
+    SidebarComponent,  
   ],
   imports: [
     BrowserModule,
