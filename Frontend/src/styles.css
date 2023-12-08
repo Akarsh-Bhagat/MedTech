@@ -15,6 +15,10 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+:root {
+  --sidebar-width: 4.5em;
+}
+
 .toast-center-center {
     top: 50%;
     left: 50%;
@@ -210,3 +214,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       width: 25em;
     }
   }
+
+
+@media (min-width: 572px) {
+  .main {
+    margin-left: var(--sidebar-width);
+  }
+}

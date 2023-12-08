@@ -9,24 +9,27 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item" [ngClass]="{ 'active': currentRoute == '/home' }">
+        <li *ngIf="(userRole === 'ADMIN' || userRole === 'PATIENT') && isLoggedIn()" class="nav-item" [ngClass]="{ 'active': currentRoute == '/home' }">
           <a class="nav-link" [routerLink]="['/home']">Doctors</a>
         </li>
-        <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/patient' }">
+        <li *ngIf="(userRole === 'ADMIN' || userRole === 'DOCTOR') &&  isLoggedIn() "  class="nav-item" [ngClass]="{ 'active': currentRoute === '/patient' }">
           <a class="nav-link" [routerLink]="['/patient']">Patients</a>
         </li>
-        <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/appointments' }">
+        <li *ngIf="isLoggedIn()" class="nav-item" [ngClass]="{ 'active': currentRoute === '/appointments' }">
           <a class="nav-link" [routerLink]="['/appointments']">Appointments</a>
         </li>
-        <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/services' }">
+        <!-- <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/services' }">
           <a class="nav-link" [routerLink]="['/services']">Services</a>
-        </li>
-        <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/about' }">
+        </li> -->
+        <li *ngIf="isLoggedIn()" class="nav-item" [ngClass]="{ 'active': currentRoute === '/about' }">
           <a class="nav-link" [routerLink]="['/about']">About</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
+        <li *ngIf="!isLoggedIn()"(click)="toggleLoginSignup()" class="nav-item" [ngClass]="{ 'active': currentRoute === '/signup' }">
+          <a class="nav-link" [routerLink]="showLogin ? ['/signup'] : ['/login']">{{ showLogin ? 'Signup' : 'Login' }}</a>
+        </li>  
       </ul>
     </div>
   </div>

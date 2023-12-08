@@ -7,10 +7,12 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
   isSidebarOpen: boolean = true;
+  userRole: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.userRole =  localStorage.getItem("userRole");
   }
 
   toggleSidebar(): void {
