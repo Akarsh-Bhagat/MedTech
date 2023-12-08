@@ -3,12 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { SignupComponent } from './signup/signup.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './Doctors/home/home.component';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,29 +20,33 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { UserFormComponent } from './user-form/user-form.component';
-import { EditComponent } from './edit/edit.component';
-import { ViewComponent } from './view/view.component';
-import { DeleteComponent } from './delete/delete.component';
-import { PatientHomeComponent } from './patient-home/patient-home.component';
-import { PatientEditComponent } from './patient-edit/patient-edit.component';
-import { PatientFormComponent } from './patient-form/patient-form.component';
-import { PatientViewComponent } from './patient-view/patient-view.component';
+import { UserFormComponent } from './Doctors/user-form/user-form.component';
+import { EditComponent } from './Doctors/edit/edit.component';
+import { ViewComponent } from './Doctors/view/view.component';
+
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { MatChipsModule } from '@angular/material/chips';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './Nav and Sidebars/footer/footer.component';
 import { CustomInterceptor } from './services/custom.interceptor';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { DeniedComponent } from './denied/denied.component';
-import { HomepageComponent } from './doctorhome/homepage.component';
-import { SuperloginComponent } from './superlogin/superlogin.component';
-import { AdminhomeComponent } from './adminhome/adminhome.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { NotFoundComponent } from './404 Error/not-found/not-found.component';
+import { DeniedComponent } from './404 Error/denied/denied.component';
+import { HomepageComponent } from './Doctors/doctorhome/homepage.component';
+import { AdminhomeComponent } from './Admin/adminhome/adminhome.component';
+import { SidebarComponent } from './Nav and Sidebars/sidebar/sidebar.component';
 
-import { AppointmentReqComponent } from './appointment-req/appointment-req.component';
+import { AppointmentReqComponent } from './Admin/appointment-req/appointment-req.component';
+import { PatientHomeComponent } from './Patients/patient-home/patient-home.component';
+import { PatientEditComponent } from './Patients/patient-edit/patient-edit.component';
+import { PatientFormComponent } from './Patients/patient-form/patient-form.component';
+import { PatientViewComponent } from './Patients/patient-view/patient-view.component';
+import { LoginComponent } from './Login and Signup/login/login.component';
+import { SignupComponent } from './Login and Signup/signup/signup.component';
+import { SuperloginComponent } from './Login and Signup/superlogin/superlogin.component';
+import { NavbarComponent } from './Nav and Sidebars/navbar/navbar.component';
+import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
 
 
 @NgModule({
@@ -58,7 +59,6 @@ import { AppointmentReqComponent } from './appointment-req/appointment-req.compo
     UserFormComponent,
     EditComponent,
     ViewComponent,
-    DeleteComponent,
     PatientHomeComponent,
     PatientEditComponent,
     PatientFormComponent,
@@ -71,7 +71,8 @@ import { AppointmentReqComponent } from './appointment-req/appointment-req.compo
     AdminhomeComponent,
     SidebarComponent,
  
-    AppointmentReqComponent,  
+    AppointmentReqComponent,
+      PatientDashboardComponent,  
   ],
   imports: [
     BrowserModule,

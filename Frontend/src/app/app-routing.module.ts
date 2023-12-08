@@ -1,23 +1,26 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from './home/home.component';
-import { UserFormComponent } from './user-form/user-form.component';
-import { EditComponent } from './edit/edit.component';
-import { ViewComponent } from './view/view.component';
-import { PatientHomeComponent } from './patient-home/patient-home.component';
-import { PatientEditComponent } from './patient-edit/patient-edit.component';
-import { PatientFormComponent } from './patient-form/patient-form.component';
-import { PatientViewComponent } from './patient-view/patient-view.component';
+
+
+
+import { ViewComponent } from './Doctors/view/view.component';
 import { AuthGuard } from './shared/auth.guard';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { DeniedComponent } from './denied/denied.component';
+import { NotFoundComponent } from './404 Error/not-found/not-found.component';
+import { DeniedComponent } from './404 Error/denied/denied.component';
 import { RoleGuard } from './shared/role.guard';
-import { HomepageComponent } from './doctorhome/homepage.component';
-import { SuperloginComponent } from './superlogin/superlogin.component';
-import { AdminhomeComponent } from './adminhome/adminhome.component';
+import { AdminhomeComponent } from './Admin/adminhome/adminhome.component';
+import { HomepageComponent } from './Doctors/doctorhome/homepage.component';
+import { EditComponent } from './Doctors/edit/edit.component';
+import { UserFormComponent } from './Doctors/user-form/user-form.component';
+import { PatientHomeComponent } from './Patients/patient-home/patient-home.component';
+import { PatientEditComponent } from './Patients/patient-edit/patient-edit.component';
+import { PatientFormComponent } from './Patients/patient-form/patient-form.component';
+import { PatientViewComponent } from './Patients/patient-view/patient-view.component';
+import { LoginComponent } from './Login and Signup/login/login.component';
+import { SignupComponent } from './Login and Signup/signup/signup.component';
+import { SuperloginComponent } from './Login and Signup/superlogin/superlogin.component';
+import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
 const routes: Routes = [
   {
     path: 'admin/login',
@@ -73,7 +76,8 @@ const routes: Routes = [
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
 
-  { path: 'homepage', component: HomepageComponent,canActivate:[AuthGuard] },
+  { path: 'doctor/homepage', component: HomepageComponent,canActivate:[AuthGuard] },
+  { path: 'patient/homepage', component: PatientDashboardComponent,canActivate:[AuthGuard] },
   { path: 'denied', component: DeniedComponent },
   { path: '**', component: NotFoundComponent }
   

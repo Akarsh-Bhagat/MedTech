@@ -1,0 +1,40 @@
+<app-sidebar></app-sidebar>
+<div class="container">
+  <div class="content">
+    <div class="header">
+      <div class="welcome">
+        <h1>Welcome, Rohit Raj</h1>
+        <p>{{ currentDate | date: 'fullDate' }}</p>
+      </div>
+    </div>
+    <div class="dashboard-cards">
+      <div class="card upcoming-appointments">
+        <h2>Upcoming Appointments</h2>
+      </div>
+      <div class="card medical-meetings">
+        <h2>Medical Meetings</h2>
+      </div>
+      <div class="card consulted-doctors">
+        <h2>Consulted Doctors</h2>
+      </div>
+      <div class="card total-payments">
+        <h2>Total Payments</h2>
+      </div>
+    </div>
+    <div class="additional-sections">
+      <div class="section appointment-requests">
+        <div class="title">
+          <h2>Appointment Requests</h2>
+          <a href="#" class="btn">View All</a>
+        </div>
+        <app-appointment-req></app-appointment-req>
+      </div>
+      <div class="section recent-appointments">
+        <div class="title">
+          <h2>Recent Appointments</h2>
+          <a href="#" class="btn">View All</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
