@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
-
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -9,13 +8,15 @@ import { LoginService } from '../services/login.service';
 })
 export class HomepageComponent implements OnInit {
   role: any = '';
-
+  currentDate!: Date;
   constructor(private router: Router, private service: LoginService) {}
-
   ngOnInit() {
-    this.role = localStorage.getItem("userRole"); 
+    this.role = localStorage.getItem("userRole");
+    this.getCurrentDate();
   }
-
+  getCurrentDate(): void {
+    this.currentDate = new Date();
+  }
   redirectTo() {
     if (this.role === 'PATIENT') {
       this.router.navigate(['/patient/form']);
@@ -26,3 +27,15 @@ export class HomepageComponent implements OnInit {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+

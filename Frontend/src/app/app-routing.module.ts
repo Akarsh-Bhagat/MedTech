@@ -15,7 +15,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DeniedComponent } from './denied/denied.component';
 import { RoleGuard } from './shared/role.guard';
-import { HomepageComponent } from './homepage/homepage.component';
+import { HomepageComponent } from './doctorhome/homepage.component';
 import { SuperloginComponent } from './superlogin/superlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 const routes: Routes = [

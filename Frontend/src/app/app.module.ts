@@ -40,10 +40,12 @@ import { FooterComponent } from './footer/footer.component';
 import { CustomInterceptor } from './services/custom.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DeniedComponent } from './denied/denied.component';
-import { HomepageComponent } from './homepage/homepage.component';
+import { HomepageComponent } from './doctorhome/homepage.component';
 import { SuperloginComponent } from './superlogin/superlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+
+import { AppointmentReqComponent } from './appointment-req/appointment-req.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HomepageComponent,
     SuperloginComponent,
     AdminhomeComponent,
-    SidebarComponent,  
+    SidebarComponent,
+ 
+    AppointmentReqComponent,  
   ],
   imports: [
     BrowserModule,
