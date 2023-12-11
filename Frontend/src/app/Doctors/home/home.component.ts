@@ -18,11 +18,10 @@ export class HomeComponent implements OnInit {
     this.userService.getPosts().subscribe((response: any) => {
       this.doctor = response;
       this.filteredDoctors = response;
+      this.userRole=localStorage.getItem('userRole');
     });
   }
-  getUserRole() {
-    this.userRole=localStorage.getItem('userRole');
-  }
+ 
   deleteAndReload(id: number) {
     this.userService.deleteData({}, id).subscribe(
       () => {
