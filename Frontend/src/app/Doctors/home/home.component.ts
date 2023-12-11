@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,18 +10,19 @@ export class HomeComponent implements OnInit {
   doctor: any[] = [];
   filteredDoctors: any[] = [];
   searchTerm: string = '';
+  userRole: any;
   @Input() showSidebar: boolean = true;
-
   constructor(private router: Router, private userService: UserService) {
   }
-
   ngOnInit(): void {
     this.userService.getPosts().subscribe((response: any) => {
       this.doctor = response;
       this.filteredDoctors = response;
     });
   }
-
+  getUserRole() {
+    this.userRole=localStorage.getItem('userRole');
+  }
   deleteAndReload(id: number) {
     this.userService.deleteData({}, id).subscribe(
       () => {
@@ -34,9 +34,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-  
-
   filterDoctors() {
     const formattedSearchTerm = this.searchTerm.trim().toLowerCase();
     if (formattedSearchTerm === '') {
@@ -55,5 +52,4 @@ export class HomeComponent implements OnInit {
       });
     }
   }
-  
 }

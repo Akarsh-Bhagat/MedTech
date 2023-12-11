@@ -7,7 +7,11 @@ import { Observable, of, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
+  isAdmin(): boolean {
+    throw new Error('Method not implemented.');
+  }
   private url = "http://localhost:8080/api/v1/auth";
+  
 
   constructor(private http: HttpClient) { }
 

@@ -50,13 +50,55 @@
                     <a href="#" class="btn">View All</a>
                   </div>
                  
+                  <table class="appointment-table">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Date</th>
+                            <th>Disease</th>
+                            <th>Action</th> <!-- New column for Accept/Decline -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example row, replace this with actual data from your application -->
+                        <tr>
+                            <td>John Doe</td>
+                            <td>2023-12-11</td>
+                            <td>Fever</td>
+                            <td>
+                                <button class="accept-btn" onclick="acceptAppointment(this)">Accept</button>
+                                <button class="decline-btn">Decline</button>
+                            </td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+
+
+                 
                 </div>
                 <div class="recent-appointments">
                   <div class="title">
                     <h2>Appointment</h2>
                     <a href="#" class="btn">View All</a>
                   </div>
+
+
+                    <!-- Table for Appointments -->
+                <table class="appointment-table" id="appointmentsTable">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Date</th>
+                            <th>Disease</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Appointments will be dynamically added here -->
+                    </tbody>
+                </table>
                 </div>
+
               </div>
         </div>
     </div>
