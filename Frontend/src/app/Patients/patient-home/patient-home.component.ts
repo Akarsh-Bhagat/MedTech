@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharingService } from '../../services/sharing.service';
 import { PatientService } from '../../services/patient.service';
@@ -12,6 +12,7 @@ export class PatientHomeComponent implements OnInit {
   patient: any[] = [];
   filteredPatients: any[] = [];
   searchTerm: string = '';
+  @Input() showSidebar: boolean = true;
 
   constructor(private router: Router, private patientService: PatientService) {}
 

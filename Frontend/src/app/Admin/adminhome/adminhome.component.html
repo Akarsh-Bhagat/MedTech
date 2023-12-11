@@ -40,20 +40,20 @@
                 </div>
             </div>
             <div class="content-2">
-                <div class="recent-patients">
-                    <div class="title">
-                        <h2>Recent Patients</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
-                    <app-patient-home></app-patient-home>
-                </div>
                 <div class="new-doctors">
                     <div class="title">
                         <h2>New Doctors</h2>
                         <a href="#" class="btn">View All</a>
                     </div>
-                <app-home></app-home>
+                <app-home [showSidebar]="false"></app-home>
                 </div>
+                <div class="recent-patients">
+                    <div class="title">
+                        <h2>Recent Patients</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    <app-patient-home [showSidebar]="false"></app-patient-home>
+                </div> 
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   doctor: any[] = [];
   filteredDoctors: any[] = [];
   searchTerm: string = '';
+  @Input() showSidebar: boolean = true;
 
   constructor(private router: Router, private userService: UserService) {
   }

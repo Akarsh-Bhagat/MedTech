@@ -19,6 +19,7 @@ import { SignupComponent } from './Login and Signup/signup/signup.component';
 import { SuperloginComponent } from './Login and Signup/superlogin/superlogin.component';
 import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
 import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './Doctors/home/home.component';
 const routes: Routes = [
   {
     path: 'admin/login',
@@ -43,6 +44,12 @@ const routes: Routes = [
     component: AdminhomeComponent,
     canActivate:[RoleGuard],
     data: { requiredRoles: ['ADMIN'] }
+  },
+  {
+    path: 'doctor',
+    component: HomeComponent,
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','PATIENT'] }
   },
   {
     path: 'form',

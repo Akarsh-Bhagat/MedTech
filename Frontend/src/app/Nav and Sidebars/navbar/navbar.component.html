@@ -9,8 +9,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li *ngIf="(userRole === 'ADMIN' || userRole === 'PATIENT') && isLoggedIn()" class="nav-item" [ngClass]="{ 'active': currentRoute == '/home' }">
-          <a class="nav-link" [routerLink]="['/home']">Doctors</a>
+        <li *ngIf="(userRole === 'ADMIN' || userRole === 'PATIENT') && isLoggedIn()" class="nav-item" [ngClass]="{ 'active': currentRoute == '/doctor' }">
+          <a class="nav-link" [routerLink]="['/doctor']">Doctors</a>
         </li>
         <li *ngIf="(userRole === 'ADMIN' || userRole === 'DOCTOR') &&  isLoggedIn() "  class="nav-item" [ngClass]="{ 'active': currentRoute === '/patient' }">
           <a class="nav-link" [routerLink]="['/patient']">Patients</a>
