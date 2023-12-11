@@ -47,6 +47,7 @@ import { SignupComponent } from './Login and Signup/signup/signup.component';
 import { SuperloginComponent } from './Login and Signup/superlogin/superlogin.component';
 import { NavbarComponent } from './Nav and Sidebars/navbar/navbar.component';
 import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-
     SidebarComponent,
  
     AppointmentReqComponent,
-      PatientDashboardComponent,  
+      PatientDashboardComponent,
+      AboutComponent,  
   ],
   imports: [
     BrowserModule,

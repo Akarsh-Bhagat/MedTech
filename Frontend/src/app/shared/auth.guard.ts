@@ -11,10 +11,19 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.loginService.isLoggedIn()) {
+      const userRole = localStorage.getItem('userRole');
+
+      if (userRole === 'ADMIN') {
+        this.router.navigate(['/home']);
+      } else if (userRole === 'DOCTOR') {
+        this.router.navigate(['/doctor/homepage']);
+      } else if (userRole === 'PATIENT') {
+        this.router.navigate(['/patient/homepage']);
+      }
+
       return true;
     } else {
-      this.router.navigate(['/denied']);
-      return false;
+      return true;
     }
   }
 }

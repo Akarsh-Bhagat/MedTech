@@ -1,9 +1,6 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-
-
 import { ViewComponent } from './Doctors/view/view.component';
 import { AuthGuard } from './shared/auth.guard';
 import { NotFoundComponent } from './404 Error/not-found/not-found.component';
@@ -21,6 +18,7 @@ import { LoginComponent } from './Login and Signup/login/login.component';
 import { SignupComponent } from './Login and Signup/signup/signup.component';
 import { SuperloginComponent } from './Login and Signup/superlogin/superlogin.component';
 import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
+import { AboutComponent } from './about/about.component';
 const routes: Routes = [
   {
     path: 'admin/login',
@@ -28,56 +26,74 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'home',
     component: AdminhomeComponent,
-    canActivate:[RoleGuard]
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN'] }
   },
   {
     path: 'form',
-    component:UserFormComponent
+    component:UserFormComponent,
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','DOCTOR'] }
   },
   {
     path: 'edit/:id',
     component:EditComponent,
-    canActivate:[AuthGuard]
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN'] }
   },
   {
     path: 'view/:id',
     component: ViewComponent,
-    canActivate:[AuthGuard]
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','PATIENT'] }
   },
   {
     path: 'patient',
     component: PatientHomeComponent,
-    canActivate:[RoleGuard]
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','PATIENT'] }
   },
   {
     path: 'patient/form',
-    component:PatientFormComponent
+    component:PatientFormComponent,
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','PATIENT'] }
   },
   {
     path: 'patient/view/:id',
     component: PatientViewComponent,
-    canActivate:[AuthGuard]
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','DOCTOR'] }
   },
   {
     path: 'patient/edit/:id',
     component:PatientEditComponent,
-    canActivate:[AuthGuard]
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN'] }
   },
   {
-    path: '', redirectTo: 'home', pathMatch: 'full'
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
 
-  { path: 'doctor/homepage', component: HomepageComponent,canActivate:[AuthGuard] },
-  { path: 'patient/homepage', component: PatientDashboardComponent,canActivate:[AuthGuard] },
+  { path: 'doctor/homepage', component: HomepageComponent , canActivate:[RoleGuard],
+  data: { requiredRoles: ['DOCTOR'] }},
+  { path: 'patient/homepage', component: PatientDashboardComponent , canActivate:[RoleGuard],
+  data: { requiredRoles: ['PATIENT'] } },
   { path: 'denied', component: DeniedComponent },
   { path: '**', component: NotFoundComponent }
   

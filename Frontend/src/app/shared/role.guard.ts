@@ -1,5 +1,7 @@
+// role.guard.ts
+
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 
 @Injectable({
@@ -9,12 +11,20 @@ export class RoleGuard implements CanActivate {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
-  canActivate(): boolean {
-    let Role= localStorage.getItem("userRole");
-    if(Role == "ADMIN"){
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const requiredRoles = route.data['requiredRoles'] as Array<string>;
+
+    if (!requiredRoles || requiredRoles.length === 0) {
       return true;
     }
-    alert("You dont't have admin rights")
-    return false;
+
+    const userRole = localStorage.getItem('userRole');
+
+    if (userRole && requiredRoles.includes(userRole)) {
+      return true;
+    } else {
+      this.router.navigate(['/denied']);
+      return false;
+    }
   }
 }
