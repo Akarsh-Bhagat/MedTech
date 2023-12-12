@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, switchMap, tap } from 'rxjs/operators';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, Subject, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,8 @@ export class LoginService {
   
 
   constructor(private http: HttpClient) { }
+  private userRoleChangedSource = new Subject<string>();
+  userRoleChanged$ = this.userRoleChangedSource.asObservable();
 
   authenticate(credentials: any) {
     return this.http.post(`${this.url}/authenticate`, credentials).pipe(
@@ -58,6 +60,7 @@ export class LoginService {
   }
 
   private storeTokens(accessToken: string, refreshToken: string, accessTokenExpiration: number, refreshTokenExpiration: number, userRole: string) {
+    this.userRoleChangedSource.next(userRole);
     localStorage.setItem("userRole", userRole);
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
@@ -116,6 +119,10 @@ export class LoginService {
      return true;
     }
    }
+
+   getUserRole(): string | null {
+    return localStorage.getItem("userRole")
+  }
 
   logout() {
     localStorage.removeItem('accessToken');

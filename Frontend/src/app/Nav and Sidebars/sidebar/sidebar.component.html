@@ -25,6 +25,13 @@
                   <span class="sidebar__nav__text">Dashboard</span>
                 </a>
             </li>
+            <li *ngIf="userRole  === 'DOCTOR' || userRole  === 'PATIENT' ">
+              <a (click)="navigateToForm()"  class="sidebar__nav__link">
+                <i class=""></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" viewBox="0 0 20 20"><path fill="currentColor" d="M11 9V5H9v4H5v2h4v4h2v-4h4V9h-4zm-1 11a10 10 0 1 1 0-20a10 10 0 0 1 0 20z"/></svg>
+                <span class="sidebar__nav__text">Add More Details</span>
+              </a>
+              </li>
           <li *ngIf="userRole === 'ADMIN' ">
             <a href="doctor" class="sidebar__nav__link">
               <i class=""></i>

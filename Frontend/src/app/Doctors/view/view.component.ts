@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 // view.component.ts
@@ -48,6 +48,7 @@ export class ViewComponent implements OnInit {
   newSpecialization: any = {};
   newRegistration: any = {};
   doctor: any={};
+  userRole: any;
 
   constructor( private route: ActivatedRoute,private userService :UserService ,private router: Router,private elRef: ElementRef){
   
@@ -61,6 +62,7 @@ export class ViewComponent implements OnInit {
         this.doctor=data;
         console.log(data);
       });
+      this.userRole=localStorage.getItem('userRole');
     });
   }
 

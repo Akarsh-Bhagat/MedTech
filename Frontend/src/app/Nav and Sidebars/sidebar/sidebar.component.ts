@@ -40,4 +40,19 @@ export class SidebarComponent {
       this.router.navigate(['/patient/homepage']);
     }
   }
+
+  navigateToForm() {
+    const currentRoute = this.router.url;
+    if (this.userRole === 'DOCTOR') {
+      if (currentRoute === '/form') {
+        window.location.reload();
+      }
+      this.router.navigate(['/form']);
+    } else if(this.userRole === 'PATIENT') {
+      if (currentRoute === '/patient/form') {
+        window.location.reload();
+      }
+      this.router.navigate(['/patient/form']);
+    }
+  }
 }

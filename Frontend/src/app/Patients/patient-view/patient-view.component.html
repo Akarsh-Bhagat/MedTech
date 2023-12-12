@@ -1,3 +1,4 @@
+<app-sidebar></app-sidebar>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <header class="text-white text-center py-5" style="background-color: #008080;">
     <h1 class="display-4">{{patient?.firstName}} {{patient?.lastName}}</h1>
@@ -37,7 +38,7 @@
   <div class="col-md-12">
     <h2 class="section-heading text-center">Clinic & Medical Reports</h2>
 
-    <button
+    <button *ngIf="userRole === 'ADMIN'"
       (click)="toggleClinicsForm()"
       class="edit-button"
     >

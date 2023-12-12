@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -12,7 +12,8 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class EditComponent implements OnInit {
   userForm!: FormGroup;
-  doctor: any = []
+  doctor: any = [];
+  @Input() showSidebar: boolean = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder) { }
   

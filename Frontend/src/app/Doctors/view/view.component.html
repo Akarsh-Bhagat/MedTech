@@ -1,3 +1,4 @@
+<app-sidebar></app-sidebar>
 <header class="text-white text-center py-5" style="background-color: #28328c; position: relative;">
   <h1 class="display-4 mb-3">Dr. {{doctor.firstName}} {{doctor.lastName}} | {{doctor.specialisation}}</h1>
   <p class="lead mb-3">{{ doctor.email }} </p>
@@ -18,7 +19,7 @@
   <div class="card mb-4 shadow">
     <div class="card-body position-relative"> 
       <h2 class="card-title display-5 mb-4">Education</h2>
-      <button
+      <button *ngIf="userRole === 'ADMIN'"
         (click)="toggleEducationForm()"
         class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
         style="top: 10px; right: 10px;"
@@ -75,7 +76,7 @@
   <div class="card mb-4 shadow">
     <div class="card-body">
       <h2 class="card-title display-5 mb-4">Experiences</h2>
-      <button
+      <button *ngIf="userRole === 'ADMIN'"
         (click)="toggleExperiencesForm()"
         class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
         style="top: 10px; right: 10px;"
@@ -143,7 +144,7 @@
   <div class="card mb-4 shadow">
     <div class="card-body position-relative"> 
       <h2 class="card-title display-5 mb-4">Registration</h2>
-      <button
+      <button *ngIf="userRole === 'ADMIN'"
         (click)="toggleRegistrationsForm()"
         class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
         style="top: 10px; right: 10px;"
@@ -199,7 +200,7 @@
       <div class="card mb-4 shadow">
         <div class="card-body">
           <h2 class="card-title display-5 mb-4">Services</h2>
-          <button
+          <button *ngIf="userRole === 'ADMIN'"
             (click)="toggleServicesForm()"
             class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
             style="top: 10px; right: 10px;"
@@ -237,7 +238,7 @@
       <div class="card mb-4 shadow">
         <div class="card-body">
           <h2 class="card-title display-5 mb-4">Specializations</h2>
-          <button
+          <button *ngIf="userRole === 'ADMIN'"
             (click)="toggleSpecializationsForm()"
             class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
             style="top: 10px; right: 10px;"
@@ -275,7 +276,7 @@
       <div class="card mb-4 shadow">
         <div class="card-body">
           <h2 class="card-title display-5 mb-4">Memberships</h2>
-          <button
+          <button *ngIf="userRole === 'ADMIN'"
             (click)="toggleMembershipsForm()"
             class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
             style="top: 10px; right: 10px;"
@@ -322,7 +323,7 @@
       <div class="card mb-4 shadow">
         <div class="card-body">
           <h2 class="card-title display-5 mb-4">Awards</h2>
-          <button
+          <button *ngIf="userRole === 'ADMIN'"
             (click)="toggleAwardsForm()"
             class="bg-blue-300 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded position-absolute"
             style="top: 10px; right: 10px;"

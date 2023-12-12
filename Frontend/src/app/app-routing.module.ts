@@ -73,7 +73,7 @@ const routes: Routes = [
     path: 'patient',
     component: PatientHomeComponent,
     canActivate:[RoleGuard],
-    data: { requiredRoles: ['ADMIN','PATIENT'] }
+    data: { requiredRoles: ['ADMIN','DOCTOR'] }
   },
   {
     path: 'patient/form',

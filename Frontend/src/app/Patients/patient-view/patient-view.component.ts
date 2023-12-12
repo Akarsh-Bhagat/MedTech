@@ -27,6 +27,7 @@ export class PatientViewComponent {
   showReports: boolean = false;
   showClinics: boolean = false;
   newClinic:any={};
+  userRole: any;
 
   constructor( private route: ActivatedRoute,private patientService: PatientService){
   
@@ -40,6 +41,7 @@ export class PatientViewComponent {
         this.patient=data;
         console.log(data);
       });
+      this.userRole = localStorage.getItem("userRole");
     });
   }
   toggleClinicsForm() {

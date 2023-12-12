@@ -12,6 +12,7 @@ export class PatientHomeComponent implements OnInit {
   patient: any[] = [];
   filteredPatients: any[] = [];
   searchTerm: string = '';
+  userRole: any;
   @Input() showSidebar: boolean = true;
 
   constructor(private router: Router, private patientService: PatientService) {}
@@ -22,6 +23,7 @@ export class PatientHomeComponent implements OnInit {
       this.filteredPatients = response;
       console.log(response);
     });
+    this.userRole=localStorage.getItem('userRole');
   }
 
   deleteAndReload(id: number) {
