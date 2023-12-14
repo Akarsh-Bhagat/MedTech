@@ -1,5 +1,7 @@
 package MedTechBackend.Backend.dto.Doctor;
 
+import MedTechBackend.Backend.entity.Appointment.Appointment;
+import MedTechBackend.Backend.entity.Appointment.TimeSlot;
 import MedTechBackend.Backend.entity.Doctor.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -37,4 +39,6 @@ public class DoctorsDTO {
     private List<DocSpecialization> specializations;
     private List<DocHandle> handles;
     private List<DocRegistration> registrations;
+    private List<Appointment> appointments;
+    private List<TimeSlot> timeSlots;
 }

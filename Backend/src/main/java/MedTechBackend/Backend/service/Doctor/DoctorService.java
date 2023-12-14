@@ -1,8 +1,12 @@
 package MedTechBackend.Backend.service.Doctor;
 
 import MedTechBackend.Backend.dto.Doctor.DoctorsDTO;
+import MedTechBackend.Backend.entity.Appointment.Appointment;
 import MedTechBackend.Backend.entity.Doctor.*;
+import MedTechBackend.Backend.repository.Appointment.AppointmentRepository;
+import MedTechBackend.Backend.repository.Appointment.TimeSlotRepository;
 import MedTechBackend.Backend.repository.Doctor.*;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +43,12 @@ public class DoctorService {
     @Autowired
     private DocRegistrationRepository docRegistrationRepository;
 
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+
+    @Autowired
+    private TimeSlotRepository timeSlotRepository;
+
     public void createDoctor(Doctors doctors) {
         doctorsRepository.save(doctors);
     }
@@ -63,6 +73,7 @@ public class DoctorService {
         List<DocSpecialization> docSpecializations = docSpecializationRepository.findByDoctor(doctor);
         List<DocHandle> docHandles= docHandleRepository.findByDoctor(doctor);
         List<DocRegistration> docRegistrations= docRegistrationRepository.findByDoctor(doctor);
+        List<Appointment> docAppointments= appointmentRepository.findByDoctorAndAcceptedIsFalse(doctor);
 
         return DoctorsDTO.builder()
                 .id(doctor.getId())
@@ -80,6 +91,8 @@ public class DoctorService {
                 .specializations(doctor.getSpecializations())
                 .handles(doctor.getHandles())
                 .registrations(doctor.getRegistrations())
+                .appointments(doctor.getAppointments())
+                .timeSlots(doctor.getTimeSlots())
                 .build();
     }
 
@@ -100,7 +113,23 @@ public class DoctorService {
         return true;
     }
 
+//    public List<Doctors> getAvailableDoctorsBySpecialization(DocSpecialization specialization) {
+//        return doctorsRepository.findBySpecializationAndAvailableIsTrue(specialization);
+//    }
+
     public void deleteAllDoctors() {
         doctorsRepository.deleteAll();
     }
+
+    public List<Appointment> getAppointmentsByDoctorId(Integer doctorId) {
+        Optional<Doctors> optionalDoctor = doctorsRepository.findById(doctorId);
+        if (optionalDoctor.isPresent()) {
+            Doctors doctor = optionalDoctor.get();
+            return appointmentRepository.findByDoctor(doctor);
+        } else {
+            // Handle the case where the doctor with the specified ID is not found
+            throw new EntityNotFoundException("Doctor not found with ID: " + doctorId);
+        }
+    }
+
 }

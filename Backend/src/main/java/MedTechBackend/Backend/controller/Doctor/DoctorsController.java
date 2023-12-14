@@ -39,6 +39,8 @@ public class DoctorsController {
         doctor.setServicings(doctorsDTO.getServicings());
         doctor.setHandles(doctorsDTO.getHandles());
         doctor.setRegistrations(doctorsDTO.getRegistrations());
+        doctor.setAppointments(doctorsDTO.getAppointments());
+        doctor.setTimeSlots(doctorsDTO.getTimeSlots());
         return doctor;
     }
 

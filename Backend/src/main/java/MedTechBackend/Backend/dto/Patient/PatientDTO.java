@@ -1,5 +1,6 @@
 package MedTechBackend.Backend.dto.Patient;
 
+import MedTechBackend.Backend.entity.Appointment.Appointment;
 import MedTechBackend.Backend.entity.Doctor.*;
 import MedTechBackend.Backend.entity.Patient.Clinic;
 import MedTechBackend.Backend.entity.Patient.MedicalHistory;
@@ -36,5 +37,6 @@ public class PatientDTO {
     private MedicalHistory medicalHistory;
     private List<MedicalReport> medicalReports;
     private List<Clinic> clinics;
+    private Appointment appointment;
 
 }

@@ -33,6 +33,7 @@ public class PatientController {
         patient.setMedicalHistory(patientDTO.getMedicalHistory());
         patient.setClinics(patientDTO.getClinics());
         patient.setReports(patientDTO.getMedicalReports());
+        patient.setAppointment(patientDTO.getAppointment());
         return patient;
     }
 

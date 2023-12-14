@@ -1,8 +1,11 @@
 package MedTechBackend.Backend.service.Patient;
 
 import MedTechBackend.Backend.dto.Patient.PatientDTO;
+import MedTechBackend.Backend.entity.Appointment.Appointment;
 import MedTechBackend.Backend.entity.Patient.*;
+import MedTechBackend.Backend.repository.Appointment.AppointmentRepository;
 import MedTechBackend.Backend.repository.Patient.*;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,9 @@ public class PatientService {
 
     @Autowired
     private ClinicRepository clinicRepository;
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
 
     public void createPatient(Patient patient) {
@@ -57,6 +63,7 @@ public class PatientService {
                 .medicalHistory(patient.getMedicalHistory())
                 .medicalReports(patient.getReports())
                 .clinics(patient.getClinics())
+                .appointment(patient.getAppointment())
                 .build();
     }
 
@@ -80,5 +87,16 @@ public class PatientService {
 
     public void deleteAllPatient() {
         patientRepository.deleteAll();
+    }
+
+    public Appointment getAppointmentByPatientId(Integer patientId) {
+        Optional<Patient> optionalPatient = patientRepository.findById(patientId);
+
+        Patient patient = optionalPatient.orElseThrow(() ->
+                new EntityNotFoundException("Patient not found with ID: " + patientId)
+        );
+
+        // Fetch appointments for the patient
+        return appointmentRepository.findByPatient(patient);
     }
 }
