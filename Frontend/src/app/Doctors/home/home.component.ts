@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     this.userService.getPosts().subscribe((response: any) => {
       this.doctor = response;
       this.filteredDoctors = response;
-      this.userRole=localStorage.getItem('userRole');
+      this.userRole=sessionStorage.getItem('userRole');
     });
   }
  

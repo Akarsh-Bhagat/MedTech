@@ -13,7 +13,7 @@ export class HomepageComponent implements OnInit {
   patientCount: any;
   constructor(private router: Router, private service: LoginService,private patientService: PatientService) {}
   ngOnInit() {
-    this.role = localStorage.getItem("userRole");
+    this.role = sessionStorage.getItem("userRole");
     this.getCurrentDate();
     this.patientService.getPatientsCount().subscribe(
       count => {

@@ -41,7 +41,7 @@ export class PatientViewComponent {
         this.patient=data;
         console.log(data);
       });
-      this.userRole = localStorage.getItem("userRole");
+      this.userRole = sessionStorage.getItem("userRole");
     });
   }
   toggleClinicsForm() {

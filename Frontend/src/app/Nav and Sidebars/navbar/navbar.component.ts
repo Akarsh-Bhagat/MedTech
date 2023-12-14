@@ -23,7 +23,7 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     this.currentRoute = this.router.url;
-    this.userRole =  localStorage.getItem("userRole");
+    this.userRole =  sessionStorage.getItem("userRole");
   }
   toggleDropdownPanel(event: Event): void {
     event.preventDefault();

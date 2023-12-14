@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       this.loginService.authenticate(this.credentials).subscribe(
         (response: any) => {
           this.toastr.success('Login Successful', 'Success', { timeOut: 1500 });
-          let userRole = localStorage.getItem('userRole');
+          let userRole = sessionStorage.getItem('userRole');
           if (userRole === 'DOCTOR') {
             this.router.navigate(['/doctor/homepage']);
           } else if (userRole === 'PATIENT') {

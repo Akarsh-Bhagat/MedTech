@@ -23,7 +23,7 @@ export class PatientHomeComponent implements OnInit {
       this.filteredPatients = response;
       console.log(response);
     });
-    this.userRole=localStorage.getItem('userRole');
+    this.userRole=sessionStorage.getItem('userRole');
   }
 
   deleteAndReload(id: number) {
