@@ -118,9 +118,6 @@ public class DoctorService {
         return true;
     }
 
-//    public List<Doctors> getAvailableDoctorsBySpecialization(DocSpecialization specialization) {
-//        return doctorsRepository.findBySpecializationAndAvailableIsTrue(specialization);
-//    }
 
     public void deleteAllDoctors() {
         doctorsRepository.deleteAll();
@@ -132,30 +129,56 @@ public class DoctorService {
             Doctors doctor = optionalDoctor.get();
             return appointmentRepository.findByDoctor(doctor);
         } else {
-            // Handle the case where the doctor with the specified ID is not found
             throw new EntityNotFoundException("Doctor not found with ID: " + doctorId);
         }
     }
 
     public List<DoctorsDTO> searchAvailableDoctors(SearchRequest searchRequest) {
-
-        List<Doctors> doctors = doctorsRepository.findBySpecializationName(searchRequest.getSpecializations());
+        List<Doctors> doctors = doctorsRepository.findBySpecialization(searchRequest.getSpecialization());
         List<Doctors> availableDoctors = new ArrayList<>();
+
         for (Doctors doctor : doctors) {
             boolean isAvailable = doctor.getTimeSlots().stream()
-                    .anyMatch(timeSlot -> isTimeSlotInRange(timeSlot, searchRequest));
+                    .anyMatch(timeSlot -> isTimeSlotAvailable(timeSlot, searchRequest));
+
             if (isAvailable) {
                 availableDoctors.add(doctor);
             }
         }
+
         return availableDoctors.stream()
-                .map(DoctorsDTO::new)
+                .map(doctor -> {
+                    DoctorsDTO doctorsDTO = new DoctorsDTO();
+                    doctorsDTO.setId(doctor.getId());
+                    doctorsDTO.setFirstName(doctor.getFirstName());
+                    doctorsDTO.setLastName(doctor.getLastName());
+                    doctorsDTO.setDateOfBirth(doctor.getDateOfBirth());
+                    doctorsDTO.setEmail(doctor.getEmail());
+                    doctorsDTO.setSpecialisation(doctor.getSpecialisation());
+                    doctorsDTO.setAddress(doctor.getAddress());
+                    doctorsDTO.setExperiences(doctor.getExperiences());
+                    doctorsDTO.setAwards(doctor.getAwards());
+                    doctorsDTO.setEducation(doctor.getEducation());
+                    doctorsDTO.setMemberships(doctor.getMemberships());
+                    doctorsDTO.setSpecializations(doctor.getSpecializations());
+                    doctorsDTO.setServicings(doctor.getServicings());
+                    doctorsDTO.setHandles(doctor.getHandles());
+                    doctorsDTO.setRegistrations(doctor.getRegistrations());
+                    doctorsDTO.setAppointments(doctor.getAppointments());
+                    doctorsDTO.setTimeSlots(doctor.getTimeSlots());
+                    return doctorsDTO;
+                })
                 .collect(Collectors.toList());
+
     }
-    private boolean isTimeSlotInRange(TimeSlot timeSlot, SearchRequest searchRequest) {
+
+    private boolean isTimeSlotAvailable(TimeSlot timeSlot, SearchRequest searchRequest) {
         LocalDateTime startTime = searchRequest.getStartTime();
         LocalDateTime endTime = searchRequest.getEndTime();
-        return !timeSlot.getEndTime().isBefore(startTime) && !timeSlot.getStartTime().isAfter(endTime);
+
+        return !timeSlot.getEndTime().isBefore(startTime) &&
+                !timeSlot.getStartTime().isAfter(endTime) &&
+                timeSlot.isAvailable();
     }
 
 }

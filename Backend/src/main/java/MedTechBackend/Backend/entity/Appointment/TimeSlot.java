@@ -35,11 +35,9 @@ public class TimeSlot {
     private Doctors doctor;
 
     @Column(name = "start_time")
-    @Future(message = "Timestamp must be in the future")
     private LocalDateTime startTime;
 
     @Column(name = "end_time")
-    @Future(message = "Timestamp must be in the future")
     private LocalDateTime endTime;
 
     @Column(name="is_available")

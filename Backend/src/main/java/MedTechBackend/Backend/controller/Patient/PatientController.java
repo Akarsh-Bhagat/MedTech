@@ -100,8 +100,14 @@ public class PatientController {
     }
 
     @PostMapping("/search-doctors")
-    public ResponseEntity<List<DoctorsDTO>> searchDoctors(@RequestBody SearchRequest searchRequest) {
+    public ResponseEntity<?> searchDoctors(@RequestBody SearchRequest searchRequest) {
         List<DoctorsDTO> availableDoctors = doctorService.searchAvailableDoctors(searchRequest);
-        return ResponseEntity.ok(availableDoctors);
+
+        if (!availableDoctors.isEmpty()) {
+            return new ResponseEntity<>(availableDoctors, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No doctors found", HttpStatus.NOT_FOUND);
+        }
     }
+
 }

@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface DoctorsRepository extends JpaRepository<Doctors, Integer> {
-    @Query("SELECT DISTINCT d FROM Doctors d JOIN d.specializations s WHERE s.specialization = :specializationName")
-    List<Doctors> findBySpecializationName(@Param("specializationName") List<String> specializationName);
-
+    @Query("SELECT DISTINCT d FROM Doctors d WHERE d.specialisation = :specialisationName")
+    List<Doctors> findBySpecialization(@Param("specialisationName") String specialisationName);
 }

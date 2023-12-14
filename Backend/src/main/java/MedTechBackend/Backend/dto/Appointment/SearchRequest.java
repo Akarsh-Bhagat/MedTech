@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SearchRequest {
 
-    private List<String> specializations;
+    private String specialization;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 

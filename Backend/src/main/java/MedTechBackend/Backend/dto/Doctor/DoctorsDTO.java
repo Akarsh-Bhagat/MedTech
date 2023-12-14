@@ -42,6 +42,4 @@ public class DoctorsDTO {
     private List<Appointment> appointments;
     private List<TimeSlot> timeSlots;
 
-    public DoctorsDTO(Doctors doctors) {
-    }
 }
