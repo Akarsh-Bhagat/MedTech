@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.sql.Time;
@@ -41,5 +42,7 @@ public class TimeSlot {
     @Future(message = "Timestamp must be in the future")
     private LocalDateTime endTime;
 
-
+    @Column(name="is_available")
+    @NotNull(message = "Please enter boolean value")
+    private boolean isAvailable;
 }

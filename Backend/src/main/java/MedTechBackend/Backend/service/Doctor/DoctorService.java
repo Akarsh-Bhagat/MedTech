@@ -1,7 +1,9 @@
 package MedTechBackend.Backend.service.Doctor;
 
+import MedTechBackend.Backend.dto.Appointment.SearchRequest;
 import MedTechBackend.Backend.dto.Doctor.DoctorsDTO;
 import MedTechBackend.Backend.entity.Appointment.Appointment;
+import MedTechBackend.Backend.entity.Appointment.TimeSlot;
 import MedTechBackend.Backend.entity.Doctor.*;
 import MedTechBackend.Backend.repository.Appointment.AppointmentRepository;
 import MedTechBackend.Backend.repository.Appointment.TimeSlotRepository;
@@ -10,8 +12,11 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
@@ -130,6 +135,27 @@ public class DoctorService {
             // Handle the case where the doctor with the specified ID is not found
             throw new EntityNotFoundException("Doctor not found with ID: " + doctorId);
         }
+    }
+
+    public List<DoctorsDTO> searchAvailableDoctors(SearchRequest searchRequest) {
+
+        List<Doctors> doctors = doctorsRepository.findBySpecializationName(searchRequest.getSpecializations());
+        List<Doctors> availableDoctors = new ArrayList<>();
+        for (Doctors doctor : doctors) {
+            boolean isAvailable = doctor.getTimeSlots().stream()
+                    .anyMatch(timeSlot -> isTimeSlotInRange(timeSlot, searchRequest));
+            if (isAvailable) {
+                availableDoctors.add(doctor);
+            }
+        }
+        return availableDoctors.stream()
+                .map(DoctorsDTO::new)
+                .collect(Collectors.toList());
+    }
+    private boolean isTimeSlotInRange(TimeSlot timeSlot, SearchRequest searchRequest) {
+        LocalDateTime startTime = searchRequest.getStartTime();
+        LocalDateTime endTime = searchRequest.getEndTime();
+        return !timeSlot.getEndTime().isBefore(startTime) && !timeSlot.getStartTime().isAfter(endTime);
     }
 
 }

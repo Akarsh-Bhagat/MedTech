@@ -73,9 +73,6 @@ public class Doctors {
     @JsonManagedReference
     private List<DocRegistration> registrations;
 
-    @Column(name="is_available")
-    @NotNull(message = "Please enter boolean value")
-    private boolean isAvailable;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "doctor-appointment")

@@ -1,7 +1,10 @@
 package MedTechBackend.Backend.controller.Patient;
 
+import MedTechBackend.Backend.dto.Appointment.SearchRequest;
+import MedTechBackend.Backend.dto.Doctor.DoctorsDTO;
 import MedTechBackend.Backend.dto.Patient.PatientDTO;
 import MedTechBackend.Backend.entity.Patient.Patient;
+import MedTechBackend.Backend.service.Doctor.DoctorService;
 import MedTechBackend.Backend.service.Patient.PatientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +17,11 @@ import java.util.List;
 public class PatientController {
 
     private final PatientService patientService;
+    private final DoctorService doctorService;
 
-    public PatientController(PatientService patientService) {
+    public PatientController(PatientService patientService, DoctorService doctorService) {
         this.patientService = patientService;
+        this.doctorService = doctorService;
     }
 
 
@@ -92,5 +97,11 @@ public class PatientController {
     public ResponseEntity<String> deleteAllPatients() {
         patientService.deleteAllPatient();
         return new ResponseEntity<>("All patient deleted successfully", HttpStatus.OK);
+    }
+
+    @PostMapping("/search-doctors")
+    public ResponseEntity<List<DoctorsDTO>> searchDoctors(@RequestBody SearchRequest searchRequest) {
+        List<DoctorsDTO> availableDoctors = doctorService.searchAvailableDoctors(searchRequest);
+        return ResponseEntity.ok(availableDoctors);
     }
 }

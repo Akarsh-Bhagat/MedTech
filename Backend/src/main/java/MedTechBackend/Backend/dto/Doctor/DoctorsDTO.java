@@ -41,4 +41,7 @@ public class DoctorsDTO {
     private List<DocRegistration> registrations;
     private List<Appointment> appointments;
     private List<TimeSlot> timeSlots;
+
+    public DoctorsDTO(Doctors doctors) {
+    }
 }
