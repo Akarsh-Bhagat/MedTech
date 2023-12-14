@@ -256,7 +256,7 @@
             <form *ngIf="showSpecializations" class="bg-white rounded-lg p-6">
               <div class="form-group">
                 <label for="name">Specialization:</label>
-                <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newSpecialization.name" />
+                <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newSpecialization.specialization" />
               </div>
     
             
@@ -265,7 +265,7 @@
             </form>
           </div>
           <ul class="list-unstyled">
-            <li *ngFor="let specialization of doctor?.specializations" class="mb-3">{{ specialization.name }}</li>
+            <li *ngFor="let specialization of doctor?.specializations" class="mb-3">{{ specialization.specialization }}</li>
           </ul>
         </div>
       </div>
