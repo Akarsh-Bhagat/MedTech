@@ -13,7 +13,7 @@ export class SidebarComponent {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.userRole =  localStorage.getItem("userRole");
+    this.userRole =  sessionStorage.getItem("userRole");
   }
 
   toggleSidebar(): void {

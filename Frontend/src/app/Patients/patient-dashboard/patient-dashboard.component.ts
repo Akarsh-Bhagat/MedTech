@@ -12,7 +12,7 @@ export class PatientDashboardComponent {
   currentDate!: Date;
   constructor(private router: Router, private service: LoginService) {}
   ngOnInit() {
-    this.role = localStorage.getItem("userRole");
+    this.role = sessionStorage.getItem("userRole");
     this.getCurrentDate();
   }
   getCurrentDate(): void {

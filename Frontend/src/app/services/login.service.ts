@@ -61,19 +61,19 @@ export class LoginService {
 
   private storeTokens(accessToken: string, refreshToken: string, accessTokenExpiration: number, refreshTokenExpiration: number, userRole: string) {
     this.userRoleChangedSource.next(userRole);
-    localStorage.setItem("userRole", userRole);
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
-    localStorage.setItem("accessTokenExpiration", accessTokenExpiration.toString());
-    localStorage.setItem("refreshTokenExpiration", refreshTokenExpiration.toString());
+    sessionStorage.setItem("userRole", userRole);
+    sessionStorage.setItem("accessToken", accessToken);
+    sessionStorage.setItem("refreshToken", refreshToken);
+    sessionStorage.setItem("accessTokenExpiration", accessTokenExpiration.toString());
+    sessionStorage.setItem("refreshTokenExpiration", refreshTokenExpiration.toString());
   }
 
  
   getAccessToken(): Observable<string | null> {
-    const expiration = localStorage.getItem("accessTokenExpiration");
+    const expiration = sessionStorage.getItem("accessTokenExpiration");
 
     if (expiration && Date.now() < +expiration) {
-      return of(localStorage.getItem("accessToken"));
+      return of(sessionStorage.getItem("accessToken"));
     } else {
       return this.refreshToken().pipe(
         catchError(() => {
@@ -85,7 +85,7 @@ export class LoginService {
   }
 
   refreshToken(): Observable<string | null> {
-    const refreshToken = localStorage.getItem("refreshToken");
+    const refreshToken = sessionStorage.getItem("refreshToken");
 
     if (!refreshToken) {
       return throwError("Refresh token not available");
@@ -111,7 +111,7 @@ export class LoginService {
   }
 
   isLoggedIn(){
-    let token= localStorage.getItem("accessToken");
+    let token= sessionStorage.getItem("accessToken");
     if(token==undefined || token==='' || token ==null){
      return false;
     }
@@ -121,15 +121,11 @@ export class LoginService {
    }
 
    getUserRole(): string | null {
-    return localStorage.getItem("userRole")
+    return sessionStorage.getItem("userRole")
   }
 
   logout() {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('accessTokenExpiration');
-    localStorage.removeItem('refreshTokenExpiration');
-    localStorage.removeItem('userRole');
+    sessionStorage.clear();
     return true;
   }
 }

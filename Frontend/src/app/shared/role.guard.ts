@@ -1,4 +1,3 @@
-// role.guard.ts
 
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
@@ -18,7 +17,7 @@ export class RoleGuard implements CanActivate {
       return true;
     }
 
-    const userRole = localStorage.getItem('userRole');
+    const userRole = sessionStorage.getItem('userRole');
 
     if (userRole && requiredRoles.includes(userRole)) {
       return true;

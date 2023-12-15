@@ -62,7 +62,7 @@ export class ViewComponent implements OnInit {
         this.doctor=data;
         console.log(data);
       });
-      this.userRole=localStorage.getItem('userRole');
+      this.userRole=sessionStorage.getItem('userRole');
     });
   }
 

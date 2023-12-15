@@ -56,8 +56,6 @@ export class UserService {
     return this.http.delete(url, { responseType: 'text' });
   }
 
-  // New methods for saving data
-
   saveEducation(newEducation: any, id: any): Observable<string> {
     const url = `${this.url}/doctors/education/${id}`;
     return this.http.post(url, newEducation, { responseType: 'text' });
