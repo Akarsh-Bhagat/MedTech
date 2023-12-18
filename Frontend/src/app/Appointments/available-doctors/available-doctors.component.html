@@ -1,0 +1,34 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div *ngIf="availableDoctors.length > 0">
+          <h2 class="text-center mb-4">Available Doctors</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Experience</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doctor of availableDoctors">
+                <td>{{ doctor.firstName }} {{ doctor.lastName }}</td>
+                <td>{{ doctor.experience }}</td>
+                <td>{{ doctor.email }}</td>
+                <td>
+                  <button type="button" class="btn btn-info btn-sm" (click)="viewDoctor(doctor)">View</button>
+                  <button type="button" class="btn btn-success btn-sm" (click)="sendBookingRequest(doctor)">Book</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="availableDoctors.length === 0" class="text-center">
+          <p>No doctors available for the given criteria.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

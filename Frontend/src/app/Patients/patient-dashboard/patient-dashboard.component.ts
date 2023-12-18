@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { PatientService } from 'src/app/services/patient.service';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -10,10 +11,26 @@ import { LoginService } from 'src/app/services/login.service';
 export class PatientDashboardComponent {
   role: any = '';
   currentDate!: Date;
-  constructor(private router: Router, private service: LoginService) {}
+  patient: any;
+  constructor(private route: ActivatedRoute,private router: Router, private service: LoginService,private patientService: PatientService) {}
   ngOnInit() {
     this.role = sessionStorage.getItem("userRole");
     this.getCurrentDate();
+    const idString = sessionStorage.getItem('userId');
+    if (idString) {
+      const id = parseInt(idString, 10); 
+      this.patientService.getDataById(id).subscribe(
+        (data: any) => {
+          this.patient = data;
+          console.log(data);
+        },
+        (error) => {
+          console.error('Error fetching user data:', error);
+        }
+      );
+    } else {
+      console.error('User ID not found in sessionStorage.');
+    }
   }
   getCurrentDate(): void {
     this.currentDate = new Date();

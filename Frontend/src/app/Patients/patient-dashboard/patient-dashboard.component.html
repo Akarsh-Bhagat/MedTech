@@ -3,7 +3,7 @@
   <div class="content">
     <div class="header">
       <div class="welcome">
-        <h1>Welcome, Rohit Raj</h1>
+        <h1>Welcome, {{patient?.firstName}} {{patient?.lastName}}</h1>
         <p>{{ currentDate | date: 'fullDate' }}</p>
       </div>
     </div>
@@ -27,7 +27,6 @@
           <h2>Appointment Requests</h2>
           <a href="#" class="btn">View All</a>
         </div>
-        <app-appointment-req></app-appointment-req>
       </div>
       <div class="section recent-appointments">
         <div class="title">

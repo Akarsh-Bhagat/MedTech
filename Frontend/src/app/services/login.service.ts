@@ -17,16 +17,14 @@ export class LoginService {
   private userRoleChangedSource = new Subject<string>();
   userRoleChanged$ = this.userRoleChangedSource.asObservable();
 
-  authenticate(credentials: any) {
+  login(credentials: any) {
     return this.http.post(`${this.url}/authenticate`, credentials).pipe(
       tap((response: any) => {
         if (response && response.accessToken && response.refreshToken &&
             response.accessExp && response.refreshExp && response.userRole) {
           const now = Date.now();
-
           const accessTokenExpiration = now + response.accessExp;
           const refreshTokenExpiration = now + response.refreshExp;
-
           this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole);
           console.log('Tokens stored successfully.');
         }
@@ -37,18 +35,42 @@ export class LoginService {
       })
     );
   }
+
+  authenticate(credentials: any) {
+    return this.http.post(`${this.url}/authenticate`, credentials).pipe(
+      tap((response: any) => {
+        console.log('Authentication response:', response); // Log the response for debugging purposes
+  
+        if (response && response.accessToken && response.refreshToken &&
+            response.accessExp && response.refreshExp && response.userRole) {
+          const now = Date.now();
+  
+          const accessTokenExpiration = now + response.accessExp;
+          const refreshTokenExpiration = now + response.refreshExp;
+  
+          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole, response.userId);
+          console.log('Tokens stored successfully.');
+        }
+      }),
+      catchError(error => {
+        console.error('Error during authentication:', error);
+        return throwError(error);
+      })
+    );
+  }
+  
 
   register(credentials: any) {
     return this.http.post(`${this.url}/register`, credentials).pipe(
       tap((response: any) => {
         if (response && response.accessToken && response.refreshToken &&
-            response.accessExp && response.refreshExp && response.userRole) {
+            response.accessExp && response.refreshExp && response.userRole && response.userId) {
           const now = Date.now();
 
           const accessTokenExpiration = now + response.accessExp;
           const refreshTokenExpiration = now + response.refreshExp;
 
-          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole);
+          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole,response.userId);
           console.log('Tokens stored successfully.');
         }
       }),
@@ -59,14 +81,25 @@ export class LoginService {
     );
   }
 
-  private storeTokens(accessToken: string, refreshToken: string, accessTokenExpiration: number, refreshTokenExpiration: number, userRole: string) {
+  private storeTokens(
+    accessToken: string,
+    refreshToken: string,
+    accessTokenExpiration: number,
+    refreshTokenExpiration: number,
+    userRole: string,
+    userId?: number
+  ) {
     this.userRoleChangedSource.next(userRole);
+    if (userId !== undefined) {
+      sessionStorage.setItem("userId", userId.toString());
+    }
     sessionStorage.setItem("userRole", userRole);
     sessionStorage.setItem("accessToken", accessToken);
     sessionStorage.setItem("refreshToken", refreshToken);
     sessionStorage.setItem("accessTokenExpiration", accessTokenExpiration.toString());
     sessionStorage.setItem("refreshTokenExpiration", refreshTokenExpiration.toString());
   }
+  
 
  
   getAccessToken(): Observable<string | null> {
@@ -100,7 +133,7 @@ export class LoginService {
           const accessTokenExpiration = now + response.accessExp;
           const refreshTokenExpiration = now + response.refreshExp;
 
-          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole);
+          this.storeTokens(response.accessToken, response.refreshToken, accessTokenExpiration, refreshTokenExpiration, response.userRole,response.userId);
 
           return of(response.accessToken);
         } else {

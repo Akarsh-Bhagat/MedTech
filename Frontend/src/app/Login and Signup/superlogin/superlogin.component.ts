@@ -36,7 +36,7 @@ export class SuperloginComponent {
   get password() { return this.loginForm.controls['password']; }
   onSubmit(){
     if((this.credentials.email!='' && this.credentials.password!='' ) &&(this.credentials.email!=null && this.credentials.password!=null )){
-      this.loginService.authenticate(this.credentials).subscribe(
+      this.loginService.login(this.credentials).subscribe(
         (response:any)=>{
           this.toastr.success('Login Successful', 'Success', { timeOut: 1500 });
           this.router.navigate(['/home']);

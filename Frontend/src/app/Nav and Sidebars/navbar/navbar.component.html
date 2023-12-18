@@ -15,8 +15,8 @@
         <li *ngIf="(userRole === 'ADMIN' || userRole === 'DOCTOR') &&  isLoggedIn() "  class="nav-item" [ngClass]="{ 'active': currentRoute === '/patient' }">
           <a class="nav-link" [routerLink]="['/patient']">Patients</a>
         </li>
-        <li *ngIf="isLoggedIn()" class="nav-item" [ngClass]="{ 'active': currentRoute === '/appointments' }">
-          <a class="nav-link" [routerLink]="['/appointments']">Appointments</a>
+        <li *ngIf="(userRole === 'PATIENT' || userRole === 'DOCTOR') && isLoggedIn()" class="nav-item" [ngClass]="{ 'active': currentRoute === '/appointments' }">
+          <a class="nav-link" (click)="navigateToAppointments()">Appointments</a>
         </li>
         <!-- <li class="nav-item" [ngClass]="{ 'active': currentRoute === '/services' }">
           <a class="nav-link" [routerLink]="['/services']">Services</a>

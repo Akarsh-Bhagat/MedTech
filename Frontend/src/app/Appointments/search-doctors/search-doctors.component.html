@@ -1,0 +1,21 @@
+<!-- search-doctors.component.html -->
+<div class="search-doctors-container">
+    <h2>Search Doctors</h2>
+    <div class="input-group">
+      <label for="specialization">Specialization:</label>
+      <input type="text" id="specialization" [(ngModel)]="specialization" />
+    </div>
+  
+    <div class="input-group">
+      <label for="startTime">Start Time:</label>
+      <input type="datetime-local" id="startTime" [(ngModel)]="startTime" />
+    </div>
+  
+    <div class="input-group">
+      <label for="endTime">End Time:</label>
+      <input type="datetime-local" id="endTime" [(ngModel)]="endTime" />
+    </div>
+  
+    <button (click)="searchDoctors()">Search Doctors</button>
+  </div>
+  

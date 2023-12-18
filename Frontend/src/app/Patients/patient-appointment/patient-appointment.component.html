@@ -1,0 +1,6 @@
+<app-sidebar></app-sidebar>
+<div class="appointment-page-container">
+    <app-search-doctors (searchRequestEmitter)="onSearchDoctors($event)"></app-search-doctors>
+    <app-available-doctors *ngIf="showAvailableDoctors" [availableDoctors]="availableDoctors"></app-available-doctors>
+  </div>
+  

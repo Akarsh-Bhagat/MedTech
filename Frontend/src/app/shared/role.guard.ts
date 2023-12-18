@@ -18,6 +18,7 @@ export class RoleGuard implements CanActivate {
     }
 
     const userRole = sessionStorage.getItem('userRole');
+    console.log('User Role:', userRole);
 
     if (userRole && requiredRoles.includes(userRole)) {
       return true;

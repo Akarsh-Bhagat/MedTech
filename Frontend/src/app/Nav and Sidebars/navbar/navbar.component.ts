@@ -42,4 +42,19 @@ export class NavbarComponent {
     this.loginService.logout();
     this.router.navigate(['/login']);
   }
+
+  navigateToAppointments() {
+    const currentRoute = this.router.url;
+    if (this.userRole === 'DOCTOR') {
+      if (currentRoute === '/doctor/appointments') {
+        window.location.reload();
+      }
+      this.router.navigate(['/doctor/appointments']);
+    } else if(this.userRole === 'PATIENT') {
+      if (currentRoute === '/patient/appointments') {
+        window.location.reload();
+      }
+      this.router.navigate(['/patient/appointments']);
+    }
+  }
 }

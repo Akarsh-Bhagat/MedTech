@@ -79,6 +79,26 @@ export class PatientFormComponent implements OnInit {
       ])
     });
 
+    const isDoctorOrPatient = sessionStorage.getItem('userRole') === 'DOCTOR' || sessionStorage.getItem('userRole') === 'PATIENT';
+    const userId = sessionStorage.getItem('userId');
+    const userIdAsNumber = userId ? parseInt(userId, 10) : null;
+    if(isDoctorOrPatient && userIdAsNumber !== null) {  
+      this.patientService.getDataById(userIdAsNumber).subscribe(
+        (patientDetails: any) => {
+      this.patientForm.patchValue({
+        personalDetails: {
+          firstName: patientDetails.firstName,
+          lastName: patientDetails.lastName,
+          email: patientDetails.email
+        },
+      });
+    },
+    (error) => {
+      console.error('Error fetching user details:', error);
+    }
+  );
+}
+
   }
 
   filterAllergies(value: string): string[] {
@@ -172,28 +192,47 @@ export class PatientFormComponent implements OnInit {
 
   onSubmit() {
     if (this.patientForm.valid) {
-      const formData =  this.transformFormData(this.patientForm.value);
+      const formData = this.transformFormData(this.patientForm.value);
       console.log(formData);
-      this.patientService.postData(formData).subscribe(
-        (response) => {
-        console.log('Patient added successfully:', response);
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/home']);
-        });
-      },
-      (error) => {
-        console.error('Error creating patient:', error);
-
-        if (error.error instanceof ErrorEvent) {
-          console.error('Client-side error:', error.error.message);
-        } else {
-          console.error(`Backend returned code ${error.status}, body was:`, error.error);
-        }
-
+  
+      const isDoctorOrPatient = sessionStorage.getItem('userRole') === 'DOCTOR' || sessionStorage.getItem('userRole') === 'PATIENT';
+      const userId = sessionStorage.getItem('userId');
+      const userIdAsNumber = userId ? parseInt(userId, 10) : null;
+  
+      if (isDoctorOrPatient && userIdAsNumber !== null) {
+        this.patientService.updateData(formData, userIdAsNumber).subscribe(
+          (response) => {
+            console.log('User details updated successfully:', response);
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/home']);
+            });
+          },
+          (error) => {
+            console.error('Error updating user details:', error);
+          }
+        );
+      } else {
+        this.patientService.postData(formData).subscribe(
+          (response) => {
+            console.log('User added successfully:', response);
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/home']);
+            });
+          },
+          (error) => {
+            console.error('Error creating user:', error);
+  
+            if (error.error instanceof ErrorEvent) {
+              console.error('Client-side error:', error.error.message);
+            } else {
+              console.error(`Backend returned code ${error.status}, body was:`, error.error);
+            }
+          }
+        );
       }
-      );
     }
   }
+  
 
   updateTitle(): void {
     switch (this.currentStep) {

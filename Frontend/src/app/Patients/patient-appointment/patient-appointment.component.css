@@ -1,0 +1,36 @@
+
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .appointment-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .search-doctors-container,
+  .available-doctors-container {
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px 0;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  

@@ -116,7 +116,30 @@ export class UserFormComponent implements OnInit {
       startWith(''),
       map(value => this._filterColleges(value))
     );
-  }
+
+const isDoctorOrPatient = sessionStorage.getItem('userRole') === 'DOCTOR' || sessionStorage.getItem('userRole') === 'PATIENT';
+const userId = sessionStorage.getItem('userId');
+const userIdAsNumber = userId ? parseInt(userId, 10) : null;
+if (isDoctorOrPatient && userIdAsNumber !== null) {  
+  this.userService.getDataById(userIdAsNumber).subscribe(
+    (userDetails: any) => {
+      this.userForm.patchValue({
+        personalDetails: {
+          firstName: userDetails.firstName,
+          lastName: userDetails.lastName,
+          email: userDetails.email
+        },
+      });
+    },
+    (error) => {
+      console.error('Error fetching user details:', error);
+    }
+  );
+}
+
+}
+
+  
 
   AddExperiences() {
     this.formexperience = this.userForm.get("expDetails") as FormArray;
@@ -267,28 +290,47 @@ get socialMediaList(): FormArray {
 
   onSubmit() {
     if (this.userForm.valid) {
-      const formData =  this.transformFormData(this.userForm.value);
+      const formData = this.transformFormData(this.userForm.value);
       console.log(formData);
-      this.userService.postData(formData).subscribe(
-        (response) => {
-        console.log('Doctor created successfully:', response);
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/home']);
-        });
-      },
-      (error) => {
-        console.error('Error creating doctor:', error);
-
-        if (error.error instanceof ErrorEvent) {
-          console.error('Client-side error:', error.error.message);
-        } else {
-          console.error(`Backend returned code ${error.status}, body was:`, error.error);
-        }
-
+  
+      const isDoctorOrPatient = sessionStorage.getItem('userRole') === 'DOCTOR' || sessionStorage.getItem('userRole') === 'PATIENT';
+      const userId = sessionStorage.getItem('userId');
+      const userIdAsNumber = userId ? parseInt(userId, 10) : null;
+  
+      if (isDoctorOrPatient && userIdAsNumber !== null) {
+        this.userService.updateData(formData, userIdAsNumber).subscribe(
+          (response) => {
+            console.log('User details updated successfully:', response);
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/doctor/homepage']);
+            });
+          },
+          (error) => {
+            console.error('Error updating user details:', error);
+          }
+        );
+      } else {
+        this.userService.postData(formData).subscribe(
+          (response) => {
+            console.log('User added successfully:', response);
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/home']);
+            });
+          },
+          (error) => {
+            console.error('Error creating user:', error);
+  
+            if (error.error instanceof ErrorEvent) {
+              console.error('Client-side error:', error.error.message);
+            } else {
+              console.error(`Backend returned code ${error.status}, body was:`, error.error);
+            }
+          }
+        );
       }
-      );
     }
   }
+  
 
   updateTitle(): void {
     switch (this.currentStep) {

@@ -20,6 +20,7 @@ import { SuperloginComponent } from './Login and Signup/superlogin/superlogin.co
 import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './Doctors/home/home.component';
+import { PatientAppointmentComponent } from './Patients/patient-appointment/patient-appointment.component';
 const routes: Routes = [
   {
     path: 'admin/login',
@@ -58,6 +59,12 @@ const routes: Routes = [
     data: { requiredRoles: ['ADMIN','DOCTOR'] }
   },
   {
+    path: 'doctor/appointments',
+    component:UserFormComponent,
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','DOCTOR'] }
+  },
+  {
     path: 'edit/:id',
     component:EditComponent,
     canActivate:[RoleGuard],
@@ -67,7 +74,7 @@ const routes: Routes = [
     path: 'view/:id',
     component: ViewComponent,
     canActivate:[RoleGuard],
-    data: { requiredRoles: ['ADMIN','PATIENT'] }
+    data: { requiredRoles: ['ADMIN','PATIENT','DOCTOR'] }
   },
   {
     path: 'patient',
@@ -78,6 +85,12 @@ const routes: Routes = [
   {
     path: 'patient/form',
     component:PatientFormComponent,
+    canActivate:[RoleGuard],
+    data: { requiredRoles: ['ADMIN','PATIENT'] }
+  },
+  {
+    path: 'patient/appointments',
+    component:PatientAppointmentComponent,
     canActivate:[RoleGuard],
     data: { requiredRoles: ['ADMIN','PATIENT'] }
   },

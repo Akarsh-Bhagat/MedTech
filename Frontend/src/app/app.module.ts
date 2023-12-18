@@ -36,8 +36,6 @@ import { DeniedComponent } from './404 Error/denied/denied.component';
 import { HomepageComponent } from './Doctors/doctorhome/homepage.component';
 import { AdminhomeComponent } from './Admin/adminhome/adminhome.component';
 import { SidebarComponent } from './Nav and Sidebars/sidebar/sidebar.component';
-
-import { AppointmentReqComponent } from './Admin/appointment-req/appointment-req.component';
 import { PatientHomeComponent } from './Patients/patient-home/patient-home.component';
 import { PatientEditComponent } from './Patients/patient-edit/patient-edit.component';
 import { PatientFormComponent } from './Patients/patient-form/patient-form.component';
@@ -48,6 +46,9 @@ import { SuperloginComponent } from './Login and Signup/superlogin/superlogin.co
 import { NavbarComponent } from './Nav and Sidebars/navbar/navbar.component';
 import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
 import { AboutComponent } from './about/about.component';
+import { PatientAppointmentComponent } from './Patients/patient-appointment/patient-appointment.component';
+import { SearchDoctorsComponent } from './Appointments/search-doctors/search-doctors.component';
+import { AvailableDoctorsComponent } from './Appointments/available-doctors/available-doctors.component';
 
 
 @NgModule({
@@ -71,10 +72,11 @@ import { AboutComponent } from './about/about.component';
     SuperloginComponent,
     AdminhomeComponent,
     SidebarComponent,
- 
-    AppointmentReqComponent,
       PatientDashboardComponent,
-      AboutComponent,  
+      AboutComponent,
+      PatientAppointmentComponent,
+      SearchDoctorsComponent,
+      AvailableDoctorsComponent,  
   ],
   imports: [
     BrowserModule,

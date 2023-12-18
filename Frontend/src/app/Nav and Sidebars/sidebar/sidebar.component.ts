@@ -55,4 +55,30 @@ export class SidebarComponent {
       this.router.navigate(['/patient/form']);
     }
   }
+  navigateToProfile() {
+    const currentRoute = this.router.url;
+    const id = sessionStorage.getItem("userId");
+  
+    if (this.userRole === 'DOCTOR') {
+      const doctorRoute = `/view/${id}`;
+      if (currentRoute.includes('/view/') && id) {    
+        if (currentRoute === doctorRoute) {
+          window.location.reload();
+        }
+      } else {
+        this.router.navigate([doctorRoute]);
+      }
+    } else if (this.userRole === 'PATIENT') {
+      if (currentRoute.includes('/patient/view/') && id) {
+        const patientRoute = `/patient/view/${id}`;
+        if (currentRoute === patientRoute) {
+          window.location.reload();
+        }
+        this.router.navigate([patientRoute]);
+      } else {
+        this.router.navigate(['/patient/form']);
+      }
+    }
+  }
+  
 }
