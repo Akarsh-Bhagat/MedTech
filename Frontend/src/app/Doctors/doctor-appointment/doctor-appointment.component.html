@@ -1,0 +1,79 @@
+<app-sidebar></app-sidebar>
+
+<div class="appointmentreq" style="margin-left: 250px; margin-top: 20px;">
+    <div class="title">
+      <h2>Appointment Requests</h2>
+      <a href="#" class="btn">View All</a>
+    </div>
+  
+    <table class="appointment-table">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Date</th>
+          <th>Slot</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example row, replace this with actual data from your application -->
+        <tr>
+          <td>John Doe</td>
+          <td>2023-12-11</td>
+          <td>Dentist</td>
+          <td>
+            <button class="accept-btn" onclick="acceptAppointment(this)">Accept</button>
+            <button class="decline-btn">Decline</button>
+          </td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="recent-appointments" style="margin-left: 250px; margin-top: 20px;">
+    <div class="title">
+      <h2>Recent Appointments</h2>
+      <a href="#" class="btn">View All</a>
+    </div>
+  
+    <table class="appointment-table" id="appointmentsTable">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Date</th>
+          <th>Disease</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Appointments will be dynamically added here -->
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- app/time-slots/time-slots.component.html -->
+
+<div class="time-slots-container">
+  <h2>Booked Time Slots</h2>
+
+  <!-- Form to input and submit available time slots -->
+  <form (submit)="submitTimeSlots()">
+    <div class="time-slot" *ngFor="let slot of availableTimeSlots">
+      {{ slot }}
+    </div>
+
+    <!-- Input field for a new time slot -->
+  
+
+    
+
+    <!-- Doctor's availability toggle section -->
+    <div class="availability-section">
+      <label>Available for more bookings:</label>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="isAvailable" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </form>
+</div>
